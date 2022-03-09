@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template/template_lookImage_CloseUp.css">
+    <title>Look image much closier</title>
+</head>
+<body>
+
+    <div id="Logo_section">
+        <img src="/image/main-logo.png" width="fit-content" height="fit-content">
+        <p id="main-title"> <span id="deco">Look image much closier</span> </p>
+    </div>
+    <% var selected_num = new Number(select) %>
+    <div class="container_title">
+    '<%= written.writer %>'님의<br>
+    '<%= written.title %>'<br>
+    라는 제목의 리뷰에<br>
+    첨부된 <%= selected_num+1 %>번째 이미지입니다
+    </div>
+    
+    <% var Compare = source %>
+    <div class="container">
+    <a class="button" href="<%= pre %>?writer=<%= written.writer %>&title=<%= written.title %>"><</a> 
+    <img class="CloseUped_Image" src="<%= source[select] %>"> 
+    <a class="button" href="<%= next %>?writer=<%= written.writer %>&title=<%= written.title %>">></a>
+    </div>
+    <div class="container_thumb">
+        <% source.forEach( element =>{ %>
+        <a href='/lookImage_CloseUp/<%= initialize %>/<%= Compare.indexOf(element) %>?writer=<%= written.writer %>&title=<%= written.title %>'> <img class="thumbnail" src="<%= element %>" > </a>
+        <% }) %>
+    </div>
+</body>
+</html>

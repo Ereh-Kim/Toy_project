@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'KCC-eunyoung';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Galmetgol';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Galmetgol.woff') format('woff');
+    font-weight: 900;
+  }
+
+html{
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body{
+   background-color: #F27536;
+   }
+
+   .likely_find,.likely_already,.likely_elminated{
+    border-radius: 15px;
+    padding: 30px 20px 30px 20px ;
+    font-family: 'Galmetgol';
+    font-size: 30px;
+    letter-spacing: 10px;
+   }
+
+   .likely_find{
+    background-color: orange;
+   }
+
+   .likely_already{
+    background-color: rgb(255, 38, 0);
+    color: white;
+   }
+
+   .likely_elminated{
+    background-color: rgb(255, 201, 158);
+    color: black;
+   }
+
+   .likely_completed{
+    position: relative;
+    left: 50px;
+    list-style: "\1F44D";
+    font-family: 'Galmetgol';
+    font-size: 25px;
+    letter-spacing: 15px;
+    padding: 10px;
+    margin: 10px;
+    border: black solid 1px;
+    border-radius: 15px;
+    width: fit-content;
+   }
+
+   .likely_mention{
+    font-family: 'Galmetgol';
+    font-size: 25px;
+   }
+
+   .like_list{
+    border-radius: 15px;
+    padding: 10px;
+    height: fit-content;
+    min-width: 500px;
+    background-color: white;
+   }
+
+   .like_box{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+   }
+
+   .link-deco:link{
+    text-decoration: none;
+    color: black;
+   }
+
+   .link-deco:visited{
+    text-decoration: none;
+    color: black;
+   }
+
+   .likely_completed:hover{
+       background-color: orange;
+   }
+
+   .address_add{
+       font-family: KCC-eunyoung;
+       position: relative;
+       bottom: 15px;
+       margin-left: 15px;
+       letter-spacing: 5px;
+       width: fit-content;
+       padding: 8px;
+       border-radius: 15px;
+   }
+
+   .requset_record{
+       position: relative;
+       bottom: 35px;
+       left: 25px;
+       padding: 5px 10px 5px 10px;
+       background-color: black;
+       color: white;
+       border-radius: 5px;
+       width: fit-content;
+       font-size: 10px;
+   }
+
+   .request_notice{
+    background-color: black;
+    color: white;
+    letter-spacing: 3px;
+    position: relative;
+    bottom: 35px;
+    left: 17px;
+    padding: 5px;
+    border: black solid 1px;
+    border-radius: 5px;
+    width: fit-content;
+    font-size: 3px;
+   }
+
+   .request_delete{
+    background-color: orange;
+    color: black;
+    letter-spacing: 3px;
+    padding: 5px;
+    border: black solid 1px;
+    border-radius: 5px;
+    width: fit-content;
+    font-size: 3px;
+   }
+
+   .request_delete:hover{
+       background-color: red;
+       color: white;
+   }
+
+   .delete_box{
+       position: relative;
+       left: 235px;
+       bottom: 55px;
+   }

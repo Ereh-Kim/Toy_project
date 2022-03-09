@@ -1,0 +1,125 @@
+@font-face {
+  font-family: "KCC-eunyoung";
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');  
+}
+@font-face {
+  font-family: 'Galmetgol';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Galmetgol.woff') format('woff');
+  font-weight: 900;
+}
+
+html{
+background-color:  #F27536;
+display: flex;
+flex-direction: row;
+justify-content: center;
+}
+
+.photo{
+  margin: 15px;
+  border-radius: 30px;
+  width: fit-content;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.photobox{
+  opacity: 50%;
+  margin: 30px 20px;
+  width: fit-content;
+  border-radius: 30px;
+  padding: 5px 15px 0 15px;
+  border: white solid 1px;
+}
+
+.photobox:hover{
+  opacity: 100%;
+}
+
+#totalphoto{
+  border-radius: 15px;
+  padding: 5px 30px 10px 30px;
+  border: black 3px solid;
+  width: 1300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow-x: scroll;
+}
+
+#totalphoto::-webkit-scrollbar {
+  height: 15px;
+}
+#totalphoto::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px #f69c6f;
+  border: 3px solid black;
+}
+#totalphoto::-webkit-scrollbar-track {
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 3px white;
+}
+
+.center{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
+#magnify{
+  border-radius: 30px;
+  border: 5px solid black;
+  margin: 30px 0px;
+  width:  fit-content;
+  height: 500px;
+}
+
+.direction{
+  padding: 200px 0px;
+  height: fit-content;
+  cursor: pointer;
+  font-family: 'KCC-eunyoung';
+  font-size: 150px;
+}
+
+.direction:hover{
+  color: white;
+}
+
+@media (max-width: 430px) and (min-width: 320px){
+  html{
+    align-items: center;
+    min-height: 700px;
+  }
+
+  #magnify{
+    height: 200px;
+    max-width: 275px;
+  }
+
+  body{
+    width: 400px;
+  }
+
+  .direction{
+    font-size: 70px;
+    padding: 0px;
+  }
+
+  .center{
+    align-items: center;
+  }
+
+  .photo{
+    height: 25px;
+    max-width: 25px;
+  }
+
+  #totalphoto,.photobox{
+    padding: 0px;
+    margin: 0px;
+    width: 400px;
+  }
+}

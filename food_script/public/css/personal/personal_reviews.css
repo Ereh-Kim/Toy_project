@@ -1,0 +1,274 @@
+@font-face {
+  font-family: 'KCC-eunyoung';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+}
+
+body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color:  #F27536;
+  height: 900px;
+  }
+
+
+.border2{
+  border-right: dashed 4px black;
+  min-height: 900px;
+  min-width: 400px;
+  max-width: 400px;
+  float: left;
+}
+
+#menubar{
+  float: right;
+  position: relative;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 450px;
+  list-style: none;
+}
+
+.border{
+  position: relative;
+  right:250px;
+  height: 40px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  border: white 4px solid;
+}
+
+.innerborder{
+  position: relative;
+  bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 130px;
+  height: 30px;
+  font-family: "KCC-eunyoung";
+}
+
+.innerhead{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  height: 250px;
+  align-items: center;
+  font-family: "KCC-eunyoung";
+  font-size: 20px;
+}
+
+
+
+#menubtn{
+transform: rotate(90deg);
+padding: 5px 0px 0px 30px;
+width: 25px;
+height: 25px;
+}
+
+#profile{
+  padding: 5px 5px 0px 5px;
+  width: 15px;
+  height: 15px;
+}
+
+#reviews{
+  padding: 5px 5px 0px 5px;
+  width: 15px;
+  height: 15px;
+}
+
+#journals{
+  padding: 5px 5px 0px 5px;
+  width: 15px;
+  height: 15px;
+}
+
+#alarms{
+  padding: 5px 5px 0px 5px;
+  width: 15px;
+  height: 15px;
+}
+
+#filter{
+  padding: 5px 5px 0px 5px;
+  width: 15px;
+  height: 15px;
+}
+
+
+.box{
+  position: relative;
+  top: 100px;
+  margin-left: 150px;
+  float: left;
+  border-left: 1px solid white;
+  width: 1100px;
+  height: 800px;
+}
+
+.title{
+  font-family: "KCC-eunyoung";
+  font-size: 30px;
+}
+
+.title2{
+  float: right;
+  width: 120px;
+  height: 80px;
+  text-align: left;
+  font-family: "KCC-eunyoung";
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 2px 9px;
+  position: absolute;
+  right: 250px;
+  top: 30px;
+}
+
+.Text{
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn{
+  display: flex;
+  flex-direction: row;
+}
+
+.btn1,.btn2{
+  border-radius: 10px;
+  background-color: white;
+  padding: 2px 9px;
+  font-family: "KCC-eunyoung";
+  font-size: 20px;
+  margin: 0px 30px 0px 0px;
+}
+
+.anchor:link{
+  color: black;
+  text-decoration: none;
+}
+
+.anchor:visited{
+  color: black;
+  text-decoration: none;
+}
+
+#review_section{
+  display: grid;
+  align-items: center;
+  height: 600px;
+  padding-top: 15px;
+  overflow-y: scroll;
+  min-width: 500px;
+  max-width: fit-content;
+  padding-right: 20px;
+  margin-top: 25px;
+  margin-left: 50px;
+  border-radius: 15px;
+  background-color: coral;
+  border: black solid 5px;
+  box-shadow: 9px 9px 1px rgb(138,53,19);
+  align-content: flex-start;
+}
+
+.review_box{
+  margin: 20px 0px 20px 30px;
+  padding: 10px 20px 10px 30px; 
+  border: 3px solid white;
+  border-radius: 15px;
+  width: 320px; 
+}
+
+.review_box:visited,.review_box:link{
+  text-decoration: none;
+  color: black;
+}
+
+.review_box:hover{
+  background-color: rgb(219, 197, 0);
+  box-shadow: 9px 9px 1px rgb(138,53,19);
+}
+
+#review_section::-webkit-scrollbar{
+  /* border-radius: 15px; */
+  width: 15px;
+}
+
+#review_section::-webkit-scrollbar-thumb{
+  background-color: black;
+  border-radius: 15px;
+}
+
+.review_content,.review_content_title,.review_content_timeline,.review_content_imageLength{
+  font-family: KCC-eunyoung;
+  font-size: 20px;
+}
+
+.review_content_title{
+  font-size: 40px;
+  word-wrap: break-word;
+}
+
+.review_content_timeline{
+float: right;
+padding-right: 20px;
+font-size: 15px;
+padding-top: 10px;
+}
+
+.review_content_imageLength{
+  background-color: blanchedalmond;
+  padding: 0px 20px;
+}
+
+.row_align{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.review_delete{
+  font-size: 20px;
+  width: fit-content;
+  min-height: fit-content;
+  font-family: KCC-eunyoung;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 15px;
+  background-color: white;
+  margin: 20px 0px 20px 30px;
+  border: 3px solid white;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.review_delete:visited,.review_delete:link{
+  text-decoration: none;
+  color: black;
+}
+
+.numbering{
+  text-align: center;
+  min-width: 40px;
+  font-size: 30px;
+  background-color: white;
+  margin: 55px 0px 0px 20px;
+  height: fit-content;
+  padding: 15px;
+  border-radius: 15px;
+}

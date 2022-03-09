@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login_local/dashboard.css">
+    <title></title>
+</head>
+<body>
+
+<div class="title">
+<img 
+class="logo" 
+src="/image/main-logo.png" >
+
+<p class="celebrate">Congratulation</p>
+</div>
+
+<ul>
+    <li class="notice_title">You are registered as ...</li>
+    <div class="register">
+    <li class="notice">User- <a class="input"><%= name %></a></li>
+    <li class="notice">ID- <a class="input"><%= id %></a></li>
+    <li class="notice">Password- <a class="input"><%= password %></a></li>
+    <li class="notice">Type- <a class="input_"><%= type %></a></li>
+    <li class="notice">Area- <a class="input"><%= area %></a></li>
+    <li class="notice">Gender- <a class="input"><%= gender %></a></li>
+    <li class="notice">Age- <a class="input"><%= age %></a></li>
+    <li class="notice">Profile_image <image src="<%= profile_image %>" class="input" style="width: 50px; height: 50px;"></li>
+    </div>
+</ul>
+
+    <a href="/login" class="recommend">Go for login</a>
+
+<script>
+alert('Your Registeration Completed Successfully')
+</script>
+
+</body>
+</html>

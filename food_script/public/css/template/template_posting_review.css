@@ -1,0 +1,204 @@
+@font-face {
+    font-family: "KCC-eunyoung";
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');  
+  }
+  @font-face {
+    font-family: 'Galmetgol';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Galmetgol.woff') format('woff');
+    font-weight: 900;
+  }
+
+html{
+    background-color:  #F27536;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    }
+
+.title{
+    text-align: center;
+    position: relative;
+    top:35px;
+    font-family: Galmetgol;
+    font-size: 30px;
+    letter-spacing: 1px;
+    background-color: coral;
+    border-radius: 5px;
+    border: white solid 2px;
+    padding: 15px 30px 15px 30px;
+    line-height: 50px;
+    min-width: 450px;
+}
+
+.posting_container{
+    height: fit-content;
+    font-family: Galmetgol;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    border: black 2px solid;
+    padding: 50px 80px 20px 80px;
+    margin-top: 60px;
+    margin-bottom: 150px;
+}
+
+.posting_title,.posting_image{
+    display: flex;
+    flex-direction: column;
+}
+
+.posting_image{
+align-items: center;
+}
+
+.p_T{
+    font-size: 30px;
+    letter-spacing: 3px;
+    padding-bottom: 15px;
+}
+
+.posting_a,.posting_b,.posting_z{
+    font-weight: bold;
+    font-family: KCC-eunyoung;
+    background-color: coral;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    padding: 5px;
+
+    font-size: 20px;
+    border: white solid 2px;
+}
+
+.posting_a::placeholder,.posting_b::placeholder,.posting_z::placeholder{
+    color: black;
+}
+
+.posting_a{
+    margin-bottom: 35px;
+
+}
+
+.posting_b{
+    margin-bottom: 30px;
+}
+
+.posting_z{
+    padding: 10px;
+}
+
+.keyword_button{
+    margin-bottom: 35px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: 5px;
+    border: white 2px solid;
+    height: 30px;   
+}
+
+.submit_btn{
+    letter-spacing: 3px;
+    font-size: 25px;
+    font-family: Galmetgol;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-radius: 5px;
+    border: white 2px solid;
+    height: 50px;  
+}
+
+#image_src,#image_preview{
+    display: none;
+}
+
+#image_btn{
+    margin-top: 50px;
+    font-size: 25px;
+    letter-spacing: 2px;
+    width: fit-content;
+    border-radius: 15px;
+    background-color:#F27536;
+    border: black solid 1px;
+    padding: 5px;
+    color: white;
+    box-shadow: 1px 1px 1px black;
+}
+
+#image_btn:hover{
+    background-color: orange;
+    color: black;
+}
+
+#image_preview_container{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 20px;
+    box-shadow: 6px 6px 1px rgb(138, 59, 13);
+    border: 3px solid white;
+    border-radius: 15px;
+    min-width: 150px;
+    min-height: 150px;
+    max-width: 500px;
+    max-height: 370px;
+    gap: 10px;
+    padding: 10px;
+}
+
+.image_inserted{
+    max-width: 50px;
+    border: black solid 5px;
+    border-radius: 10px;
+}
+
+.image_insert_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 6px solid white;
+    border-radius: 15px;
+    background-color: orange;
+}
+
+#G_user,#G_email{
+    display: none;
+}
+
+#starRate{
+    font-size: 20px;
+    box-shadow: 1px 1px 1px black;
+    border: black 1px solid;
+    /* margin-top: 5px; */
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #F27536;
+    color: white;
+    font-family: "KCC-eunyoung";
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.starIcon{
+    text-align: left;
+}
+
+#image_length{
+    display: none;
+}
+
+@media (max-width:430px) and (min-width:320px){
+    .title,.posting_container{
+        min-width: 0px;
+        width: 300px;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .posting_container{
+        padding: 30px 40px 0px 40px;
+    }
+}

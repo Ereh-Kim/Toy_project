@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'KCC-eunyoung';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+}
+
+body{
+    background-color: #F27536;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 900px;
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notice{
+    list-style: none;
+    font-family: "KCC-eunyoung";
+    font-size: 30px;
+    padding: 10px 50px 10px 50px;
+}
+
+.register{
+    background-color: white;
+    padding: 20px 0px 20px 0px;
+}
+
+.notice_title{
+    padding: 0px 5px 0px 5px;
+    width: fit-content;
+    background-color: white;
+    letter-spacing: 1px;
+    list-style: none;
+    font-family: "KCC-eunyoung";
+    font-size: 25px;
+    margin: 20px;
+}
+
+.recommend{
+    padding-top: 15px;
+    font-family: "KCC-eunyoung";
+    font-size: 25px;
+}
+
+.celebrate{
+    background-color: white;
+    font-size: 40px;
+    letter-spacing: 4px;
+    font-family: "KCC-eunyoung";
+}
+
+.input{
+    padding: 5px 15px 5px 15px;
+    letter-spacing: 15px;
+    background-color: orange;
+    color: white;
+    margin-left: 15px;
+}
+
+.input_{
+    padding: 5px 15px 5px 15px;
+    letter-spacing: 5px;
+    background-color: orange;
+    color: white;
+    margin-left: 15px;
+}

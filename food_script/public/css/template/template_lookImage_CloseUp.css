@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'Galmetgol';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Galmetgol.woff') format('woff');
+    font-weight: 900;
+  }
+  @font-face {
+    font-family: "KCC-eunyoung";
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');  
+  }
+
+body{
+    display: grid;
+    justify-items: center;
+    background-color: #F27536;
+}
+
+.CloseUped_Image{
+    z-index: 0;
+    border: black solid 3px;
+    padding: 50px;
+    border-radius: 15px;
+    width: fit-content;
+    aspect-ratio: 4/3;
+    width: 500px;
+    margin: 0px 80px;
+}
+
+.container{
+    min-width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container_thumb{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    min-width: 500px;
+    border-radius: 15px;
+    border: black solid 3px;
+    margin: 50px 0px;
+    min-height: 150px;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 150px;
+    padding-bottom: 25px;
+}
+
+.container_title{
+    opacity: 0.1;
+    max-width: 250px;
+    font-family: KCC-eunyoung;
+    font-size: 20px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    position: relative;
+    top: 280px;
+    left: 150px;
+    z-index: 100;
+}
+
+.container_title:hover{
+    opacity: 1;
+}
+
+.button{
+    font-family: KCC-eunyoung;
+    font-size: 80px;
+    background-color: white;
+    color: black;
+    border: black solid 3px;
+    border-radius: 300px;
+    padding: 0px 15px 15px 15px;
+}
+
+.button:visited,.button:link{
+    text-decoration: none;
+    color: black;
+}
+
+.thumbnail{
+    width: 100px;
+    aspect-ratio: 4/3;
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+#main-title{
+    width: 1800px;
+    text-align: center;
+    overflow-x: hidden;
+    padding: 5px 0px 9px 0px;
+    font-family: KCC-eunyoung;
+    font-size: 40px;
+
+}
+
+#Logo_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#deco{
+    border: solid black 3px;
+    background-color: white;
+    padding: 0px 15px;
+}
+
+.container_thumb,.container{
+    position: relative;
+    bottom: 150px;
+}

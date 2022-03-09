@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="\css\personal\personal_account.css">
+  <title>Food script- filter</title>
+</head>
+<body>
+  <div class="text">
+<div class="border2">
+  <ul id="menubar">
+
+  <li>
+  <img id="menubtn" src="\image\iconmonstr-menu-5-64 (1).png">
+  </li>
+
+  <li><a class="anchor" href='/account'><div class="border"><p class="innerborder">My Account
+    <img id="profile" src="\image\iconmonstr-user-20-24.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/reviews"><div class="border"><p class="innerborder">My Reviews
+    <img id="reviews" src="\image\iconmonstr-pencil-15-96.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/journals"><div class="border"><p class="innerborder">My Journals
+    <img id="journals" src="\image\iconmonstr-file-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/alarms"><div class="border"><p class="innerborder">Alarms
+    <img id="alarms" src="\image\iconmonstr-bell-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/filter"><a class="anchor" href='/filter'><div class="border"><p class="innerborder">Filter
+    <img id="filter" src="\image\iconmonstr-filter-1-32 (1).png"></p></div></a>
+  </li>
+
+</ul></div>
+
+
+<div class="box">
+
+  <a href="/account/edit" class="editbtn">Edit</a>
+  <div class='Status'>My Account</div>
+<div class="profile_likelist">
+<ul class="profile">
+<li class="list2"> Profile Image: <image src= <% if( user != 'undefined' ){ %> "<%= profile_image_src %> <% } %>" class="box2"></li>
+<li class="list.a">Nick-Name: <% if( user != 'undefined' ){ %> <%= user %> <% } %> </li>
+<li class="list.b">User As: <% if( user != 'undefined' ){ %> <%= position %> <% } %></li>
+<li class="list.c">Usual Area: <% if( user != 'undefined' ){ %> <%= area %> <% } %></li>
+<li class="list.c">Gender: <% if( user != 'undefined' ){ %> <%= gender %> <% } %></li>
+<li class="list.c">Age: <% if( user != 'undefined' ){ %> <%= age %> <% } %></li>
+
+
+</ul>
+
+<div class="personalize_section">
+
+  <p id="component_title">'내'가 추가한 관심목록</p>
+
+<div class="likelist">
+<% for(var i=0; i<likelist.length; i++){%> 
+  
+<div id="com_align">
+
+  <a href="/location?place_id=<%=likelist[i].like_spot_links%>&place_name=<%=likelist[i].like_spot_names%>"
+    target="/location?place_id=<%=likelist[i].like_spot_links%>&place_name=<%=likelist[i].like_spot_names%>"
+    class="component_link">
+    <span id="component_name"><%= likelist[i].like_spot_names %></span>
+    <span id="component_address"><%= likelist[i].like_spot_address %></span>
+    <span id="component_timeline"><%= likelist[i].like_spot_timeline_year%>.<%= likelist[i].like_spot_timeline_month%>.<%= likelist[i].like_spot_timeline_date%> <%= likelist[i].like_spot_timeline_sunset%> <%= likelist[i].like_spot_timeline_hour%>시 <%= likelist[i].like_spot_timeline_minute%>분에 추가함</span>
+  </a>
+
+  <a id="excluding"
+   href="/excluding_here_from_account/<%=likelist[i].like_spot_names%>?place_id=<%=likelist[i].like_spot_links%>&place_address=<%=likelist[i].like_spot_address%>">
+   삭제하기</a>
+
+</div>
+<% } %>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="js/personal_account.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>

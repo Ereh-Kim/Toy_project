@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="\css\personal\personal_account.css">
+  <title>Food script- filter</title>
+</head>
+<body>
+  <div class="text">
+<div class="border2">
+  <ul id="menubar">
+
+  <li>
+  <img id="menubtn" src="\image\iconmonstr-menu-5-64 (1).png">
+  </li>
+
+  <li><a class="anchor" href='/account'><div class="border"><p class="innerborder">My Account
+    <img id="profile" src="\image\iconmonstr-user-20-24.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/reviews"><div class="border"><p class="innerborder">My Reviews
+    <img id="reviews" src="\image\iconmonstr-pencil-15-96.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/journals"><div class="border"><p class="innerborder">My Journals
+    <img id="journals" src="\image\iconmonstr-file-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/alarms"><div class="border"><p class="innerborder">Alarms
+    <img id="alarms" src="\image\iconmonstr-bell-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/filter"><a class="anchor" href='/filter'><div class="border"><p class="innerborder">Filter
+    <img id="filter" src="\image\iconmonstr-filter-1-32 (1).png"></p></div></a>
+  </li>
+
+</ul></div>
+
+
+<div class="box">
+
+<form action="/account/update" method="post">
+
+  <input class="editbtn" type="submit" value="변경사항 저장하기">
+  <div class='Status'>My Account</div>
+<div class="profile_likelist">
+<ul class="profile">
+<li class="list1">      
+
+      <div class="input5">
+        <label class="profile_image_button" for="profile_image"> 프로필 이미지 업로드</label>
+        <input type="file" id="profile_image">
+      </div>
+
+      <% if( typeof user_image != 'undefined' ){ %>
+      <div id="profile_form_activate">
+        <img id="profile_image_change" src="<%=user_image%>" >
+        <label for="profile_image_change" id="profile_image_filename">
+            기존 이미지 프로필
+        </label>
+        <input id="profile_image_src" name="profile_image_src" value="<%=user_image%>"></input>
+      </img>
+        </div>
+        <% } %>
+
+    </li>
+
+<li class="list.b">User As:    
+
+  <div class="input2">
+    <label class="type_text"><input type="checkbox" class="type_botton" name="type" value="owner">owner</label>
+    <label class="type_text"><input type="checkbox" class="type_botton" name="type" value="journalist">journalist</label>
+    <label class="type_text"><input type="checkbox" class="type_botton" name="type" value="reviewer">reviewer</label>
+  </div></li>
+
+<li class="list.c">Usual Area:         
+    
+    <select name="area" id="area" required>
+    <option value="" selected hidden>활동하시는 지역을 다시 정해주세요!</option>
+    <option name="area" value="서울">서울</option>
+    <option name="area" value="경기">경기</option>
+    <option name="area" value="인천">인천</option>
+    <option name="area" value="강원">강원</option>
+    <option name="area" value="충북">충북</option>
+    <option name="area" value="충남">충남</option>
+    <option name="area" value="세종">세종</option>
+    <option name="area" value="대전">대전</option>
+    <option name="area" value="대구">대구</option>
+    <option name="area" value="경북">경북</option>
+    <option name="area" value="경남">경남</option>
+    <option name="area" value="광주">광주</option>
+    <option name="area" value="전북">전북</option>
+    <option name="area" value="전남">전남</option>
+    <option name="area" value="울산">울산</option>
+    <option name="area" value="부산">부산</option>
+    <option name="area" value="제주">제주</option>
+  </select></li>
+
+<li class="list.c">Gender:       
+    
+    <div class="input2">
+    <label class="gender_text">남성
+    <input
+      type="radio"
+      id='gender'
+      name="gender"
+      value="남성"
+    /></label>
+
+    <label class="gender_text">여성
+    <input
+      type="radio"
+      id='gender'
+      name="gender"
+      value="여성"
+      required
+      /></label>
+  </div class="input2"></li>
+  
+<li class="list.c">Age:         
+    
+    <select name="age" id="age" required>
+    <option value="" selected hidden>현재 나이대로 수정해주세요</option>
+    <option name="age" value="10세~19세">10세~19세</option>
+    <option name="age" value="20세~29세">20세~29세</option>
+    <option name="age" value="30세~39세">30세~39세</option>
+    <option name="age" value="40세~49세">40세~49세</option>
+    <option name="age" value="50세~59세">50세~59세</option>
+    <option name="age" value="60세~69세">60세~69세</option>
+    <option name="age" value="70세 이상">70세 이상</option>
+  </select></li>
+
+
+</ul>
+
+<div class="text_input">
+
+    <span class="arrow1"> 
+
+        <span>&#11176;</span>
+        <span>&#11176;</span>
+
+
+    </span><span class="notice"> 수정하실 정보를<br>다시 입력해주세요 </span>
+    
+    <span class="arrow2"> 
+        <span>&#11183;</span>
+        <span>&#11183;</span>
+        <span>&#11183;</span>
+     </span>
+    <div class="text_input_component">
+    <span class="text_title"> Nick-Name: </span>
+    <span>
+      <input name="name" class="input1" value="<%= user_name %>" type="text">
+      <input type="button">
+    </span>
+    </div>
+    
+    <div class="text_input_component">
+    <span class="text_title">ID: </span><input name="id" class="input1" value="<%= user_id %>" type="text"> 
+    </div>
+    
+    <div class="text_input_component">
+    <span class="text_title">Password: </span><input name="password" class="input1" value="<%= user_password %>" type="password"> 
+    </div>
+
+    </div>
+
+</div>
+</div>
+</form>
+</div>
+<script src='/js/image_preview2.js'>
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+@font-face {
+    font-family: "KCC-eunyoung";
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');  
+  }
+  @font-face {
+    font-family: 'Galmetgol';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_04@1.0/Galmetgol.woff') format('woff');
+    font-weight: 900;
+  }
+
+html{
+    background-color:  #F27536;
+    }
+
+body{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.title{
+    text-align: center;
+    position: relative;
+    top:35px;
+    font-family: Galmetgol;
+    font-size: 30px;
+    letter-spacing: 1px;
+    background-color: coral;
+    border-radius: 5px;
+    border: white solid 2px;
+    padding: 15px 30px 15px 30px;
+    line-height: 50px;
+    width: 470px;
+}
+
+.posting_container{
+    margin-bottom: 50px;
+    height: fit-content;
+    font-family: Galmetgol;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    border: black 2px solid;
+    padding: 50px 80px 20px 80px;
+    margin-top: 60px;
+    width: 370px;
+}
+
+.posting_title{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+}
+
+.p_T{
+    font-size: 30px;
+    letter-spacing: 3px;
+    padding-bottom: 15px;
+}
+
+.posting_a,.posting_b,.posting_z{
+    font-weight: bold;
+    font-family: KCC-eunyoung;
+    background-color: coral;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+    padding: 5px;
+
+    font-size: 20px;
+    border: white solid 2px;
+}
+
+#grid2{
+    grid-column-start: 2;
+    grid-column-end: 2;
+}
+
+#grid1{
+    grid-column: 1/1;
+    display: flex;
+    flex-direction: column;
+}
+
+#grid3{
+    grid-column: 3/3;
+    display: flex;
+    flex-direction: column;
+}
+
+.skip_btn{
+    font-size: 120px;
+    font-family: KCC-eunyoung;
+    background-color: white;
+    padding: 20px;
+    border-radius: 110px;
+}
+
+.skip_btn:visited,.skip_btn:link{
+    text-decoration: none;
+    color: black;
+}
+
+.review_content,.review_content_felt{
+    background-color: coral;
+    width: 350px;
+    padding: 9px 5px 9px 15px;
+    border-radius:5px;
+    border: white solid 3.5px;
+    letter-spacing: 2px;
+    font-size: 25px;
+    word-wrap: break-word;
+    font-family: Galmetgol;
+}
+
+.review_content1,.review_content_felt1{
+    background-color: coral;
+    width: 350px;
+    padding: 9px 5px 9px 15px;
+    border-radius:5px;
+    border: white solid 3.5px;
+    letter-spacing: 2px;
+    font-size: 25px;
+    word-wrap: break-word;
+    font-family: Galmetgol;
+}
+
+.review_content1:focus,.review_content_felt1:focus{
+    background-color: wheat;
+    border: black solid 3.5px;
+}
+
+.review_content:focus,.review_content_felt:focus{
+    background-color: coral;
+    border: white solid 3.5px;
+}
+
+.review_content_felt,.review_content_felt1{
+    min-height: fit-content;
+    max-height: 300px;
+    word-wrap: break-word;
+    letter-spacing: 5px;
+    padding: 15px;
+    line-height: 30px;
+
+}
+
+.excluding{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-family: KCC-eunyoung;
+    border: black solid 3px;
+    width: 30px;
+}
+
+.page_text{
+    font-size: 40px;
+    font-family: KCC-eunyoung;
+    text-align: center;
+    padding: 10px 0px 0px 0px;
+}
+
+#posting_img{
+    width: 330px;
+    min-height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: coral;
+    margin: 10px 0px;
+    padding: 20px;
+    border-radius: 15px;
+    border: white solid 1px;
+    grid-row-gap: 20px;
+    justify-items: center;
+
+}
+
+.posted_img{
+    aspect-ratio: 4/3;
+    width: 75px;
+    padding: 10px;
+    border: black solid 3px;
+    border-radius: 15px;
+}
+
+#order{
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    padding: 0px 0px 5px 10px;
+    margin-right: 5px ;
+}
+
+#modify_btn{
+    padding: 25px 100px;
+    font-size: 30px;
+    border-radius: 15px;
+    letter-spacing: 20px;
+    font-family: KCC-eunyoung;
+    font-weight: bold;
+    background-color: coral;
+    border: white solid 3px;
+    cursor: pointer;
+}
+
+#modify_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#modify_btn:hover{
+    background-color: wheat;
+}
+
+.excluding{
+   padding: 0px 30px;
+   cursor: pointer;
+}
+
+.excluding:hover{
+    background-color: coral;
+    border: white solid 3px;
+}
+
+.edit_image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

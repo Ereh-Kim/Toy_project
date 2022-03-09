@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="name">About: </title>
+  <link rel='stylesheet' href='\css\template\template_reviews.css'>
+</head>
+<body>
+
+<div id="border2">
+
+  <ul id="menubar1">
+
+  <li><a href="/menu">
+  <img id="menubtn" src="image\iconmonstr-menu-5-64 (1).png"></a>
+  </li>
+
+  <li><div class="border">
+    <img id="profile" src="image\iconmonstr-user-20-24.png"></div>
+  </li>
+
+  <li><div class="border">
+    <img id="reviews" src="image\iconmonstr-pencil-15-96.png"></div>
+  </li>
+
+  <li><div class="border">
+    <img id="journals" src="image\iconmonstr-file-1-32.png"></div>
+  </li>
+
+  <li><div class="border">
+    <img id="alarms" src="image\iconmonstr-bell-1-32.png"></div>
+  </li>
+
+  <li><div class="border"><a href='/filter'>
+    <img id="filter" src="image\iconmonstr-filter-1-32 (1).png"></a></div>
+  </li>
+
+</ul></div><div class="line">
+
+<div class="align-left">
+  <div class="basic">
+  <div class="name"></div>
+  <div class="textdetail">
+    <ul class= 'list1'>
+      <!-- <li class="marginA"><a class="text">Serve type: </a> <a class="answer">한식</a></li> -->
+      <li class="marginA"><a class="text">Average-Rating:</a> <br>  <a class="answer"></a> <br> <p style="font-size: 10px;"> ( Google api supplied ) </p> </li>
+      <li class="marginA"><a class="text">Location:</a> <br> <a id="Location" class="answer"></a></li>
+      <li class="marginA"><a class="text">Phone-Number: </a> <br> <a id="phone_number" class="answer"></a> </li>
+      <li class="marginA"><a class="text">Opening_Hours:</a>  <p class='answer_hour'></p></li>
+    </ul></div>
+  </div>
+
+
+  <div class="collection">
+    <div class='slide'><a class="title1">Image Section ( Google-Api-Supplied )</a><a class="btn-close">close</a></div>
+    <div class="image-area">
+      <ul class="contentbox">
+
+        <li class="imagealigns">
+          <div class="minititle">photos</div>
+          <div class="lookupsection-photo">
+            <a class="link" href='/photo' target="/photo"><div class="image"><div id="text"></div></div></a>
+          </div></li>
+
+
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="collection">
+    <div class='slide'><a class="title1">Review Section ( Google-Api-Supplied )</a><a class="btn-close">close</a></div>
+    
+    <div class="review-area">
+
+    <ul class="reviewalign">
+      <div id="totalreview"></div>
+    </ul>
+  </div></div>
+    
+  
+<% if( typeof DB_reviews != 'undefined') { %>
+  <div class="collection">
+      <div class='slide'><a class="title1">Review Section ( food-script )</a><a class="btn-close">close</a></div>
+
+
+      <div class="review-area">
+      <ul class="reviewalign">
+        <div id="totalreview_local">작성된 총 리뷰 ( <%= DB_reviews_length %> ) 건</div>
+        <div id="totalreview_local"> - Food Script -<br> 리뷰 평균 ( <%= '⭐'.repeat(DB_reviews_starRate) %> ) 점</div>
+
+        <% if(DB_reviews.length === 0){ %>
+          <p id="local_review_none">
+        ( Food Script 리뷰)란에, <br>
+        추가된 리뷰가 아직 않습니다 
+          </p>
+        <% } %>
+
+        <% var DB_reviews_count = DB_reviews %>
+        <%  DB_reviews.forEach( DB_reviews => { %>
+
+      
+      <span class="numbering_local"><%= DB_reviews_count.indexOf(DB_reviews)+1 %></span>
+      <li class="local_reviews"> 
+
+        <div class="text_reviews">
+
+          <% if(DB_reviews.F_user != null) { %>
+        <span class="text_review_content">작성자/ <%= DB_reviews.F_user %></span>
+          <% } %>
+
+          <% if(DB_reviews.G_user != null) { %>
+        <span class="text_review_content">작성자/ <%= DB_reviews.G_user %></span>
+          <% } %>
+          <span class="text_review_content">별점 / <%= '⭐'.repeat(DB_reviews.starRate) %></span>        
+        <span class="text_review_content">제목 / <%= DB_reviews.title %></span>
+        <span class="text_review_content">한마디 / <%= DB_reviews.keyword %></span>
+        <span class="text_review_content">리뷰 / <%= DB_reviews.reviews %></span>
+
+        <% if(DB_reviews.review_image_posted != '') { %>
+        <span class="image_text">리뷰 이미지들</span>
+        <div class="review_image">
+        <% var Images = DB_reviews.review_image_posted.replace(/,data/gi,' data').split(' ') %>
+        <% Images.forEach( element => { %>
+        <a href="<%= DB_image %>/<%= DB_reviews.initial_num %>/<%= Images.indexOf(element) %>?writer=<%= DB_reviews.G_user %><%= DB_reviews.F_user %>&title=<%= DB_reviews.title %>" 
+          target="<%= DB_image %>/<%= DB_reviews.initial_num %>/<%= Images.indexOf(element) %>?writer=<%= DB_reviews.G_user %><%= DB_reviews.F_user %>&title=<%= DB_reviews.title %>"> <img src="<%= element %>" class="init" alt="이미지 X"> </a>
+        <% })} %>
+        </div>
+
+        <div id="text_review_date"><%= DB_reviews.insert_year %> / <%= DB_reviews.insert_month %> / <%= DB_reviews.insert_date %> 에 작성됨
+        </div>
+
+      </li>
+      <% })} %>
+
+      <% if( typeof DB_reviews_overLimit != 'undefined' ){ %>
+        <a href="<%= DB_reviews_overLimit %>" target="<%= DB_reviews_overLimit %>" id="lookMoreReview"> &#129131; 리뷰 더 보기 &#129131; </a>
+        <% } %>
+
+    </ul>
+
+
+
+  </div>
+
+  </div>
+
+    
+
+
+
+
+
+  <div class="collection">
+  <div class="insert-area">
+
+  <div class="writesection1">
+    <a id="write_review_link">
+    <div id="writereview">
+      <div class="writetext">Write <br> My Review <br>about here</div>
+      <img src="image\iconmonstr-pencil-15-96.png" class="writeicon">
+    </div></a>
+  </div>
+
+
+  <div class="writesection2">
+    <a id="write_journal_link">
+    <div id="writejournal">
+      <div class="writetext">Write<br> My Journal <br>about here</div>
+      <img src="image\iconmonstr-file-1-32.png" class="writeicon">
+    </div></a>
+  </div>
+
+  <div display="none" id="map"></div>
+
+  </div>
+
+
+  </div>
+  </div>
+
+
+
+</div>
+
+<script async defer type="text/javascript" src="js/template_reviews.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw0X4pec-WCEWCcNz-tmNDEqo9XiZyNdM&libraries=places"></script>
+</body>
+
+</html>

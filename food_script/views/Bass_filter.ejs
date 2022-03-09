@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height">
+  <link rel="stylesheet" href="\css\Bass\Bass_filter.css">
+  <title>Food script- filter</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="border2">
+
+  <ul id="menubar1">
+
+  <li>
+  <img id="menubtn" title="menu" src="image\iconmonstr-menu-5-64 (1).png">
+  </li>
+
+  <li><div class="border">
+    <img id="profile" title="profile" src="image\iconmonstr-user-20-24.png"></div>
+  </li>
+
+  <li><div class="border">
+    <img id="reviews" title="reviews" src="image\iconmonstr-pencil-15-96.png"></div>
+  </li>
+
+  <li><div class="border">
+    <img id="journals" title="journals" src="image\iconmonstr-file-1-32.png"></div>
+  </li>
+
+  <li><div class="border">
+    <img id="alarms" title="alarms" src="image\iconmonstr-bell-1-32.png"></div>
+  </li>
+
+  <li><div class="border"><a href='/filter'>
+    <img id="filter" title="filter" src="image\iconmonstr-filter-1-32 (1).png"></a></div>
+  </li>
+
+</ul></div>
+
+<div id="unactivate_border2">
+  <ul id="activate_menubar">
+
+  <li><a>
+  <img id="activate_menubtn" src="\image\iconmonstr-menu-5-64 (1).png"></a>
+  </li>
+
+  <li><div id="activate_Head">
+    <div class="activate_innerhead">Profile
+
+    <% if( typeof user_name&&typeof user_profile != 'undefined'){ %>
+    <image src="<%= user_profile %>" class="activate_profileimg" >Welcome<br>
+    <p class="activate_name">
+        "<%= user_name %>""
+    </p>
+    <% }else{ %>
+    <image src="" class="activate_profileimg" >Welcome<br>
+    <p class="activate_name">
+        "User"
+    </p>
+    <% } %>
+
+    </div>
+    </div>
+  </li>
+
+  <li><a class="activate_anchor" href='/account'><div class="activate_border"><p class="activate_innerborder">My Account
+    <img id="activate_profile" src="\image\iconmonstr-user-20-24.png"></p></div></a>
+  </li>
+
+  <li><a class="activate_anchor" href= "/reviews"><div class="activate_border"><p class="activate_innerborder">My Reviews
+    <img id="activate_reviews" src="\image\iconmonstr-pencil-15-96.png"></p></div></a>
+  </li>
+
+  <li><a class="activate_anchor" href= "/journals"><div class="activate_border"><p class="activate_innerborder">My Journals
+    <img id="activate_journals" src="\image\iconmonstr-file-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="activate_anchor" href= "/alarms"><div class="activate_border"><p class="activate_innerborder">Alarms
+    <img id="activate_alarms" src="\image\iconmonstr-bell-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="activate_anchor" href= "/filter"><a class="activate_anchor" href='/filter'><div class="activate_border"><p class="activate_innerborder">Filter
+    <img id="activate_filter" src="\image\iconmonstr-filter-1-32 (1).png"></p></div></a>
+  </li>
+
+</ul></div>
+
+<div class="line">
+<div class="center"><form id='su'>
+<div class='Logo-Searchbar'>
+  <a href="/"><img class="logo"src="\image\icon.png"></a>
+  <input id='shot' type="text" class="Searchbar"><img class="icon" src="\image\돋보기.png"></div></form></div>
+
+<div class="center">
+  <div class="center2">
+
+
+    <div id="version_selector">
+
+      <div id="version_selector_title"> Selector_Status </div>
+
+      <p class="select_doc">Please Select <br> Your Filter Version <br> lL===></p>
+
+    <div class='select'>
+    <img class="version_img" src="/image/meat.png">
+    <label class="version_btn" for="">nearby_with_keyword</label>
+    <input type="radio" checked value="nearby_with_keyword" name="version">
+  </div>
+
+    <div class='select'>
+    <img class="version_img" src="/image/quest.png" alt="">
+    <label class="version_btn" for="">quest_for_food</label>    
+    <input type="radio" value="quest_for_food" name="version">
+    </div>
+        
+    <img class="version_close_btn" src="/image/iconmonstr-x-mark-4-240.png" alt="">
+    <img class="version_open_btn_unactivate" src="/image/iconmonstr-minus-4-240.png" alt="">
+
+    </div>
+
+  <div id='filter1_activate'>
+  <div id="btn2">Apply</div>
+
+        <ul class="apply">
+          <li class="list">Type of Place
+          <select class='range' value='Type' name="types">
+          <option value="none" >Select an Option</option>
+          <option value="restaurant">default</option>
+          <option value="restaurant">restaurant</option>
+          <option value="cafe">cafe</option>
+          <option value="bar">bar</option>
+          </select>
+          </li>
+
+
+
+          <li class="list">Radius
+            <input class="listtype_2" type='range' list='rangechart' step='100' min='100' max='1000'
+            oninput="rangevalue()"
+            >
+            <datalist id='rangechart'>
+              <option value="0" disabled hidden>0m</option>
+              <option value="100"></option>
+              <option value="200"></option>
+              <option value="300"></option>
+              <option value="400"></option>
+              <option value="500" selected ></option>
+              <option value="600"></option>
+              <option value="700"></option>
+              <option value="800"></option>
+              <option value="900"></option>
+              <option value="1000"></option>
+            </datalist>
+            <div>
+          <em id="rangeValLabel"></em>
+          <span id="default">500m</span>
+        </div>
+          </li>
+
+        </ul>
+
+        <div id="closebtn">Close</div>
+        <div id="unactivate_openbtn">Open</div>
+        <div id="unactivate_filter_title">Using - " Search NearBy Filter "</div>
+
+
+  </div>
+
+  <div class="arrow">
+    <p style="font-size: 30px; word-spacing: 3px; background-color: white; border-radius: 15px; padding: 4px 8px;">Search-Results are Reflected!</p>
+    <img src="/image/iconmonstr-cursor-31-240.png" alt="" style="width: 50px; height: 50px; transform: rotate(180deg);">
+  </div>
+
+  <div class="nearby_search_result" id="formatted_address"></div>
+  <div class="nearby_search_result" id="target"></div>
+  <div class="nearby_search_result" id="map"></div>
+  <div class="nearby_search_result" id="searchstatus"></div>
+  <div class="nearby_search_result" id="notice"></div>
+  <div class="nearby_search_result" id="searched"></div>
+  <div class="nearby_search_result" id="notice2"></div>
+  <div class="nearby_search_result" id="plus"></div>
+
+
+</div></div></div>
+
+<script async defer type="text/javascript" src="js/Bass_filter.js"></script>
+<script type="text/javascript" src="js/Bass_filter_UI_EventHandler.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw0X4pec-WCEWCcNz-tmNDEqo9XiZyNdM&libraries=places"></script>
+
+</body>
+</html>

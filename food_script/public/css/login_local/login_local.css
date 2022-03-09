@@ -1,0 +1,141 @@
+@font-face {
+    font-family:큐트신민상;
+    src: "C:\Users\82104\Downloads\큐트신민상v1_01.ttf" format('woff');
+
+    font-family: "Ink Free";
+    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot");
+  
+}
+
+body{
+    background-color: #F27536;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 900px;
+}
+
+.formbox{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: black 5px solid;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+#input_1{
+    border: 1px black solid;
+    border-radius: 5px;
+    margin: 15px;
+    font-size:15px;
+}
+
+#input_2{
+    width: 140px;
+    border: 1px black solid;
+    border-radius: 5px;
+    margin: 15px;
+    font-size:15px;
+}
+
+.form_design{
+    font-size:15px;
+    font-family: 'Ink Free';
+}
+
+.logo{
+    padding-bottom: 50px;
+}
+
+.error_message{
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    color: white;
+    background-color: red;
+    font-family: 'Ink Free';
+    word-spacing: 3px;
+    padding: 3px 10px 3px 3px;
+
+    border-radius: 15px;
+}
+
+.error_icon{
+    padding-right: 10px;
+    width: 25px;
+    height: fit-content;
+}
+
+.submit_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.submit_botton{
+    background-color: white;
+    font-weight: bold;
+    letter-spacing: 15px;
+    font-size: 15px;
+    margin-top: 20px;
+    width: 230px;
+    font-family: 'Ink Free';
+    padding: 4px 0px 4px 10px;
+    border-radius: 15px;
+    border: black 3px solid;
+}
+
+.submit_botton:hover{
+    background-color: orange
+}
+
+.error_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+   
+}
+
+.recommend_1{
+    margin:  15px 0px 15px 0px;
+
+    background-color: papayawhip;
+    padding: 6px;
+    border-radius: 10px;
+    border: black solid 0px;
+
+    font-weight: bold;
+    font-family: 'Ink Free';
+    font-size: 15px;
+}
+
+.recommend_2{
+    margin:  15px 0px 15px 0px;
+
+    background-color: papayawhip;
+    padding: 6px;
+    border-radius: 10px;
+    border: black solid 0px;
+
+    font-weight: bold;
+    font-family: 'Ink Free';
+    font-size: 15px;
+
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.recommend_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
