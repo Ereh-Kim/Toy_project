@@ -180,12 +180,12 @@ rotation: 0,
     })
     // 마커 설정 + 아이콘 설정 함께 //
 
-    var Linfowindow = new google.maps.InfoWindow({
+    var F_infowindow = new google.maps.InfoWindow({
        content: `<a class='mylocation'>내가 검색한 위치</a>`
      });
      // 정보창 설정 //
 
-     Linfowindow.open({
+     F_infowindow.open({
        anchor: marker,
        map
      })
@@ -286,14 +286,14 @@ rotation: 0,
           });
           // 마커 설정 + 아이콘 함께 //
 
-          var infowindow = new google.maps.InfoWindow({
+          var S_Infowindow = new google.maps.InfoWindow({
              content: `<a class='pop'>${n}. ${place.name}</a>`
            });
           };
           //정보창 설정 //
 
           if(document.documentElement.clientWidth<430){
-            infowindow.open({
+            S_Infowindow.open({
               anchor: marker,
               map
             })
