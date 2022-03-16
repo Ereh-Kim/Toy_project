@@ -81,7 +81,7 @@ function code(e) {
     params:{
       address: Input,
       region: "kr",
-      key: 'AIzaSyBw0X4pec-WCEWCcNz-tmNDEqo9XiZyNdM'}
+      key: process.env.G_API_KEY}
   // -- axios data fetech -- //
 
   }).then(
