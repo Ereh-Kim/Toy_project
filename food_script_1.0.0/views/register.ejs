@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="/css/login_local/register.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Register</title>
+  </head>
+  <body>
+
+    <div id="box">
+
+    <div class="title">
+    <a href="/"><img class="register_logo" src="/image/main-logo.png"></a>
+    <p class="register_title">Register Page</p>
+    </div>
+
+    <form action="/register_user" method="POST">
+
+        <p class="Q1">&#8544 . Fill Up Your Account</p>
+
+      <div>
+        <input
+          class="input1"
+          type="text"
+          id='name'
+          name="name"
+          placeholder="name"
+          required />
+      </div>
+      <div>
+        <input
+          class="input1"
+          type="text"
+          id='id'
+          name="id"
+          placeholder="id"
+          required />
+      </div>
+      <div>
+        <input
+          class="input1"
+          type="password"
+          id='password'
+          name="password"
+          placeholder="password"
+          required
+        />
+      </div>
+
+      <div class="Q2">
+      <p class="Q1">&#8545 . Select Your Position</p>
+      <a class="notice">(Several Selections are available)</a>
+      </div>
+
+      <div class="input2">
+
+
+        <label class="type_text"><input type="checkbox" class="type_botton" name="type" value="owner">owner</label>
+        <label class="type_text"><input type="checkbox" class="type_botton" name="type" value="journalist">journalist</label>
+        <label class="type_text"><input type="checkbox" class="type_botton" name="type" value="reviewer">reviewer</label>
+      </div>
+
+      <div class="input3">
+        
+        <!-- <input
+          type="area"
+          id='area'
+          name="area"
+          placeholder="area"
+          required
+        /> -->
+
+        <p class="Q1">&#8546 . Select Your Activity Area</p>
+
+        <select name="area" id="area" required>
+        <option value="" selected hidden>Choose Your Activity Area</option>
+        <option name="area" value="서울">서울</option>
+        <option name="area" value="경기">경기</option>
+        <option name="area" value="인천">인천</option>
+        <option name="area" value="강원">강원</option>
+        <option name="area" value="충북">충북</option>
+        <option name="area" value="충남">충남</option>
+        <option name="area" value="세종">세종</option>
+        <option name="area" value="대전">대전</option>
+        <option name="area" value="대구">대구</option>
+        <option name="area" value="경북">경북</option>
+        <option name="area" value="경남">경남</option>
+        <option name="area" value="광주">광주</option>
+        <option name="area" value="전북">전북</option>
+        <option name="area" value="전남">전남</option>
+        <option name="area" value="울산">울산</option>
+        <option name="area" value="부산">부산</option>
+        <option name="area" value="제주">제주</option>
+      </select>
+      </div>
+
+      <!-- <div>
+        <select name="area2" id="area2">
+        <option value="" selected hidden>활동하시는 '동네'를 정해주세요</option>
+        <option value="" id="area_secound" disabled></option>
+      </select>
+      </div> -->
+
+      <p class="Q1">&#8547 . Select Your Gender</p>
+
+      <div class="input4">
+
+      <div>
+        <label class="gender_text">남성
+        <input
+          type="radio"
+          id='gender'
+          name="gender"
+          value="남성"
+        /></label>
+      </div>
+
+      <div>
+        <label class="gender_text">여성
+        <input
+          type="radio"
+          id='gender'
+          name="gender"
+          value="여성"
+          required
+          /></label>
+      </div>
+      </div>
+
+
+      <div class="input3">
+
+        <p class="Q1">&#8548 . Select Your Age</p>
+
+        <select name="age" id="age" required>
+        <option value="" selected hidden>Choose Your Age</option>
+        <option name="age" value="10세~19세">10세~19세</option>
+        <option name="age" value="20세~29세">20세~29세</option>
+        <option name="age" value="30세~39세">30세~39세</option>
+        <option name="age" value="40세~49세">40세~49세</option>
+        <option name="age" value="50세~59세">50세~59세</option>
+        <option name="age" value="60세~69세">60세~69세</option>
+        <option name="age" value="70세 이상">70세 이상</option>
+      </select>
+      </div>
+
+      <p class="Q1">&#8549 . Select Your Profile - image</p>
+
+      <div class="input5">
+        <label class="profile_image_button" for="profile_image"> 프로필 이미지 업로드</label>
+        <input type="file" id="profile_image">
+      </div>
+
+      <div id="profile_form">
+      <image id="profile_image_change">
+      <label for="profile_image_change" id="profile_image_filename">
+      </label>
+      <input id="profile_image_src" name="profile_image_src"></input>
+
+    </image>
+      </div>
+
+        <input class="submit_button" type="submit" value="SUBMIT" />
+      
+      
+    </form>
+</div>
+<a class="login" href="/login">Already registered? Login here</a>
+
+
+
+  <% if(typeof error != 'undefined'){ error.forEach(error => { %>
+    <div class="error_box">
+    <p class="error_message">
+      <img 
+      class="error_icon"
+      src="/image/iconmonstr-warning-6-96 (1).png" >
+      <%= error.message %></p></div>
+      <% })} %>
+  
+
+<script src="js/image_preview.js">
+
+</script>
+</body>
+</html>

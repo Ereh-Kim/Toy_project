@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/login_local/login_local.css">
+  <title>Food-Script_Login</title>
+</head>
+<body>
+  
+  <img 
+    class="logo" 
+    src="/image/main-logo.png" >
+
+  <form 
+   class="formbox" 
+   action="/login_local"
+   method="post">
+
+    <div class="form_design">
+    <label for="id">ID:</label>
+     <input
+       type="id"
+       id="input_1"
+       name="id"
+       placeholder="id"
+       required
+     />
+     </div>
+      
+    
+     <div class="form_design">
+    <label for="password">PASSWORD:</label>
+     <input
+       type="password"
+       id="input_2"
+       name="password"
+       placeholder="Password"
+       required
+     />
+    </div> 
+
+    <div class="submit_box">
+    <input class="submit_botton" type="submit" value="Login">
+    </div>
+
+  </form>
+
+  <% if(messages.error){ %>
+<div class="error_box">
+<p class="error_message">
+  <img 
+  class="error_icon"
+  src="/image/iconmonstr-warning-6-96 (1).png" >
+  <%= messages.error %></p>
+    
+  
+  <div class="recommend_box">
+
+  <p class="recommend_1">
+    Do You Forget Your ID & Password ? 
+  <a href='/find_process'> Click Here</a></p>
+
+  <p class="recommend_2">
+    Do You Need Registration? 
+  <a href='/register'> Click Here</a></p>
+  
+
+  </div>
+
+  </div>
+  <% } %>
+
+  
+</body>
+</html>

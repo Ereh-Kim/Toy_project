@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="\css\personal\personal_reviews.css">
+  <title>Food script- filter</title>
+</head>
+<body>
+<div class="border2">
+  <ul id="menubar">
+
+  <li>
+  <img id="menubtn" src="\image\iconmonstr-menu-5-64 (1).png">
+  </li>
+
+  <li><a class="anchor" href='/account'><div class="border"><p class="innerborder">My Account
+    <img id="profile" src="\image\iconmonstr-user-20-24.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/reviews"><div class="border"><p class="innerborder">My Reviews
+    <img id="reviews" src="\image\iconmonstr-pencil-15-96.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/journals"><div class="border"><p class="innerborder">My Journals
+    <img id="journals" src="\image\iconmonstr-file-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/alarms"><div class="border"><p class="innerborder">Alarms
+    <img id="alarms" src="\image\iconmonstr-bell-1-32.png"></p></div></a>
+  </li>
+
+  <li><a class="anchor" href= "/filter"><a class="anchor" href='/filter'><div class="border"><p class="innerborder">Filter
+    <img id="filter" src="\image\iconmonstr-filter-1-32 (1).png"></p></div></a>
+  </li>
+
+</ul></div>
+
+
+<div class="box">
+<div class="Text">
+  <p class="title">Allign Items ( 총 <%= reviewfile.length %>개 )</p>
+  <div class="btn">
+<div class="btn1">Latest</div><div class="btn2">Recent</div></div>
+</div>
+<div class="title2">My Reviews</div>
+<div id="review_section">
+  <% if( typeof reviewfile != 'undefined' ) { %>
+  <% reviewfile.forEach( element => { %>
+    <div class="row_align">
+    <div class="numbering"><%= reviewfile.indexOf(element)+1 %></div>
+  <a class="review_box"
+  href="/reviewObo/<%= element.initial_num %>/<%= reviewfile.indexOf(element) %>"
+  target="/reviewObo/<%= element.initial_num %>/<%= reviewfile.indexOf(element) %>">
+
+     <span class="review_content_title"><%= element.title %></span><br>
+     <span class="review_content">식당: <%= element.place_name %></span><br>
+     <span class="review_content">주소지: <%= element.place_address %></span><br>
+
+     <% if( element.image_length != '0' ){%>
+     <span class="review_content_imageLength"> 
+      첨부된 사진 <%= element.image_length %> 장
+      </span>
+      <% } %>
+
+
+     <span class="review_content_timeline">
+       <%= element.insert_year %>/
+       <%= element.insert_month %>/
+       <%= element.insert_date %>
+       에 작성됨
+      </span>
+
+      <a class="review_delete" 
+      href="/excluding_review/<%= element.initial_num %>">
+      삭제하기
+      </a>
+
+      <a class="review_delete" 
+      href="/modification_review/<%= element.initial_num %>/<%= reviewfile.indexOf(element)+1 %>/<%= reviewfile.length %>"
+      target="/modification_review/<%= element.initial_num %>/<%= reviewfile.indexOf(element)+1 %>/<%= reviewfile.length %>">
+      수정하기
+      </a>
+
+    </div>
+  </a>
+  <% })} %>
+</div>
+
+</div>
+
+
+</body>
+</html>

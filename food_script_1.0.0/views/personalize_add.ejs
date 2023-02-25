@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/personalize/personalize_add.css">
+    <title>Likely Find-List Alert</title>
+</head>
+<body>
+
+    <% if (typeof message != 'undefined'){ %>
+    <p class='likely_find'><%= message %>(가/이) <br><br> 성공적으로 관심등록에 완료되었습니다</p>
+    <% } %>
+
+    <% if (typeof alert != 'undefined'){ %>
+    <p class='likely_already'><%= alert %> (은/는)<br><br> 이미 관심등록된 지점입니다</p>
+    <% } %>
+
+    <% if (typeof alert_deleting != 'undefined'){ %>
+    <p class='likely_elminated'><%= alert_deleting %> (가/이)<br><br> 성공적으로 관심등록에서 제외되었습니다</p>
+    <% } %>
+    
+    <div class="like_box">
+    <div>
+    <p class='likely_mention'>'사용자'님께서 구성하신 관심목록은</p>
+    <ul class="like_list">
+    <% if (typeof like != 'undefined'){ for (var i=0; i<like.length; i++ ){ %>
+    <a
+    class="link-deco"
+    href=" /location?place_id=<%= link[i] %>&place_name=<%= like[i] %>"
+    target=" /location?place_id=<%= link[i] %>&place_name=<%= like[i] %>">
+    <li class='likely_completed'><%= like[i] %></li>
+    <p class="address_add">ㄴ> 주소: <%= detail[i] %></p>
+    </a>
+
+    <span class="request_notice">등록일시:</span>
+    <span class="requset_record"><%= trace[i] %> </span>
+
+    <form class="delete_box" 
+    action="/excluding_here/<%= like[i] %>?place_id=<%= link[i]%>&place_detail=<%= detail[i] %>"
+    method='post'>
+    <input type='submit' value="관심목록에서 제외하기" class="request_delete">
+    </input></form>
+    
+    <% }} %>
+    </ul>
+    <p class='likely_mention'>으로 완성되어 있습니다</p>
+</div>    
+</div>
+
+</body>
+</html>

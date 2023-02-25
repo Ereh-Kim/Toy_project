@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\template\template_lookMoreReview.css">
+    <title>Look for More Reviews</title>
+</head>
+
+<body>
+
+    <% if( typeof DB_reviews_overLimited != 'undefined' ){ %>
+    <div id="Logo_section">
+        <img src="/image/main-logo.png" width="fit-content" height="fit-content">
+        <p id="main-title">   0 0 0 0 0 0 0 0 <span id="deco">Look for More Reviews</span>    0 0 0 0 0 0 0 0</p>
+    </div>
+
+    <div id="totalreview_local">작성된 총 리뷰 ( <%= total %> ) 건</div>
+    <div id="totalreview_local"> Food Script / 리뷰 평균 ( <%= '⭐'.repeat(DB_reviews_starRate) %> ) 점</div>
+    <% } %>
+
+    <% if( typeof DB_reviews_overLimited != 'undefined' ){ %>
+
+    <% var Compare = DB_reviews_overLimited %>
+    <% var LastPage = new Number(DB_reviews_Lastpage) %>
+    <% DB_reviews_overLimited.forEach( DB_reviews_overLimited => {%>
+
+    <p class="numbering"><%= Compare.indexOf(DB_reviews_overLimited)+LastPage+1 %></p>
+    <div class="container">
+    <% if(DB_reviews_overLimited.F_user != null) { %>
+    <p class="review_contents">
+    작성자/ <%= DB_reviews_overLimited.F_user %>
+    </p>
+    <% } %>
+
+
+    <% if(DB_reviews_overLimited.G_user != null) { %>
+    <p class="review_contents">
+    작성자/ <%= DB_reviews_overLimited.G_user %>
+    </p>
+    <% } %>
+
+    <span class="text_review_content">별점 / <%= '⭐'.repeat(DB_reviews_overLimited.starRate) %></span>        
+    <p class="review_contents">제목/ <%= DB_reviews_overLimited.title %></p>
+    <p class="review_contents">한마디/ <%= DB_reviews_overLimited.keyword %></p>
+    <p class="review_contents">리뷰/ <%= DB_reviews_overLimited.reviews %></p>
+
+    <% if(DB_reviews_overLimited.review_image_posted != ''){ %>
+    <% var Images = DB_reviews_overLimited.review_image_posted.replace(/,data/gi,' data').split(' ') %>
+    <div class="container_thumb">
+
+    <% Images.forEach( element => { %>
+        <a href='/lookImage_CloseUp/<%= DB_reviews_overLimited.initial_num %>/<%= Images.indexOf(element) %>?writer=<%= DB_reviews_overLimited.F_user %><%= DB_reviews_overLimited.G_user %>&title=<%= DB_reviews_overLimited.title %>'
+        target="/lookImage_CloseUp/<%= DB_reviews_overLimited.initial_num %>/<%= Images.indexOf(element) %>?writer=<%= DB_reviews_overLimited.F_user %><%= DB_reviews_overLimited.G_user %>&title=<%= DB_reviews_overLimited.title %>">
+        <img class="thumbnail" src="<%= element %>" > </a>
+    <% }) %>
+
+    </div>
+    <% } %>
+
+    </div>
+    <% })} %>
+
+    <% if( typeof DB_reviews_overLookLink != 'undefined'){ %>
+    <a class="Lookmore" href="<%= DB_reviews_overLookLink %>">	
+        ▲ Next Page ▲</a>
+        <% if( typeof return_page != 'undefined'){ %>
+    <a class="Lookmore" href="<%= return_page %>">	
+        &#9660; Back Before &#9660;</a>
+        <% } %>
+    <% } %>
+
+    <% if( typeof DB_reviews_overLimited != 'undefined' ){ %>    
+        <p id="main-title">   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</p>
+    <% } %>
+
+    <% if( typeof error != 'undefined'){ %>
+    <p class="error">"<%= error %>"</p>
+    <p class="error"> Click <a href="<%= return_page %>">here</a> to return before page </p>
+    <% } %>
+
+</body>
+
+</html>

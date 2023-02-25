@@ -1,0 +1,359 @@
+@font-face {
+  font-family:'큐트신민상';
+  src: "C:\Users\82104\Downloads\큐트신민상v1_01.ttf" format('woff');
+
+  font-family: "KCC-eunyoung";
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');}
+
+body{
+ background-color: #F27536;
+}
+
+.grid{
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+}
+
+.logo{
+  width: 265px;
+  height: 75px;
+}
+
+.States{
+  font-family: "KCC-eunyoung";
+  font-size: 20px;
+  position: relative;
+  right: 160px;
+  top: 10px;
+  margin-bottom: 100px;
+}
+
+.Logo-Searchbar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* grid-row: 100px/100px; */
+}
+
+.Searchbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #F27536;
+  width: 365px;
+  height: 45px;
+  border: 5px black solid;
+  border-radius: 50px;
+  font-size: 35px;
+  font-weight: bold;
+  font-size: 22px;
+  font-family: KCC-eunyoung;
+  text-align: center;
+}
+
+.icon{
+  border-right: 5px solid black;
+  padding: 0px 30px 0px 10px;
+  width: 27px;
+  height: 27px;
+
+
+}
+
+.title{
+  border-bottom: 4px black dashed;
+  font-family: KCC-eunyoung;
+  font-size: 15pt;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  width: 1200px;
+  height: 84px;
+  padding-bottom: 30px;
+  margin-top: 50px;
+  /* grid-row: 30px/30px */
+}
+
+#purpose:hover,#HTU:hover,#support:hover{
+  cursor: pointer;
+  font-size:40px;
+}
+
+#purpose{
+  grid-row: 1fr/1fr
+}
+
+#HTU{
+  grid-row: 2fr/2fr;
+}
+
+#support{
+  grid-row: 3fr/3fr;
+  text-align: center;
+}
+
+#introduction{
+  font-family: KCC-eunyoung;
+  text-align: center;
+  width: 1200px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  display: fixed;
+}
+
+.mainintro{
+  font-size: 40px;
+}
+
+.contacts{
+  padding: 80px 30px 110px 30px;
+  font-family: KCC-eunyoung;
+  border-top: 1px black solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 1200px;
+}
+
+/* active.css 아래에*/
+
+.afterclick{
+  background-color: white;
+  font-size: 40px;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+.detail1{
+border-radius: 50px;
+border: white 5px solid;
+height: 450px;
+width: 500px;
+padding-top: 30px;
+word-spacing: 2px;
+font-size: 25px;
+line-height: 40px;
+}
+
+.detail2{
+border-left: white solid 3px;
+border-bottom: white solid 3px;
+word-spacing: 5px;
+line-height: 35px;
+text-align: left;
+margin: 30px 0px;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+width: 1300px;
+}
+
+.p{
+  width: 550px;
+}
+
+.p2{
+  width: 550px;
+}
+
+#buttonA,#buttonB{
+  border-radius: 20px;
+  background-color: white;
+  font-size: 30px;
+  margin-top:50px;
+  padding: 30px;
+
+}
+
+.T{
+  font-size: 35px;
+  font-weight: bolder;
+}
+
+.Po{
+  font-size: 20px;
+}
+
+#Notice{
+  font-size: 16px;
+  padding-top: 5px;
+  color: purple;
+}
+
+
+
+@media (min-width:300px) and (max-width:750px) {
+
+  .States{
+    top: 30px;
+    right: 100px;
+  }
+  .logo{
+    width: 190px;
+    height: 55px;
+  }
+  .icon{
+    padding: 0px 10px 0px 10px;
+  }
+  .Searchbar{
+    width: 275px;
+    height: 35px;
+    font-size: 15px;
+    padding-right: 10px;
+  }
+  .title{
+    width: 300px ;
+  }
+  #introduction{
+    width: 300px;
+  }
+  .contacts{
+    width: 300px;
+  }
+  .afterclick{
+    font-size: 20px;
+  }
+  #purpose:hover,#HTU:hover,#support:hover{
+    cursor: pointer;
+    font-size:20px;
+  }
+  .p{
+    width: 300px;
+  }
+  .Po{
+    font-size: 20px;
+    width: 300px;
+    word-break: break-word;
+  }
+  .T{
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .p2{
+    width: 300px;
+  }
+
+  .detail2{
+    line-height: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 300px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    }
+    
+    .detail1{
+
+      border-radius: 50px;
+      border: white 5px solid;
+      height: fit-content;
+      width: 300px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      word-spacing: 2px;
+      font-size: 20px;
+      line-height: 30px;
+      }
+
+    #buttonA,#buttonB{
+      border-radius: 20px;
+      background-color: white;
+      font-size: 30px;
+      margin-top:10px;
+      padding: 10px;
+    }
+
+}
+
+@media (min-width:750px) and (max-width:1400px) {
+
+  .States{
+    top: 30px;
+    right: 100px;
+  }
+  .logo{
+    width: 190px;
+    height: 55px;
+  }
+  .icon{
+    padding: 0px 10px 0px 10px;
+  }
+  .Searchbar{
+    width: 275px;
+    height: 35px;
+    font-size: 15px;
+    padding-right: 10px;
+  }
+  .title{
+    width: 700px ;
+  }
+  #introduction{
+    width: 700px;
+  }
+  .contacts{
+    width: 700px;
+  }
+  .afterclick{
+    font-size: 20px;
+  }
+  #purpose:hover,#HTU:hover,#support:hover{
+    cursor: pointer;
+    font-size:20px;
+  }
+  .p{
+    width: 500px;
+  }
+  .Po{
+    font-size: 20px;
+    width: 500px;
+    word-break: break-word;
+  }
+  .T{
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .p2{
+    width: 500px;
+  }
+
+  .detail2{
+    line-height: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 500px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    }
+    
+    .detail1{
+      height: fit-content;
+      border-radius: 50px;
+      border: white 5px solid;
+      width: 500px;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      word-spacing: 2px;
+      font-size: 20px;
+      line-height: 30px;
+      }
+
+    #buttonA,#buttonB{
+      border-radius: 20px;
+      background-color: white;
+      font-size: 30px;
+      margin-top:10px;
+      padding: 10px;
+    }
+
+}

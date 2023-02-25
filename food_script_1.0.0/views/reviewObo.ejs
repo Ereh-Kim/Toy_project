@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template/template_reviewObo.css">
+    <title>posting_review about</title>
+</head>
+<body>
+
+    <%if(typeof selectedOrder != 'undefined'){ %>
+        <% var nextorder = Number(selectedOrder) + 1 %>
+        <% var preorder = Number(selectedOrder) - 1 %>
+        <% } %>
+
+    <% if(typeof preReview_initialNum != 'undefined'){ %>
+    <div id="grid1">
+    <a class="skip_btn" href='/reviewObo/<%= preReview_initialNum.initial_num %>/<%= preorder %>'><-- </a>
+    <span class="page_text">이전 페이지</span>
+    </div>
+    <% } %>
+
+
+    <div id="grid2">
+    <% if( typeof matchedReview != 'undefined'){ %>
+    <% var UI_num = Number(selectedOrder) + 1 %>
+    <p class="title">
+    ( " <span id="otherUser"></span><%= matchedReview.F_user %> " 님이 작성한 )<br>
+    " <%= matchedReview.place_name %> " 에 관한 <br>
+    <span id="order"> ( <%= UI_num %> / <%= selectedLength %> ) </span> 번째 리뷰 </p>
+    <% } %>
+
+    <div class="posting_container">
+
+    <div class="posting_title">
+    <span class="p_T">핵심 '한마디'</span>
+    <span class="review_content"><%= matchedReview.title %></span>
+    </div>
+
+    <div class="posting_title">
+    <span class="p_T">핵심 '키워드'</span>
+    <span class="review_content"><%= matchedReview.keyword %></span>
+    </div>
+
+    <div class="posting_title">
+        <span class="p_T">별점</span>
+        <span class="review_content"><%= '⭐'.repeat(matchedReview.starRate) %></span>
+    </div>
+    
+    <div class="posting_title">
+        <span class="p_T">느낀점 및 리뷰 </span>
+        <span class="review_content_felt"><%= matchedReview.reviews %></span>
+    </div>
+
+
+    <%if( matchedReview.review_image_posted != ''){ %>
+    <%var images = matchedReview.review_image_posted.replace(/,data/gi,' data').split(' ') %>
+    <div id="posting_img">
+        <% images.forEach( element => { %>
+        <a href="/lookImage_CloseUp/<%= initial_num %>/<%= images.indexOf(element) %>?writer=<%= User.name %>&title=<%= matchedReview.title %>"
+           target="/lookImage_CloseUp/<%= initial_num %>/<%= images.indexOf(element) %>?writer=<%= User.name %>&title=<%= matchedReview.title %>">
+        <img src="<%= element %>" class="posted_img">
+        </a>
+        <% }) %>
+    </div>
+    <% } %>
+
+    </div>
+</div>
+
+    
+    <% if(typeof nextReview_initialNum != 'undefined'){ %>
+    <div id="grid3">
+    <a class="skip_btn" href='/reviewObo/<%= nextReview_initialNum.initial_num %>/<%= nextorder %>'> --> </a>
+    <span class="page_text">다음 페이지</span>
+    </div>
+    <% } %>
+
+<script src="/js/image_preview3.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>

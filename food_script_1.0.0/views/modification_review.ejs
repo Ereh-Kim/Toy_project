@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template/template_reviewObo.css">
+    <title>posting_review about</title>
+</head>
+<body>
+
+    <div id="grid1"></div>
+
+    <div id="grid2">
+    <form 
+    action="/modify_review/<%= initial_num %>"
+    method="post">
+    
+    <% if( typeof matchedReview != 'undefined'){ %>
+    <% var UI_num = Number(selectedOrder) %>
+    <p class="title">
+    ( " <span id="otherUser"></span><%= matchedReview.F_user %> " 님이 작성한 )<br>
+    " <%= matchedReview.place_name %> " 에 관한 <br>
+    <span id="order"> ( <%= UI_num %> / <%= selectedLength %> ) </span> 번째 리뷰 </p>
+    <% } %>
+
+    <div class="posting_container">
+
+    <div class="posting_title">
+    <span class="p_T">핵심 '한마디'</span>
+    <input type="text" name="title" value='<%= matchedReview.title %>' class="review_content1">
+    </div>
+
+    <div class="posting_title">
+    <span class="p_T">핵심 '키워드'</span>
+    <input type="text" name="keyword" value='<%= matchedReview.keyword %>' class="review_content1">
+    </div>
+
+    <div class="posting_title">
+        <span class="p_T">별점</span>
+        <select name="starRate" class="review_content1">
+            <option selected  hidden value="<%= matchedReview.starRate %>"><%= '⭐'.repeat(matchedReview.starRate) %></option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+    
+    <div class="posting_title">
+        <span class="p_T">느낀점 및 리뷰 </span>
+        <textarea cols="40" rows="10" type="text" name="review_content" class="review_content_felt1"><%= matchedReview.reviews %></textarea>
+    </div>
+
+
+    <%if(matchedReview.review_image_posted != ''){ %>
+    <%var images = matchedReview.review_image_posted.replace(/,data/gi,' data').split(' ') %>
+    <div id="posting_img">
+        <% images.forEach( element => { %>
+            <div class="edit_image">
+        <a href="/lookImage_CloseUp/<%= initial_num %>/<%= images.indexOf(element) %>?writer=<%= User %>&title=<%= matchedReview.title %>"
+           target="/lookImage_CloseUp/<%= initial_num %>/<%= images.indexOf(element) %>?writer=<%= User %>&title=<%= matchedReview.title %>">
+        <img src="<%= element %>" class="posted_img">
+        </a>
+        <!-- <input class="excluding" value="X" type="button"> -->
+            </div>
+        <% }) %>
+    </div>
+    <% } %>
+
+    </div>
+
+    <div id="modify_container">
+        <input type="submit" value="수정사항 제출하기" id="modify_btn" >
+        </div>
+
+</form>
+</div>
+
+<div id="grid3"></div>
+
+<script src="/js/image_preview3.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>

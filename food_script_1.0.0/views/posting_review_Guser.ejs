@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/template/template_posting_review.css">
+    <title>posting_review about</title>
+</head>
+<body>
+
+    <% if( typeof user && typeof select != 'undefined'){ %>
+    <p class="title">
+    ( " <span id="otherUser"></span><%= user %> " 님이 작성하는 )<br>
+    " <%= select %> " 에 관한 리뷰작성</p>
+    <% } %>
+
+    <div class="posting_container">
+<form action="<%= form %>" method="post">
+    <div class="posting_title">
+    <span class="p_T">핵심 '한마디'</span>
+    <input name="title" type="text" placeholder="'제목' 을 적어주세요..." class="posting_a" required >
+    </div>
+
+    <div class="posting_title">
+    <span class="p_T">핵심 '키워드'</span>
+    <input name="keyword" type="text" placeholder="'키워드' 를 적고 추가해주세요..." class="posting_b" >
+    
+    <!-- <button class="keyword_button" type="button">
+    <label for="keyword_button">+ 클릭해서 추가 +</label>
+    </button> -->
+    </div>
+    
+    <div class="posting_title">
+        <span class="p_T">별점</span>
+        <select name="starRate" id="starRate" required>
+            <option selected hidden> "별점"을 추가해주세요 </option>
+            <option class="starIcon" value="⭐">⭐</option>
+            <option class="starIcon" value="⭐⭐">⭐⭐</option>
+            <option class="starIcon" value="⭐⭐⭐">⭐⭐⭐</option>
+            <option class="starIcon" value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+            <option class="starIcon" value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+
+    <div class="posting_title">
+    <span class="p_T">느낀점 및 리뷰 :</span>
+    <textarea name="review_content" class="posting_z" placeholder="'리뷰' 및 '느낀 점' 을 적어주세요..." cols="40" rows="10" required></textarea>
+    </div>
+
+    <div class="posting_image">
+        <input id="image_src" name="review_image_posted" type="text">
+        <input id="image_preview" type="file" multiple>
+        <label for="image_preview" id="image_btn">이미지 같이 업로드하기</label>
+        <div id="image_preview_container"></div>
+        
+    </div>
+    <input type="text" name="G_user" id="G_user">
+    <input type="text" name="G_email" id="G_email">
+    
+    <div class="posting_title">
+    <input class="submit_btn" type="submit" value="클릭해서 리뷰 등록하기">
+</div>
+
+
+</form>
+    </div>
+<script src="/js/image_preview3_Guser.js"></script>
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+</body>
+</html>

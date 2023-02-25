@@ -1,0 +1,284 @@
+@font-face {
+    font-family:'KCC-eunyoung';
+    src: "C:\Users\82104\Downloads\KCC-eunyoungv1_01.ttf" format('woff');
+  
+    font-family: "KCC-eunyoung";
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+  }
+
+body{
+    background-color: #F27536;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height:fit-content;
+    margin-top: 50px;
+}
+
+form{
+    position: relative;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     height: fit-content;
+}
+
+.input1{
+    background-color: #F27536;
+    color: white;
+    border: 1px black solid;
+    border-radius: 5px;
+    margin: 5px;
+    font-size:15px;
+    padding: 7px;
+    box-shadow: 1px 1px 1px black;
+}
+
+.input1::placeholder{
+    color: white;
+    font-family: "KCC-eunyoung";
+}
+
+.input2{
+    box-shadow:  1px 1px 1px black;
+    border-radius: 15px;
+    padding: 5px 30px 15px 40px;
+    border: black 1px solid;
+    font-family: "KCC-eunyoung";
+    font-size:15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px 0px 0px 10px;
+}
+
+.input5{
+    box-shadow:  1px 1px 1px black;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
+    border: black 1px solid;
+    font-family: "KCC-eunyoung";
+    font-size:15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px 0px 0px 10px;
+}
+
+.input4{
+    box-shadow:  1px 1px 1px black;
+    border-radius: 15px;
+    padding: 5px 40px 15px 40px;
+    border: black 1px solid;
+    font-family: KCC-eunyoung;
+    font-size:15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 0px 0px 10px;
+}
+
+.type_botton{
+ margin-RIGHT: 15px;
+ width: 10px;
+ height: 10px;
+}
+
+.type_text{
+    position: relative;
+    right: 20px;
+    color: white;
+    margin: 5px 0px 5px 0px;
+}
+
+.gender_text{
+    letter-spacing: 10px;
+    color: white;
+}
+
+.select_text{
+   text-align: center;
+}
+
+#box{
+    border: black 2px solid;
+    border-radius: 15px;
+    padding: 0px 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Q1{
+    background-color: white;
+    margin-top: 40px;
+    word-spacing: 8px;;
+    font-weight: lighter;
+    font-size: 20px;
+    font-family: "KCC-eunyoung";
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+.notice{
+    padding: 2px 5px 2px 5px;
+    background-color: white;
+    position: relative;
+    bottom: 8px;
+    font-size: 15px;
+    word-spacing: 5px;
+    font-family: "KCC-eunyoung";
+    margin-bottom: 20px;
+
+}
+
+#area{
+    box-shadow: 1px 1px 1px black;
+    border: black 1px solid;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #F27536;
+    color: white;
+    font-family: "KCC-eunyoung";
+    text-align: center;
+}
+
+#age{
+    box-shadow: 1px 1px 1px black;
+    border: black 1px solid;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #F27536;
+    color: white;
+    font-family: "KCC-eunyoung";
+    text-align: center;
+}
+
+
+#profile_image{
+    display: none;
+}
+
+.profile_image_button{
+    font-size: larger;
+    font-family: 'KCC-eunyoung';
+    color: white;
+}
+
+.profile_image_button:hover{
+    color: black;
+    cursor: pointer;
+}
+
+#profile_image_src{
+    display: none;
+}
+
+#profile_form_activate{
+    box-shadow: 1px 1px 1px black;
+    border-radius: 10px;
+    padding: 20px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    border: 3px black solid;
+    margin-top: 45px;
+    margin-left: 10px;
+}
+
+#profile_image_filename{
+    line-height: 20px;
+    text-align: center;
+    width: 150px;
+    height: fit-content;
+    font-family: 'KCC-eunyoung';
+    font-size: 15px;
+    color: white;
+}
+
+.input5:hover{
+    background-color: orange;
+}
+
+#gender{
+    margin: 5px 0px 5px 0px;
+}
+
+.input3{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.submit_button{
+    font-weight: bold;
+    letter-spacing: 20px;
+    font-size: 15px;
+    background-color: white;
+    width: 300px;
+    padding: 15px 0px 15px 25px;
+    border: 1px #F27536 solid;
+    border-radius: 15px;
+    position: relative;
+    top: 50px;
+}
+
+.submit_button:hover{
+    background-color: orange;
+}
+
+.Q2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register_title{
+background-color: white;
+font-family: "KCC-eunyoung";
+font-size: 20px;
+padding: 2px 5px 2px 5px;
+}
+
+.register_logo{
+position: relative;
+top: 20px
+}
+
+.login{
+    padding: 20px 0px 20px 0px;
+    font-family: "KCC-eunyoung";
+}
+
+.error_message{
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    color: white;
+    background-color: red;
+    font-family: 'KCC-eunyoung';
+    word-spacing: 3px;
+    padding: 3px 10px 3px 3px;
+
+    border-radius: 15px;
+}
+
+.error_icon{
+    padding-right: 10px;
+    width: 25px;
+    height: fit-content;
+}
