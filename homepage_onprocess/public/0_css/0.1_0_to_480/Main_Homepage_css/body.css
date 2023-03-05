@@ -1,0 +1,21 @@
+@media (max-width:480px) and (min-width:0px) {
+
+body {
+  background-color: #F27536;
+
+  margin-left: 10vw;
+  margin-right: 10vw;
+  width: 80vw;
+
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  height: 80vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+}
