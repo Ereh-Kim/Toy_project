@@ -1,21 +1,48 @@
 @media (max-width:480px) and (min-width:0px) {
 
+@font-face {
+  font-family:'큐트신민상';
+  src: "C:\Users\82104\Downloads\큐트신민상v1_01.ttf" format('woff');
+}
+
 body {
   background-color: #F27536;
 
+  width: 80vw;
   margin-left: 10vw;
   margin-right: 10vw;
-  width: 80vw;
 
-  margin-top: 5vh;
+  height: 92vh;
+  margin-top: 3vh;
   margin-bottom: 5vh;
-  height: 80vh;
 
+}
+
+#root{
+  width: inherit;
+  height: inherit;
+}
+
+/* Account_nevbar & nevbar_Components CSS */
+
+.Account_nevbar{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 
+  width: inherit;
+  height: fit-content;
+}
+
+.Account_nevbar_child_components{
+  
+  font-family:'큐트신민상';
+
+  font-size: 6vw;
+  padding-right: 5vw;
+  height: fit-content;
+
+  font-weight: bolder;
 }
 
 }

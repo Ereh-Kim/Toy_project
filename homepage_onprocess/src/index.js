@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './0_component/App';
+import App from './0_component/Account_nevbar/Account_nevbar.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
