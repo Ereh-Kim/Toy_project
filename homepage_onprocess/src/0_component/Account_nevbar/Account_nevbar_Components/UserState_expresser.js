@@ -22,7 +22,6 @@ export const UserState_expresser = (props) => {
       }
       // 개인정보 확인 이후, 컴포넌트에 전달 (인증절차 추가 예정)
 
-      return result.data.username
     }).then((result)=>{
 
       switch(UserState){
