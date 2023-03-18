@@ -21,11 +21,15 @@ body {
 #root{
   width: inherit;
   height: inherit;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Account_nevbar & nevbar_Components CSS */
 
-.Account_nevbar{
+#Account_nevbar{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -39,10 +43,95 @@ body {
   font-family:'큐트신민상';
 
   font-size: 6vw;
-  padding-right: 5vw;
+  margin-right: 5vw;
   height: fit-content;
 
   font-weight: bolder;
+  word-spacing: 3px;
+}
+
+.LogInOut_button{
+  padding: 1vw;
+
+  border: black solid 3px;
+  border-radius: 5px;
+  font-size: 4vw;
+}
+
+/* Main_Logo & SearchBar CSS */
+
+#Main_Logo{
+  margin-top: 3.5vh;
+  width: 60vw;
+  height: fit-content;
+}
+
+/* Main_Logo CSS */
+
+#SearchBar{
+  width: inherit;
+  height: 4vh;
+  margin-top: 2.5vh;
+
+  border: black 3px solid;
+  border-radius: 25px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#SearchBar_Input{
+  width: 60%;
+  height: 2vh;
+
+  padding-left: 5%;
+
+  position: relative;
+  right:10vw;
+
+  background-color: #F27536;
+  border: none;
+  border-left: black 5px solid;
+
+  font-family: '큐트신민상';
+  font-weight: bolder;
+}
+
+/* SearchBar CSS */
+
+#Reading_Glass_icon{
+  width: 5vw;
+
+  position: relative;
+  right: 12vw;
+  top: 0.25vh;
+}
+
+/* Reading_Glass_icon CSS */
+
+/* Three_instruction_TabNevBar */
+
+#Three_TabNevBar_TabPart{
+
+  width: inherit;
+  height: fit-content;
+
+  margin-top: 3vh;
+  padding-bottom: 1vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  font-family: '큐트신민상';
+  font-weight: bolder;
+  font-size: 5vw;
+
+  border-bottom: black dotted 3px;
+
+  list-style: none;
+
 }
 
 }

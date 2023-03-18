@@ -25,14 +25,14 @@ export const UserState_expresser = (props) => {
     }).then((result)=>{
 
       switch(UserState){
-        case 'Stranger' : updateexpresser('Join us with new account!');
+        case 'Stranger' : updateexpresser('새로운 계정으로 같이해요!');
         case 'User' : updateexpresser(
-           <div> Hello user <a href="">{result}</a> ! </div> );
+           <div> 반가위용... <a href="">{result}</a> 님 ! </div> );
            // ㄴ> anchor 태그에 개인 계정으로 가는 참조 url 추가 예정
       }
 
     })
-  })
+  },[UserState])
 
   return (
     
