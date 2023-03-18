@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 
 export const Three_TabNevBar_TabPart = () => {
 
-    const [Highlight_List, update_Hightlight] = useState([0,1,2]) 
-    useEffect(() => {
-        
-    },[])
-
     const Activate_Highlight = (tab) => {
         
         const ParentNode = tab.target.parentNode.children
