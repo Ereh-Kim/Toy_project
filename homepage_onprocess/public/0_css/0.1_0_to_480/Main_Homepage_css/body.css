@@ -169,10 +169,12 @@ font-weight: bolder;
   grid-template-rows: repeat(2, 40%);
 
   column-gap: 10%;
-  row-gap: 10%;
+  row-gap: 20%;
 }
 
 .Business_icon_Components{
+  height: 2.3vh;
+
   background-color: #8ca0ff;
   list-style: none;
 
