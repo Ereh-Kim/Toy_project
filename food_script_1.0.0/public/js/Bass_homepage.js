@@ -157,7 +157,7 @@ function init(){
   console.log('init');
     gapi.load('auth2',function(){
   console.log('auth2');
-    window.gauth =  gapi.auth2.init({client_id: "549894532540-f9caavscf2vie2vlg4gc24njavgda0hs.apps.googleusercontent.com"});
+    window.gauth =  gapi.auth2.init({client_id: ""});
 
     gauth.then(
 
