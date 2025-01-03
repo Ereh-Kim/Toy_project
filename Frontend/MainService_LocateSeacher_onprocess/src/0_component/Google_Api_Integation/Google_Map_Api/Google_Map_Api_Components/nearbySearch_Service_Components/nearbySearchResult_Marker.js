@@ -8,9 +8,11 @@ import Src from '../../../../../1_image_or_icon/Fock_icon_SearchNear.png'
 export const nearbySearch_Result = (props) => {
 
     const Emiting_Places_Pins = (Places) => {
-        return Places.map((place)=>{
+        return Places.map((place, index)=>{
             return <AdvancedMarker
-            position={{ lat:place.geometry.location.lat(), lng:place.geometry.location.lng()}}>
+            key={index}
+            position={{ lat:place.location.latitude
+                       ,lng:place.location.longitude}}>
             
                 <Google_Map_Marker src={Src}/>
             </AdvancedMarker>

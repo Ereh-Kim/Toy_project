@@ -96,6 +96,17 @@ export const Default_Info = () => {
         }
     }
 
+    const GetDetail = async (input) => {
+        
+        let result = await fetch(`http://localhost:8080/google_map_api/fetch_getDetail/${input}`)
+        const result_data = await result.json()
+        console.log(result_data)
+
+        // updateInfo(result_data.data)
+
+
+    }
+
     const [cameraProps, setCameraProps] = useState(INITIAL_CAMERA);
     const [markerProps, setMarkerProps] = useState(INITIAL_MARKER);
     const [PlaceInfo, updateInfo] = useState({})
@@ -104,6 +115,8 @@ export const Default_Info = () => {
         if (!Place_Library || !Map_Instance) return;
         var svc = new Place_Library.PlacesService(Map_Instance); 
         
+        // GetDetail(params.placeid)
+
         svc.getDetails({
             fields: ['name','formatted_address','formatted_phone_number','types'
                 ,'photos', 'geometry','reviews'

@@ -21,9 +21,10 @@ export const NearbySearch_TabResults = (props) => {
     }
 
     const Place_Photo_Inspector = (input) => {
+
         switch(typeof input.photos){
             case('object'):
-            return input.photos[0].getUrl()
+            return input.photos[0].img_src
 
             case('undefined'):
 
@@ -95,7 +96,7 @@ export const NearbySearch_TabResults = (props) => {
                 return;
 
                 case('object'):
-                const weekday_text = input[index].weekday_text
+                const weekday_text = input[index].weekdayDescriptions
 
                 return weekday_text.map((day_timeline)=>{
                     return <React.Fragment>
@@ -142,7 +143,7 @@ export const NearbySearch_TabResults = (props) => {
             return;
 
             case('object'):
-            const condition = input[index].isOpen()
+            const condition = input[index].openNow
 
             switch(condition){
                 case(true):
@@ -264,9 +265,12 @@ export const NearbySearch_TabResults = (props) => {
     }}>
 
 
-    {props.places.map((place)=>{
+    {props.places.map((place, index)=>{
 
         return <div
+
+        key={index}
+
         style={{
             width: '45vw',
             height: '35vh',
@@ -279,7 +283,7 @@ export const NearbySearch_TabResults = (props) => {
             paddingBottom: '2vh'
         }}>
             <a 
-            href={`search/location/${place.place_id}`}
+            href={`search/location/${place.name}`}
             target="_blank"
             >
             
@@ -305,7 +309,7 @@ export const NearbySearch_TabResults = (props) => {
                     textWrap: 'nowrap'
                 }}
                 >
-                    {place.name.split(' ').map((str)=>{
+                    {place.displayName.text.split(' ').map((str)=>{
 
                         if(str.length>10){
                         return <React.Fragment>
@@ -347,7 +351,7 @@ export const NearbySearch_TabResults = (props) => {
                     paddingTop: '1vh'
                  }}
                 >
-                {place.vicinity}
+                {place.shortFormattedAddress}
                     
                 </span>
                 

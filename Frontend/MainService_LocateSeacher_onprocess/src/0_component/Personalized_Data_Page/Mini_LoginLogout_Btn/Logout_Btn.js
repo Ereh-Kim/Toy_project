@@ -29,7 +29,10 @@ export const Logout_Btn = (props) => {
             
         }}
         >
+        <a href="/logout">
         Logout
+        </a>
+
         </span>
 
         </div>

@@ -1,5 +1,7 @@
 import React from "react";
 
+import Homepage_Btn from './Homepage_Btn.js'
+
 export const My_Reviews = () => {
 
     return <React.Fragment>
@@ -8,6 +10,8 @@ export const My_Reviews = () => {
         className="Personalize_Data_Page_Container"
         >
 
+            <Homepage_Btn/>
+
             <div
             className="Personalized_Data_Container_Aligner"
             >
@@ -15,6 +19,15 @@ export const My_Reviews = () => {
                 className="Personalized_Data_Page_TextTitle"
                 >
                 My Reviews
+                </span>
+                <br></br>
+
+                <span
+                className="Personalized_Data_Page_TextTitle"
+                >
+                This Page
+                <br></br>
+                is Preparing
                 </span>
             
 

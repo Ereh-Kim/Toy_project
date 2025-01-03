@@ -39,10 +39,10 @@ class Login_Checker_Api extends PureRouter {
 
         this.Pure_Router.get('/',async (req,res)=>{
 
-            let condition = req.session.data
+            let condition = req.session
             let result;
 
-            switch(typeof condition){
+            switch(typeof condition.data){
                 case('undefined'):
                 result = {message: 'undefined_user_accessed'}
                 break;
@@ -54,7 +54,6 @@ class Login_Checker_Api extends PureRouter {
                 break;
             }
 
-            console.log(result,'결과')
             res.json(result)
         })
 

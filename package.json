@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "backend": "nodemon Backend/Composition_Object/MainStream/4_MainArea/4.0_Pure_MainArea/main_area.js",
+    "backend": "npm run backend --prefix Backend",
     "frontend": "npm start --prefix Frontend/MainService_LocateSeacher_onprocess",
     "start": "concurrently \"npm run backend\" \"npm run frontend\""
   },
@@ -15,6 +15,7 @@
   "dependencies": {
     "concurrently": "^7.6.0",
     "gitmoji-cli": "^8.0.0",
+    "http-proxy-middleware": "^3.0.3",
     "nodemon": "^2.0.21"
   }
 }

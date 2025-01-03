@@ -12,7 +12,7 @@ import bodyParser from "body-parser";
 
     this.Pure_Router.use(
         bodyParser.urlencoded({
-            extended: false
+            extended: true
         })
     )
 

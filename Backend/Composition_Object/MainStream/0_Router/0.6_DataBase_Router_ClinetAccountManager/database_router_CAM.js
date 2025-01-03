@@ -70,16 +70,28 @@ export class Database_Router_CAM extends Database_Router {
     }
 
     
-    async Update_User(request, input, account){
+    async Update_User(request, input){
 
         let DB = await this.DB
-        let query = `UPDATE user_info.foodscript_user`
-        let query_request_1 = `SET ${request} = $1`
-        let query_request_2 = `WHERE email = ${account}`
-        query = query + query_request_1 + query_request_2 + ` RETURNING *`
+        let query = `UPDATE user_info.foodscript_user `
+        let query_request_1 = `SET `
+        request.forEach((element, index)=>{
+            switch(index){
+                case(request.length-1):
+                query_request_1 += `${element} = $${index+1} `
+                return;
 
+                default:
+                query_request_1 += `${element} = $${index+1}, `
+                break;
+            }
+        })
+
+        let query_request_2 = `WHERE id = $${request.length+1}`
+        query = query + query_request_1 + query_request_2 + ` RETURNING *`
+        
         let result = await DB.query(query,input)
-    
+        
         return result
     }
 

@@ -45,12 +45,12 @@ export class google_certification_router extends Pure_Router {
 
     return UserInfo}
 
-    async Register_verified_UserInfo(userinfo, status, temporary) {
+    async Register_verified_UserInfo(userinfo, status, temporary, institution) {
 
     this.userinfo = userinfo
     this.status = status
     this.temporary_certification = temporary
-    this.authorization = 'google'
+    this.authorization = institution
 
     return this.userinfo}
 
@@ -74,16 +74,16 @@ export class google_certification_router extends Pure_Router {
 
     this.Pure_Router.get('/redirect',async (req,res, next)=>{      
     
+        
         const access_token = await this.Issue_Google_Access_Token(req.query.code)
         const UserInfo= await this.Get_UserInfo_From_AccessToken(access_token)
 
         const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
         let DB = new Account_Register_Router();
 
-        console.log(RequestOrigin)
         switch(RequestOrigin){
             case('/registeration/signup-with-google'):
-            await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified')
+            await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified', 'google')
             
             let password_genarator = new Password_Genarator();
             let file_reader = new File_Reader();
@@ -104,31 +104,67 @@ export class google_certification_router extends Pure_Router {
                 return;
 
                 default:
-                res.redirect('/googlelogin/sessionset')
+                    const approved_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                        method: 'PATCH'
+                     })
+                     const approved_session_data = await approved_session.json()
+                     
+                     req.session.data = approved_session_data.user_info
+                     res.write(`<script>alert('${approved_session_data.message}')</script>`)
+                     res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
+                     res.end()
                 break;
             }
             break;
 
-            case('/login/google'):
+            case('/login/font/CuteMin.ttf'):
             const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
                 console.log(status)
                 switch(status){
 
                     case('Need_Registeration'):
-                    await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified')
-                    res.redirect('/googlelogin/sessionset')
+                    await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified', 'google')
+                        
+                        const temporary_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                            method: 'PATCH'
+                        })
+                        const temporary_session_data = await temporary_session.json()
+                
+                        req.session.data = temporary_session_data.user_info
+                        res.write(`<script>alert('${temporary_session_data.message}')</script>`)
+                        res.write(`<script>window.location=\"${temporary_session_data.redirectUrl}\"</script>`);
+                        res.end()
                     return;
 
                     case('Account_already_exist'):
-                    await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified')
-                    res.redirect('/googlelogin/sessionset')
+                    const Pre_Existed_AcccountData = await DB.Load_UserData(['email'],[`${UserInfo.email}`])
+                    await this.Register_verified_UserInfo(Pre_Existed_AcccountData, 'verified', 'verified', 'foodscript(local)')
+                        
+                        const approved_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                            method: 'PATCH'
+                        })
+                        const approved_session_data = await approved_session.json()
+                
+                        req.session.data = approved_session_data.user_info
+                        res.write(`<script>alert('${approved_session_data.message}')</script>`)
+                        res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
+                        res.end()
                     return;
                 }
             return;
 
             default:
-            await this.Register_verified_UserInfo(UserInfo, 'unverified', 'unverified')
-            res.redirect('/googlelogin/sessionset')
+            await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified')
+                
+                const default_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                    method: 'PATCH'
+                })
+                const default_session_data = await default_session.json()
+        
+                req.session.data = default_session_data.user_info
+                res.write(`<script>alert('${default_session_data.message}')</script>`)
+                res.write(`<script>window.location=\"${default_session_data.redirectUrl}\"</script>`);
+                res.end()
             return;
             
 

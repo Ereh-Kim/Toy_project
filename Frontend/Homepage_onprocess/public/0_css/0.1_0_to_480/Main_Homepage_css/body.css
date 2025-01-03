@@ -415,3 +415,56 @@ footer a:link, footer a:visited{
 }
 
 }
+
+/* Login_Page_Css */
+
+#Login_Page_Container{
+    width: 80vw;
+    height: 92vh;
+
+    display: grid;
+    place-items: center;
+}
+
+#Login_Box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    padding: 1vh 5vw;
+
+    width: 60vw;
+    height: fit-content;
+
+    border: black 5px solid;
+    border-bottom: black solid 9px;
+    border-radius: 15px;
+}
+
+.LoginBtn{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  font-size: 4.5vw;
+  font-family: '큐트신민상';
+
+  border: black solid 3.5px;
+  border-bottom: black solid 7px;
+  border-radius: 15px;
+
+  padding: 1vh 2vw;
+  margin: 1vh 0vw;
+}
+
+.Login_input{
+  
+  margin: 1vh 0vw; 
+  padding: 1vh 4vw;
+  
+  border: black solid 3px;
+  border-bottom: black solid 5px;
+
+  border-radius: 20px;
+
+}

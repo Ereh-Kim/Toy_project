@@ -7,6 +7,8 @@ import Session_Crypto from "../0.10_Tools/0.10.3_Session_Crypto/session_crypto.j
 import { File_Reader } from "../0.10_Tools/0.10.2_File_Reader_API/file_reader.js";
 import { Password_Genarator } from "../0.10_Tools/0.10.1_Password_Genagrator_API/password_genarator_api.js";
 
+import multer from 'multer';
+
 class Account_Register_Router extends Pure_Router {
 
     constructor(){
@@ -53,21 +55,32 @@ class Account_Register_Router extends Pure_Router {
     }
 
     Manage_account_register_Routes(){
+
+        const storage = multer.memoryStorage()
+        const upload = multer({ storage: storage })
         
-        this.Pure_Router.post('/',async (req, res)=>{
+        this.Pure_Router.post('/', upload.single('picture'), async (req, res)=>{
+
+            if(req.file){
+                
             let condition = await this.Create_NewUser(`${req.body.email}`, 
-                [`${req.body.email}`,`${req.body.name}`,`${req.body.picture}`,`${req.body.password}`,`${req.body.position}`])
+                [`${req.body.email}`,`${req.body.name}`, req.file.buffer,`${req.body.password}`,`${req.body.position}`])
 
             switch(condition){
                 case('Need_To_Find'):
                 res.write("<script>alert('Need to find email')</script>")
-                res.write("<script>window.location=\"/login\"</script>");
+                res.write("<script>window.location=\"/login/foodscript-login\"</script>");
+                res.end()
                 return;
 
                 default:
-                res.send('create_user')
+                res.write("<script>alert('You just created your account')</script>")
+                res.write("<script>window.location=\"/login/foodscript-login\"</script>");
+                res.end()
+
             }
-        })
+            }}
+        )
 
             
         this.Pure_Router.get('/signup-with-google',async (req, res)=>{
@@ -127,56 +140,6 @@ class Account_Register_Router extends Pure_Router {
 
             }}
         )
-
-            
-        
-
-        this.Pure_Router.get('/',async (req, res)=>{
-            res.send(`
-                <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to Binary</title>
-</head>
-<body>
-
-<form action='/registeration' method='post'>
-<input type="file" name='picture' id="imageInput" accept="image/*">
-<input type='text' name='email'></input>
-<input type='text' name='password'></input>
-<input type='text' name='name'></input>
-<input type='text' name='position'></input>
-<input type='submit'/>
-</form>
-
-<script>
-document.getElementById('imageInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];  
-
-        if (file) {
-        const reader = new FileReader();
-
-        reader.readAsArrayBuffer(file);
-
-        reader.onload = function(e) {
-            const arrayBuffer = e.target.result;  
-            console.log(arrayBuffer);  
-        };
-
-        reader.onerror = function(e) {
-            console.error('Error reading file', e);
-        };
-    }
-});
-</script>
-
-</body>
-</html>
-
-                `)
-        })
 
     }
 

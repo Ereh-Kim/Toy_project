@@ -25,7 +25,7 @@ export const Registration_Default_Page = () => {
     >
 
     <a
-    href="../search"
+    href="../"
     >
     <img
     src={Arrow}

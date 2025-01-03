@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Homepage_Standby_Image from './food_script_tabicon.png'
+import Homepage_Standby_Image from '../../../1_image_or_icon/food_script_tabicon.png'
 
 export const Three_TabNevBar_TabPart = (props) => {
 

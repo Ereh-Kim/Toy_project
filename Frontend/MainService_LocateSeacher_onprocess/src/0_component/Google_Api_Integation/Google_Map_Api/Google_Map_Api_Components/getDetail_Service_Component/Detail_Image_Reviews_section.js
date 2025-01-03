@@ -172,10 +172,15 @@ export const Detail_Image_Reviews_Section = (props) => {
                 
                 <div
                 style={{
-                    maskImage: 'linear-gradient(black, transparent)'
+                    maskImage: 'linear-gradient(black, transparent)',
+                    height: 'fit-content',
+                    maxHeight: '50vh',
+                    overflow: 'scroll'
                 }}
                 >
+                    <span>
                     {input.slice(0,49)}
+                    </span>
                 </div>
                 <div
                 style={{
@@ -203,6 +208,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                         case(''):
                         Blinder.innerText = `${input.slice(0,49)}`
                         Blinder.style.maskImage = 'linear-gradient(black, transparent)'
+    
                         e.target.style.transform = 'rotate(0deg)'
                         break;
                     }

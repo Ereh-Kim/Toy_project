@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react"
 
+import readingGlass from '../../../1_image_or_icon/reading_glass_icon.png'
+
 export const SearchBar = () => {
 
 const SearchBar_Ref = useRef('')
@@ -26,7 +28,7 @@ const Detech_Change_ForSearch = () => {
 
                     <a href={'/search?keyword='+Search_Keyword}>
                     {/* ㄴ> 검색 알고리즘 과 검색 랜딩페이지도 구성예정 */}
-                    <img src="\1_image_or_icon\reading_glass_icon.png" 
+                    <img src={readingGlass} 
                     id="Reading_Glass_icon"/>
                     </a>
 

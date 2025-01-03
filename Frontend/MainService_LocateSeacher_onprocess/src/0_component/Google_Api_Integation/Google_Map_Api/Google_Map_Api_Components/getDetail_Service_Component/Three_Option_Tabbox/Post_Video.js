@@ -2,9 +2,10 @@ import React from "react";
 
 import VideoIcon from '../../../../../../1_image_or_icon/video-add-icon.png'
 
-export const Post_Video_Btn = () => {
+export const Post_Video_Btn = (props) => {
     return <div
     className="place_detail_ActionBtn"
+    onClick={props.clickEvent}
     >
 
     <div>

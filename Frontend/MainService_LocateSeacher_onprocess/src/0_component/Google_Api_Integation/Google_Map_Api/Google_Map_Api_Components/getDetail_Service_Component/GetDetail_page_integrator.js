@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Default_Info from './Default_Info.js'
+
 import { Route, Routes } from "react-router-dom";
 
 export const GetDetails_integrator = () => {
@@ -9,16 +10,15 @@ export const GetDetails_integrator = () => {
     
         <Routes>
             <Route 
-            path="location/:placeid"
+            path="/location/places/:placeid"
             element={<Default_Info/>}
             >
             </Route>
 
             <Route
-            path='location/:placeid/:index'
+            path='/location/places/:placeid/:index'
             element={<Default_Info/>}
             >
-                
             </Route>
         </Routes>
 

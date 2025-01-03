@@ -1,13 +1,14 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import { Buffer } from "buffer";
 
 import Tabicon from '../../1_image_or_icon/food_script_tabicon.png'
 import Arrow from '../../1_image_or_icon/Arrow_Button_UpAhead.png'
 
 export const Registration_Field_Page = (props) => {
 
-    const Field_Dispenser = (type,name,id,value,readonly) => {
+    const Field_Dispenser = (type,name,id,value,readonly,event) => {
 
         return <React.Fragment>
 
@@ -52,6 +53,7 @@ export const Registration_Field_Page = (props) => {
 
             }}
             readOnly={readonly}
+            onChange={event}
             ></input>
 
         </div>
@@ -121,7 +123,9 @@ export const Registration_Field_Page = (props) => {
                 >( as {props.purpose} )</span>
 
                 <form
-                action=""
+                action="http://localhost:8080/registration"
+                method='POST'
+                encType="multipart/form-data"
                 >
 
                 <div
@@ -142,20 +146,94 @@ export const Registration_Field_Page = (props) => {
                     }}
                     >
                         
-                        {Field_Dispenser('text','name','name')}
+                        {Field_Dispenser('text','name','name', null, false)}
 
-                        {Field_Dispenser('email','email','email')}
+                        {Field_Dispenser('email','email','email', null, false)}
 
+                            <div
+                            style={{
+                                width: 'inherit',
 
-                        {Field_Dispenser('text','password','password')}
+                                display:'flex',
+                                flexDirection:'column',
+                                justifyContent:'space-around',
+
+                                fontFamily: '큐트신민상',
+                                fontSize: '4vw',
+                                fontWeight: 'bold',
+
+                                letterSpacing: '1vw',
+                                margin: '1.5vh 0vw'
+                            }}
+                            >
+
+                                
+                                
+                                <div
+                                style={{
+                                    border: 'black dotted 5px',
+                                    textAlign: 'center',
+                                    padding: '1vh 0vw',
+                                    borderRadius: '5px'
+                                }}
+                                >
+
+                                <label 
+                                 htmlFor={`picture`}
+                                 id='picture_label'
+                                 >
+                                    Picture
+                                </label>
+                                
+
+                                </div>
+                                
+                                <input 
+                                type='file'
+                                name='picture'
+                                id='picture'
+                                style={{
+                                    display: 'none',
+                                    maxWidth:'40vw',
+                                    
+                                    margin: '1vh 0vw 1vh 0vw',
+                                    padding: '0.5vh 3vw',
+
+                                    borderRadius: '7px',
+                                }}
+                                onChange={
+                                    (e)=>{
+                                        const file = e.target.files[0];  
+        
+                                        if (file) {
+                                        const reader = new FileReader();
+                                        reader.readAsArrayBuffer(file);
+        
+                                        reader.onload = function(e) {
+                                            const arrayBuffer = e.target.result;  
+                                            console.log(arrayBuffer)
+                                        };
+        
+                                        reader.onerror = function(e) {
+                                            console.error('Error reading file', e);
+                                        }
+                                        }
+                                        
+                                    }
+                                    }
+                                ></input>
+
+                            </div>
+
+                        {Field_Dispenser('text','password','password', null, false)}
 
                         {Field_Dispenser('text', 'position', 'position', `${props.purpose}`, true)}
 
                         <input
-                        type="button"
+                        type="submit"
                         style={{
                             
-                            width: '49vw',
+                            width: '54vw',
                             // height: '3.5vh',
 
                             borderRadius: '10px',

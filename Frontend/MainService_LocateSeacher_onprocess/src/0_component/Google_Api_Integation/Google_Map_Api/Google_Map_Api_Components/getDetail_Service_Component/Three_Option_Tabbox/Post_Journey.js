@@ -2,9 +2,10 @@ import React from "react";
 
 import JourneyIcon from '../../../../../../1_image_or_icon/Picket_icon.jpg'
 
-export const Post_Journey_Btn = () => {
+export const Post_Journey_Btn = (props) => {
     return <div
     className="place_detail_ActionBtn"
+    onClick={props.clickEvent}
     >
 
     <div>

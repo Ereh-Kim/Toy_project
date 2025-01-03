@@ -21,7 +21,7 @@ export const Login_Btn = () => {
         Welcome Join &#8658;
         </span>
 
-        <a href="/registration">
+        <a href="/login">
         <span
         style={{
             backgroundColor: 'white',

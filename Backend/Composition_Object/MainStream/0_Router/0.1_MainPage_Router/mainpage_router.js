@@ -1,5 +1,8 @@
 import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
     class MainPage_Router extends Pure_Router {
 
@@ -9,25 +12,25 @@ import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
         Manage_MainPage_Routes(){
 
-            
+            const __filename = fileURLToPath(import.meta.url);
+            const __dirname = path.dirname(__filename);
+
+            this.Pure_Router.use(express.static(path.join(__dirname, '../../../../../Frontend/Homepage_onprocess','build')))
+
             this.Pure_Router.get('/',(req, res)=>{
-                req.session.text ='text'
-                
-                
-                console.log(req.session,'from homepage')
-            
-                res.send('homepage')
-            })
-        
-            this.Pure_Router.get('/text',(req,res)=>{
-                console.log(req.session,'from text')
-                res.send('text')
+
+                const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
+                res.sendFile(ClientPage_path)
+
             })
 
-            this.Pure_Router.get('/test',(req,res)=>{
-                console.log(req.session,'from test')
-                res.send('test')
+            this.Pure_Router.get('/*',(req, res)=>{
+
+                const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
+                res.sendFile(ClientPage_path)
+
             })
+
         }
     }
 

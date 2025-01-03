@@ -5,10 +5,10 @@ import { ActionCreater } from "../../../../2_reducer/reducer";
 
 import { Map, AdvancedMarker, useMapsLibrary, useMap} from '@vis.gl/react-google-maps'
 
-import NearbySearchResult_Marker from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_Marker'
-import NearbySearch_Result_TabResult from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_TabResults'
-import Fork_Icon from '../../../../1_image_or_icon/Fock_icon.jpg'
-import Marker from "./Google_Map_Markers";
+import NEARBYSEARCHRESULT_MARKER from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_Marker'
+import NEARBYSEARCH_RESULT_TABRESULT from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_TabResults'
+import FORK_ICON from '../../../../1_image_or_icon/Fock_icon.jpg'
+import MARKER from "./Google_Map_Markers";
 
 export const Google_Map = () => {
 
@@ -34,7 +34,7 @@ const [markerProps, setMarkerProps] = useState(INITIAL_MARKER);
 
 const [Google_Map_Search_Option, updateOption ] = useState({
     type: ['restaurant'],
-    distance: GoogleMap_Deafult_Option.get('distance')||'500'
+    distance: GoogleMap_Deafult_Option.get('distance')||500
 })
 const [List_Around_spot, updateSpots] = useState([]);
 const [Opening_Hours, updatePeriod ] = useState({});
@@ -74,67 +74,76 @@ const [StartSpot, updateStart] = useState();
         if (!Place_Library || !Map_Instance) return;
         const svc = new Place_Library.PlacesService(Map_Instance);      
 
-        // svc.findPlaceFromQuery({
-        //     query: `${Keyword}` ,fields :[
-        //         'geometry.location','name', 'formatted_address','photos','types']
-        // },  (result)=>{ 
-        //     console.log(result)
-        //     updateStart(result)
-        //     const Existed_Keyword = result[0].geometry.location
-        //     UpdateMap( Existed_Keyword.lat(), Existed_Keyword.lng() )
+        // start_spot fetch --- 1
 
-        //     svc.nearbySearch({
-
-        //         location: {lat: Existed_Keyword.lat(), lng: Existed_Keyword.lng()},
-        //         radius: Google_Map_Search_Option.distance,
-        //         type: Google_Map_Search_Option.type[0],
-        //         rankBy: 0
-
-        //     },(result)=>{
-        //         updateSpots(result)
-        //         let TimeStamp = [];
-        //         let PhoneStamp = [];
-        //         result.map((spot)=>{
-
-        //             svc.getDetails({
-        //                 placeId: spot.place_id,
-        //                 fields: ['opening_hours','formatted_phone_number', 'utc_offset_minutes']
-        //             },(result)=>{
-        //                 const opening_hours = result.opening_hours
-        //                 const phone_numbers = result.formatted_phone_number
-                
-        //                 switch(typeof opening_hours){
-        //                     case('undefined'):
-        //                     TimeStamp.push(opening_hours)
-        //                     updatePeriod(TimeStamp)
-        //                     break;
-
-        //                     case('object'):
-        //                     TimeStamp.push(opening_hours)
-        //                     updatePeriod(TimeStamp)
-        //                     break;
-        //                 }
-                        
-        //                 switch(typeof phone_numbers){
-        //                     case('undefined'):
-        //                     PhoneStamp.push(phone_numbers)
-        //                     updaateNumbers(PhoneStamp)
-        //                     break;
-
-        //                     case('string'):
-        //                     PhoneStamp.push(phone_numbers)
-        //                     updaateNumbers(PhoneStamp)
-        //                     break;
-        //                 }
-                        
-        //             })
-        //         })
-        //     })
-
-        // })
-
+                let fetch_data = await fetch(`http://localhost:8080/google_map_api/fetch_start_spot/${Keyword}`,{
+                    method: 'GET'
+                })
+                let fetch_data_result = await fetch_data.json()
+                let spot_data = fetch_data_result.candidates[0]
         
 
+        // start_spot img fetch --- 2
+
+                let fetch_data_img = await fetch(`http://localhost:8080/google_map_api/fetch_img/${spot_data.photos[0].photo_reference}`,{
+                    method: 'GET'
+                })
+
+                let fetch_data_img_result = await fetch_data_img.json()
+                
+                spot_data = {...spot_data, photos: fetch_data_img_result.src}
+                const spot_data_lat = spot_data.geometry.location.lat
+                const spot_data_lng = spot_data.geometry.location.lng
+
+        updateStart(spot_data)
+        UpdateMap( spot_data_lat, spot_data_lng )
+        
+        // NearByResult fetch --- 3
+
+                const type_input = encodeURIComponent(JSON.stringify(Google_Map_Search_Option.type))
+                const lat_input = JSON.stringify(spot_data_lat).replaceAll('.','_')
+                const lng_input = JSON.stringify(spot_data_lng).replaceAll('.','_')
+
+                let nearbyresult = await fetch(`http://localhost:8080/google_map_api/fetch_nearbyresult/${type_input}/${lat_input}/${lng_input}/${Google_Map_Search_Option.distance}`,{
+                    method: 'GET',
+                    })
+        
+        let nearbyresult_result = await nearbyresult.json()
+        nearbyresult_result = JSON.stringify(nearbyresult_result.places)
+            
+        // NearByResult img fetch ---3.1
+
+                let nearbyresult_img = await fetch(`http://localhost:8080/google_map_api/fetch_nearbyresult_img`,{
+                    method: `POST`,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: nearbyresult_result
+                })
+
+        let nearbyresult_img_result = await nearbyresult_img.json()
+        console.log(nearbyresult_img_result)
+
+        const data_result = nearbyresult_img_result.data
+        updateSpots(data_result)
+
+        // phonenumber_timestamp align
+                
+                let TimeStamp = [];
+                let PhoneStamp = [];
+                    
+                for(let t=0; t<data_result.length; t++){
+
+                let opening_hours = data_result[t].regularOpeningHours
+                let phone_numbers = data_result[t].nationalPhoneNumber
+            
+                TimeStamp.push(opening_hours)
+                PhoneStamp.push(phone_numbers)
+
+                }
+        
+        updaateNumbers(PhoneStamp)
+        updatePeriod(TimeStamp)
 
     }
 
@@ -185,9 +194,7 @@ const [StartSpot, updateStart] = useState();
             </div>
 
             
-
-            {input[0].photos.map((element)=>{
-                return <img
+            <img
                 style={{
                     width: '40vw',
                     aspectRatio: '1',
@@ -196,9 +203,10 @@ const [StartSpot, updateStart] = useState();
                     border: 'solid white 3px'
                 }}
 
-                src={element.getUrl()}
-                ></img>
-            })}
+                src={input.photos}
+                alt="none"
+            ></img>
+            
             <div
             style={{
                 backgroundColor: 'white',
@@ -209,7 +217,7 @@ const [StartSpot, updateStart] = useState();
                 padding: '0.5vh 2vw'
             }}
             >
-            {input[0].name}
+            {input.name}
             </div>
 
             <div
@@ -220,10 +228,9 @@ const [StartSpot, updateStart] = useState();
                 margin: '1vh 0vw',
                 fontSize: '3vw',
                 padding: '0.5vh 2vw',
-                // textAlign
             }}
             >
-            {input[0].formatted_address.split(' ').map((element,index)=>{
+            {input.formatted_address.split(' ').map((element,index)=>{
                 switch(index){
                     case(2):
                     return <React.Fragment>
@@ -241,6 +248,9 @@ const [StartSpot, updateStart] = useState();
             </div>
 
             </React.Fragment>
+
+            default:
+            break;
         }
     }
 
@@ -270,6 +280,9 @@ const [StartSpot, updateStart] = useState();
             break;
 
             case('object'):
+            break;
+
+            default:
             break;
         }
 
@@ -301,10 +314,10 @@ return <React.Fragment>
                 
                         <AdvancedMarker
                         {...markerProps}>
-                            <Marker src={Fork_Icon} border={`solid black 3.5px`}/>
+                            <MARKER src={FORK_ICON} border={`solid black 3.5px`}/>
                         </AdvancedMarker>
 
-                        <NearbySearchResult_Marker places={List_Around_spot}/>
+                        <NEARBYSEARCHRESULT_MARKER places={List_Around_spot}/>
 
                 </Map>
 
@@ -333,7 +346,7 @@ return <React.Fragment>
                 >
                 </input>
 
-            {StartSpot_Align(StartSpot)}                
+            {StartSpot_Align(StartSpot)}           
 
                 <div id='Google_Map_Option_Selector'
                 style={{
@@ -453,7 +466,7 @@ return <React.Fragment>
 
                 </div>
 
-                        <NearbySearch_Result_TabResult 
+                        <NEARBYSEARCH_RESULT_TABRESULT 
                             places={List_Around_spot}
                             timestamp={Opening_Hours}
                             phonestamp={PhoneNumbers}/>
