@@ -16,12 +16,6 @@ export const Three_Option_integrator = () => {
         Post_journey_box_activated : false
     })
 
-    const [ inputSaved, updateInput ] = useState({
-        reviewInput : {},
-        videoInput : {},
-        journeyInput : {}
-    })
-
     const post_box_btnEvent = (target) =>{
         
         let Renewed_State = {...BtnState}
@@ -46,16 +40,6 @@ export const Three_Option_integrator = () => {
         updateBox({...Renewed_State})
     }
 
-    const inputSaveEvent = (target,input) => {
-        
-        let Renewed_Input = {...inputSaved}
-
-        Renewed_Input[target] = input
-        
-        updateInput({...Renewed_Input})
-        
-    }
-
     const Input_Box = () => {
 
         const key = Object.keys(BtnState)
@@ -69,7 +53,9 @@ export const Three_Option_integrator = () => {
                     return <Video_Post_Box/>
 
                     case('Post_review_box_activated'):
-                    return <Review_Post_Box/>
+                    return <Review_Post_Box 
+                            PostEvent={()=>{post_box_btnEvent()}}
+                            />
 
                     case('Post_journey_box_activated'):
                     return <Journey_Post_Box/>

@@ -14,6 +14,10 @@ export const Detail_Image_Reviews_Section = (props) => {
     const [Distance, updateDistance] = useState(0)
     const [index, updateIndex] = useState(0)
 
+    useEffect(()=>{
+        
+    },[])
+
     const photo_dispenser = (input) => {
 
         switch(typeof input){
@@ -208,7 +212,6 @@ export const Detail_Image_Reviews_Section = (props) => {
                         case(''):
                         Blinder.innerText = `${input.slice(0,49)}`
                         Blinder.style.maskImage = 'linear-gradient(black, transparent)'
-    
                         e.target.style.transform = 'rotate(0deg)'
                         break;
                     }

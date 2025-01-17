@@ -254,7 +254,6 @@ export const Default_Info = () => {
         <br></br>
         <Detail_Journey_section/>
         <br></br>
-
         <Three_Option_integrator/>
         <br></br>
 

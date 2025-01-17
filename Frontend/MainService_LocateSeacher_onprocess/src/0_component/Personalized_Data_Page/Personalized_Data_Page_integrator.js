@@ -68,7 +68,9 @@ export const Personalized_Data_Page_integrator = () => {
             
             <Route
             path="user/:userid/reviews"
-            element={<My_Reviews/>}
+            element={<My_Reviews
+                id={UserData}
+            />}
             />
 
             <Route

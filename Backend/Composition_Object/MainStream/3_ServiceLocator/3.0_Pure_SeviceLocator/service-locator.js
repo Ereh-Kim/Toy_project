@@ -22,8 +22,11 @@ import {Google_Map_Api_Routes} from '../../0_Router/0.9_API/0.9.2_Google_Map_API
 import Account_Delete_Routes from '../../0_Router/0.11_Account_Delete_Router/0.11_account_delete_router.js';
 import {Account_Update_Routes} from '../../0_Router/0.12_Account_Update_Router/0.12_account_update_router.js';
 
-    export class Service_LocatorClass extends Pure_Server {
+import Usercreation_C_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.1_Usercreation_C_Router/Usercreation_C_Router.js';
+import Usercreation_R_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.3_Usercreation_R_Router/Usercreation_R_Router.js';
 
+    export class Service_LocatorClass extends Pure_Server {
+ 
         constructor(){
         super()
         }
@@ -56,7 +59,11 @@ import {Account_Update_Routes} from '../../0_Router/0.12_Account_Update_Router/0
         this.Pure_Server.use('/update', Account_Update_Routes)
 
         this.Pure_Server.use('/google_map_api',Google_Map_Api_Routes)
-        }
+
+        this.Pure_Server.use('/usercreation', Usercreation_C_Routes)
+        this.Pure_Server.use('/usercreation', Usercreation_R_Routes)
+
+    }
 
     }
 

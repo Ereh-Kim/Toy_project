@@ -23,10 +23,10 @@ export class Database_Router_CAM extends Database_Router {
             query_request += ` AND ${element} = $${index+1}`
             return;
             }
+
         });
 
         query = query + query_request;
-        
         let result = await DB.query(query, input)
 
         switch(result.rowCount){
@@ -70,12 +70,31 @@ export class Database_Router_CAM extends Database_Router {
     }
 
     
-    async Update_User(request, input){
+    async Update_User(request, input, edit_input){
 
         let DB = await this.DB
+        
+            const EDIT_INPUT_PUSPOSE = edit_input.purpose
+            let INTEGREATION_INPUT;
+
+            switch(EDIT_INPUT_PUSPOSE){
+                case('INTEGRATION'):
+                INTEGREATION_INPUT = await this.Select_User(['id'],[edit_input.user_id])
+                const LEGACY = INTEGREATION_INPUT[`${edit_input.target}`]
+                const RENEWED_TARGET = input[request.indexOf(`${edit_input.target}`)]
+
+                const TARGET_INDEX = request.indexOf(`${edit_input.target}`)
+                input[TARGET_INDEX] = [...LEGACY, ...RENEWED_TARGET]
+                break;
+
+                default:
+                break;
+            }
+        
         let query = `UPDATE user_info.foodscript_user `
         let query_request_1 = `SET `
         request.forEach((element, index)=>{
+
             switch(index){
                 case(request.length-1):
                 query_request_1 += `${element} = $${index+1} `
@@ -85,12 +104,17 @@ export class Database_Router_CAM extends Database_Router {
                 query_request_1 += `${element} = $${index+1}, `
                 break;
             }
+        
+            if(request.length === 1){
+                query_request_1 = `${element} = $${index+1}`
+            }
+        
         })
 
         let query_request_2 = `WHERE id = $${request.length+1}`
         query = query + query_request_1 + query_request_2 + ` RETURNING *`
-        
-        let result = await DB.query(query,input)
+
+        let result = await DB.query(query, input)
         
         return result
     }

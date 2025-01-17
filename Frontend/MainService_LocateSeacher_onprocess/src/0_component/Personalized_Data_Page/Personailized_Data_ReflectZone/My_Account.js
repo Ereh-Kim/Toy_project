@@ -305,7 +305,7 @@ export const My_Account = (props) => {
                         <img
                         src={input}
                         style={{
-                            width: '50vw',
+                            maxWidth: '20vw',
                             objectFit: 'cover',
                             borderRadius: '10px',
                             border: 'black solid 3px',

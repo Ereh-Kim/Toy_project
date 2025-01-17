@@ -12,16 +12,20 @@ module.exports = function(app) {
   app.use(
     createProxyMiddleware([`/v1/places/:NAME/photos/:PHOTOS/media`,'/v1/places:searchNearby'],{
       target: 'https://places.googleapis.com',
-      changeOrigin: true,
-      // pathRewrite: (path, req)=>{
-      //   const NAME = req.params.NAME
-      //   const New_Path = path.replace('')
-      // }
+      changeOrigin: true
     })
   );  
 
   app.use(
-    createProxyMiddleware([`/login_check`,`/update`,`/delete`,`/login/google`],{
+    createProxyMiddleware([`/login_check`,`/update`,`/delete`],{
+      target: 'http://localhost:8080',
+      changeOrigin: true
+    })
+  );
+
+  app.use(
+    '/usercreation/**',
+    createProxyMiddleware({
       target: 'http://localhost:8080',
       changeOrigin: true
     })
