@@ -123,7 +123,6 @@ export const Default_Info = () => {
             ],
             placeId: params.placeid,
         },(result)=>{
-            
             updateInfo(result)
             setCameraProps({
                 defaultZoom : 15,
@@ -254,7 +253,9 @@ export const Default_Info = () => {
         <br></br>
         <Detail_Journey_section/>
         <br></br>
-        <Three_Option_integrator/>
+        <Three_Option_integrator
+        placename={PlaceInfo.name}
+        />
         <br></br>
 
     </div>

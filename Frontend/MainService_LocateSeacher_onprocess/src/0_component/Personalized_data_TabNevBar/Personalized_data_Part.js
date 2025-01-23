@@ -38,12 +38,10 @@ const Personalized_data_Part = () => {
                         switch(status_data.status){
                                 
                                 case('verified'):
-                                console.log(status_data,'verified')
                                 updateUserdata(status_data)
                                 break;
 
                                 case('unverified'):
-                                console.log(status_data,'unverified')
                                 updateUserdata(status_data)
                                 break;
 

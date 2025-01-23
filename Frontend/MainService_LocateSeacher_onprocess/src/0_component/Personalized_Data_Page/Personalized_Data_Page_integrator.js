@@ -11,7 +11,14 @@ import My_Alarms from './Personailized_Data_ReflectZone/MY_Alarms'
 
 export const Personalized_Data_Page_integrator = () => {
 
-    const [ UserData, updateUserdata ] = useState();    
+    const [ UserData, updateUserdata ] = useState(
+        {
+            userinfo:{
+                    name:'stranger'
+            },
+            status:'unverified'
+    }
+    );    
 
     const login_check = async () => {
 
@@ -21,12 +28,6 @@ export const Personalized_Data_Page_integrator = () => {
         switch(status_data.message){
                 
                 case(`undefined_user_accessed`):
-                updateUserdata({
-                        userinfo:{
-                                name:'stranger'
-                        },
-                        status:'unverified'
-                })
                 break;
 
                 case( undefined ):

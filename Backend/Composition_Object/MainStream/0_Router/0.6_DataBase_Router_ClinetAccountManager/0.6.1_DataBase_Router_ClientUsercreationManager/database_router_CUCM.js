@@ -8,10 +8,10 @@ export class Database_Router_CUCM extends Database_Router {
     super()
     }
 
-    async Select_Post( request, input, section, placecode, limit ){
+    async Select_Post( request, input, table, schema, limit ){
         
         let DB = this.DB_usercreation
-        let query = `SELECT * FROM "${placecode}".${section}`
+        let query = `SELECT * FROM "${schema}".${table}`
 
         let query_request_1 = ` WHERE`
         await request.forEach((element,index) => {
@@ -34,14 +34,7 @@ export class Database_Router_CUCM extends Database_Router {
 
         let query_request_2 = ` LIMIT ${limit}`
 
-        query =`
-            DO $$
-            BEGIN
-                IF EXSISTS(SELECT 1 FROM pg_catalog.pg_namespace WHERE nspname = 'placecode_${placecode}' ) THEN
-                    ${query}${query_request_1}${query_request_2} 
-                END IF;
-            END $$
-        `
+        query = query + query_request_1 + query_request_2;
         
         let result = await DB.query(query, input)
 

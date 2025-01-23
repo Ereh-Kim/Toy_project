@@ -1,5 +1,5 @@
 import pg from 'pg'
-const { Client } = pg
+const { Pool } = pg
 
 import dotenv from 'dotenv'
 dotenv.config();
@@ -8,28 +8,35 @@ export let Database_Router = class Router {
 
     constructor(){
 
-    let MasterDB = new Client({
+    let MasterDB = new Pool({
         user: `postgres`,
         password: `${process.env.DATABASE_PASSWORD}`,
         host: `${process.env.DATABASE_HOST}`,
         port: `${process.env.DATABASE_PORT}`,
-        database: `${process.env.DATABASE_ACCESSING}`
+        database: `${process.env.DATABASE_ACCESSING}`,
+        max: 10,
+        idleTimeoutMillis: 30000
+        
     })
 
-    let DB = new Client({
+    let DB = new Pool({
         user: `${process.env.DATABASE_ROLE_1}`,
         password: `${process.env.DATABASE_PASSWORD}`,
         host: `${process.env.DATABASE_HOST}`,
         port: `${process.env.DATABASE_PORT}`,
-        database: `${process.env.DATABASE_ACCESSING}`
+        database: `${process.env.DATABASE_ACCESSING}`,
+        max: 10,
+        idleTimeoutMillis: 30000
     })
 
-    let DB_usercreation = new Client({
+    let DB_usercreation = new Pool({
         user: `${process.env.DATABASE_ROLE_2}`,
         password: `${process.env.DATABASE_PASSWORD}`,
         host: `${process.env.DATABASE_HOST}`,
         port: `${process.env.DATABASE_PORT}`,
-        database: `${process.env.DATABASE_ACCESSING}`
+        database: `${process.env.DATABASE_ACCESSING}`,
+        max: 10,
+        idleTimeoutMillis: 30000
     })
 
     MasterDB.connect()

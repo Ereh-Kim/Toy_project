@@ -10,13 +10,13 @@ class Usercreation_R_Router extends Pure_Router {
 
     Manage_Loading_PostData_API(){
 
-        this.Pure_Router.get('/read_reviews',()=>{
+        this.Pure_Router.get('/read_reviews/:user_id', async (req,res)=>{
 
             const DB = new Database_Router_CUCM();
-            // DB.Select_Post(['id',])
-            res.json({
-                messsage: 'read_reviews'
-            })
+            const INPUT = Number(req.params.user_id)
+
+            const result = await DB.Select_Post(['user_id'],[INPUT],'user_post','user_post',10)
+            res.json({result:result})
         })
 
     }

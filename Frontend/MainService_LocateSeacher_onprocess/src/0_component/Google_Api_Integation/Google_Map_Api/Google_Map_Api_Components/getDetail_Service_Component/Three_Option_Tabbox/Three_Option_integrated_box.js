@@ -8,7 +8,9 @@ import Review_Post_Box from "../../../../../User_Creator_Zone/Review_Post_Box";
 import Journey_Post_Box from "../../../../../User_Creator_Zone/Journey_Post_Box";
 import Video_Post_Box from "../../../../../User_Creator_Zone/Video_Post_Box";
 
-export const Three_Option_integrator = () => {
+export const Three_Option_integrator = (props) => {
+
+    console.log(props.placename)
 
     const [ BtnState, updateBox ] = useState({
         Post_review_box_activated : false,
@@ -54,6 +56,7 @@ export const Three_Option_integrator = () => {
 
                     case('Post_review_box_activated'):
                     return <Review_Post_Box 
+                            placename ={props.placename}
                             PostEvent={()=>{post_box_btnEvent()}}
                             />
 

@@ -81,6 +81,9 @@ export class google_certification_router extends Pure_Router {
         const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
         let DB = new Account_Register_Router();
 
+        console.log(RequestOrigin)
+        console.log(req.session.url_history)
+
         switch(RequestOrigin){
             case('/registeration/signup-with-google'):
             await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified', 'google')
@@ -117,7 +120,7 @@ export class google_certification_router extends Pure_Router {
             }
             break;
 
-            case('/login/font/CuteMin.ttf'):
+            case('/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'):
             const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
                 console.log(status)
                 switch(status){

@@ -46,7 +46,8 @@ const Review_Post_Box = (props) =>{
             
             formData.append('id',ID_data.userinfo.id)
             formData.append('placecode', placecode)
-            
+            formData.append('placename', props.placename)
+
             const POST_ACTION = await fetch('/usercreation/post_review',{
                 method:`POST`,
                 body: formData
@@ -295,6 +296,7 @@ const Review_Post_Box = (props) =>{
             }}
             placeholder="Write down your comment at here"
             
+            minLength={30}
             ref={textareaRef}
             value={text}
             onChange={handleChange}
