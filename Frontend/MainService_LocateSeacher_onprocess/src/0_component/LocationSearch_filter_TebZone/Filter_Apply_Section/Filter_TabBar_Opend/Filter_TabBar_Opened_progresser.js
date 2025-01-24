@@ -5,16 +5,19 @@ import Filter_Option_Selector from "./Filter_TabBar_Opened_Components/Filter_Opt
 import Opened_Toggler_Button from "./Filter_TabBar_Opened_Components/Opened_Toggler_Button";
 import Keyword_popup from "./Filter_TabBar_Opened_Components/Keyword_popup";
 
+import { useSelector } from "react-redux";
+
 export const Filter_TabBar_Opened_progresser = (props) => {
 
     const options = props.options
+    const NowUrl = useSelector(state => state.urlObject)
 
     return <React.Fragment>
 
         <Filter_TabBar_Container component={
             
             <React.Fragment>
-            <Filter_Option_Selector option={options.option1}/>
+            <Filter_Option_Selector option={options.option1} url={NowUrl}/>
             <Filter_Option_Selector option={options.option2}/>
             <Filter_Option_Selector option={options.option3}/>
             <Filter_Option_Selector option={options.option4}/>

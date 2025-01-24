@@ -255,6 +255,7 @@ export const Default_Info = () => {
         <br></br>
         <Three_Option_integrator
         placename={PlaceInfo.name}
+        placepicture={PlaceInfo.photos}
         />
         <br></br>
 

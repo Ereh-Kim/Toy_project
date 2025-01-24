@@ -3,9 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 
 export const Closed_Toggler_Button = (props) => {
 
-        const Url = new URLSearchParams(document.location.search)
-        Url.set('FilterTabBar',`${props.path}`)
         const Dependecy = useLocation().search
+        const Url = new URLSearchParams(Dependecy)
+        Url.set('FilterTabBar',`${props.path}`)
 
         useEffect(()=>{
             Url.set('FilterTabBar',`${props.path}`)

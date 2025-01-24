@@ -10,8 +10,6 @@ import Video_Post_Box from "../../../../../User_Creator_Zone/Video_Post_Box";
 
 export const Three_Option_integrator = (props) => {
 
-    console.log(props.placename)
-
     const [ BtnState, updateBox ] = useState({
         Post_review_box_activated : false,
         Post_video_box_activated : false,
@@ -57,6 +55,7 @@ export const Three_Option_integrator = (props) => {
                     case('Post_review_box_activated'):
                     return <Review_Post_Box 
                             placename ={props.placename}
+                            placepicture ={props.placepicture}
                             PostEvent={()=>{post_box_btnEvent()}}
                             />
 

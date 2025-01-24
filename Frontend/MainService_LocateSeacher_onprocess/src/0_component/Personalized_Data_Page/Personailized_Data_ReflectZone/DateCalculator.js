@@ -1,8 +1,28 @@
-import { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 
 export const DateCalculator = (props) => {
+    const [Datedata, updatedata] = useState('')
+    const [parentWidth, setParentWidth] = useState(0)
+    const containerRef = useRef(null)
 
-    const [Datedata , updatedata] = useState('')
+    useEffect(() => {
+        const container = containerRef.current
+        if (!container) return
+
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                const parentWidthInPx = entry.target.parentElement.offsetWidth
+                const vw = (parentWidthInPx / window.innerWidth) * 100
+                setParentWidth(vw)
+            }
+        })
+
+        resizeObserver.observe(container)
+
+        return () => {
+            resizeObserver.disconnect()
+        }
+    }, [])
 
     const Define_Today = () =>{
 
@@ -156,8 +176,19 @@ export const DateCalculator = (props) => {
         return;
     }
 
-    return `- ${Datedata} / ${Today_Data.Year}. ${Today_Data.Month}. ${Today_Data.Date} -`;
-
+    return (
+        <div 
+            ref={containerRef}
+            style={{
+                fontSize: `calc(${parentWidth}vw * 0.12)`,
+            }}
+        >
+            {Datedata}
+            <br></br>
+            
+            - {Today_Data.Year}. {Today_Data.Month}. {Today_Data.Date} -
+        </div>
+    )
 }
 
 export default DateCalculator;

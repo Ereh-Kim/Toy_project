@@ -12,6 +12,7 @@ const Review_Post_Box = (props) =>{
         if (textareaRef.current) {
             textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
           }
+          
     },[text])
 
     const location = useLocation();
@@ -43,10 +44,12 @@ const Review_Post_Box = (props) =>{
             pictures_input.forEach((file)=>{
                 formData.append('post_pictures',file)
             })
-            
+            const placepicture = props.placepicture[0].getUrl()
+
             formData.append('id',ID_data.userinfo.id)
             formData.append('placecode', placecode)
             formData.append('placename', props.placename)
+            formData.append('placepicture', placepicture)
 
             const POST_ACTION = await fetch('/usercreation/post_review',{
                 method:`POST`,
@@ -144,7 +147,8 @@ const Review_Post_Box = (props) =>{
                                 width:'50vw',
                                 border: 'white solid 1vw',
                                 aspectRatio: '1',
-                                borderRadius: '15px'
+                                borderRadius: '15px',
+                                objectFit: 'cover'
                             }}
                             src={element}
                         >

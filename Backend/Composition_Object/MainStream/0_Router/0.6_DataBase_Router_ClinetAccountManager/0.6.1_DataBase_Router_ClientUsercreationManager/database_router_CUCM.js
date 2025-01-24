@@ -129,11 +129,11 @@ export class Database_Router_CUCM extends Database_Router {
 
     }
 
-    async Delete_Post(section){
+    async Delete_Post( input, schema, table ){
 
         let DB = await this.DB_usercreation
-        let query = `DELETE FROM user_creation.${section}`
-        let query_request = ` WHERE serial_num = $1`
+        let query = `DELETE FROM ${schema}.${table}`
+        let query_request = ` WHERE id = $1`
         query = query + query_request + ` RETURNING *`
 
         let result = await DB.query(query,input)

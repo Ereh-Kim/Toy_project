@@ -8,7 +8,7 @@ import Service_LocatorClass from "../../3_ServiceLocator/3.0_Pure_SeviceLocator/
 
         Supply_Settled_Server(){
             super.Inject_Dependency()
-            super.Listen_to_Port(8080)
+            super.Listen_to_Port(8080||process.env.PORT)
         }
        
     }

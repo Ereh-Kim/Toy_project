@@ -25,6 +25,7 @@ export const Keyword_popup = () => {
 
 
             case('object'):
+            console.log('object')
                 Keyword_Cotainer = []
                 Keyword_Cotainer.push(Keyword_Input)
                 dispatch(ActionCreater('UpdateUrl',`${Keyword_Current_Option}`,Keyword_Cotainer))
@@ -32,9 +33,7 @@ export const Keyword_popup = () => {
                 
 
                 return;
-
             }
-
         }
 
         const Inspectiong_Keyword = (Keyword, Keyword_Cotainer, Keyword_Current_Option, Keyword_exsisted) => {
@@ -106,6 +105,7 @@ export const Keyword_popup = () => {
         onKeyUp={()=>{
             if(window.event.keyCode ===13 ){
                 Keyword_Event_Integrated()
+                
             }
         }}
     ></input>

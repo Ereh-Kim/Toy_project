@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,7 +8,11 @@ export const Filter_Option_Selector = (props) => {
 
     let counter= 0;
 
-    const NowUrl = useSelector(state => state.urlObject)
+    const NowUrl = useSelector(state => ({
+        urlObject : state.urlObject,
+        urlToString : state.urlObject.toString()
+    }))
+    
     const dispatch = useDispatch()
 
     const Showing_popup = () => {
@@ -21,9 +25,12 @@ export const Filter_Option_Selector = (props) => {
     
     }
 
-    const DisplayKeyword = (state,option) => {
+    const DisplayKeyword = (props) => {
 
-        const Input = state.get(option)
+        const state = props.state
+        const option = props.option
+
+        const Input = state.urlObject.get(option)
 
         switch(typeof Input){
                 case('object'):
@@ -89,7 +96,9 @@ export const Filter_Option_Selector = (props) => {
             <span className="OptionRepresented">{props.option}</span>
             <br></br>
             <p className={`Added_Keyword_Container`}>
-            {DisplayKeyword(NowUrl,props.option)}
+            <DisplayKeyword
+            state={NowUrl}
+            option={props.option}/>
             </p>
             <div className="OptionSelector_Button" onClick={()=>{
 

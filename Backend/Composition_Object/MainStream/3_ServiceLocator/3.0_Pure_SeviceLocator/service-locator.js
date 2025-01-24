@@ -24,6 +24,7 @@ import {Account_Update_Routes} from '../../0_Router/0.12_Account_Update_Router/0
 
 import Usercreation_C_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.1_Usercreation_C_Router/Usercreation_C_Router.js';
 import Usercreation_R_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.3_Usercreation_R_Router/Usercreation_R_Router.js';
+import Usercreation_D_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.4_Usercreation_D_Router/Usercreation_D_Router.js';
 
     export class Service_LocatorClass extends Pure_Server {
  
@@ -62,6 +63,7 @@ import Usercreation_R_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.
 
         this.Pure_Server.use('/usercreation', Usercreation_C_Routes)
         this.Pure_Server.use('/usercreation', Usercreation_R_Routes)
+        this.Pure_Server.use('/usercreation', Usercreation_D_Routes)
 
     }
 

@@ -6,9 +6,10 @@ import { useLocation } from "react-router-dom";
 
 export const Filter_TabBar_Part = () => {
 
-    const Url = new URLSearchParams(document.location.search)
-    const Status = Url.get('FilterTabBar')
     const Dependency = useLocation().search
+    const Url = new URLSearchParams(Dependency)
+    const Status = Url.get('FilterTabBar')
+    
 
     useEffect(()=>{
     },[Status])

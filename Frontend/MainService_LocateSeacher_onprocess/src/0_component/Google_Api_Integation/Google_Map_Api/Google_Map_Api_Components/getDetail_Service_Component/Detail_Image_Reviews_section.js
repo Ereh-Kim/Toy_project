@@ -9,148 +9,155 @@ import EditIcon from '../../../../../1_image_or_icon/edit-list-icon.png'
 
 export const Detail_Image_Reviews_Section = (props) => {
 
-    const [FirstTouch, updateStart] = useState(0)
-    const [LastTouch, updateLast] = useState(0)
-    const [Distance, updateDistance] = useState(0)
-    const [index, updateIndex] = useState(0)
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(()=>{
         
     },[])
 
-    const photo_dispenser = (input) => {
-
-        switch(typeof input){
-            case('object'):
-            // console.log(input[0].getUrl())
-            return  <div>
+    const renderDotIndicators = (totalImages, currentIdx) => {
+        return (
+            <div
+                style={{
+                    width: 'inherit',
+                    display: "flex",
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    marginTop: '2vh'
+                }}
+            >
+                {[...Array(4)].map((_, idx) => {
+                    let dotColor = '#ffffff';
+                    let borderColor = '#ffffff';
                     
-                    <Link to={`${Distance/index+1||1}`}>
-                    <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent:'start',
-                        width:'62vw',
-                        overflow: 'scroll',
-                        aspectRatio: '1',
-                        border: 'black solid 3.5px',
-                        borderRadius: '15px'
-                    }}
-                    
-                    
-
-                    onTouchStart={(e)=>{
-                        const touches = e.changedTouches[0].pageX;
-                        updateStart(touches)
-
-                    }}
-
-                    onTouchEnd={async (e)=>{
-                        const touches = e.changedTouches[0].pageX
-                        updateLast(touches)
-
-                        const Arrow = FirstTouch - LastTouch
-                        updateIndex(e.target.offsetWidth)
-                        switch(typeof e.target.parentNode.childNodes.length){
-
-                                case('number'):
-
-                                const Length = e.target.parentNode.childNodes.length
-
-                                if(Arrow>100){
-                                updateDistance(Distance+e.target.offsetWidth)
-
-                                e.target.parentNode.scrollTo({
-                                    top:0,
-                                    left:Distance+e.target.offsetWidth,
-                                    behavior:'smooth'
-                                })
-                                
-                                if(Distance>e.target.offsetWidth*(Length-2)){
-                                    updateDistance(e.target.offsetWidth*(Length-1))
-                                }
-                                break;
-                                return;}
-
-                                if(Arrow<-100){
-                                updateDistance(Distance-e.target.offsetWidth)
-
-                                e.target.parentNode.scrollTo({
-                                    top:0,
-                                    left:Distance-e.target.offsetWidth,
-                                    behavior:'smooth'
-                                })
-
-                                if(Distance<1){
-                                    updateDistance(0)
-                                }
-                                break;
-                                return;}
-                                
-                                if(-100<Arrow<100){
-                                    
-                                e.target.parentNode.scrollTo({
-                                    top:0,
-                                    left:Distance,
-                                    behavior:'smooth'
-                                    })}
-                        
-                                case('undefined'): 
-                                break;
-                                return;
-
+                    if (totalImages <= 4) {
+                        if (currentIdx === idx) {
+                            dotColor = '#007bff';
+                            borderColor = '#007bff';
+                        }
+                    } else {
+                        if (currentIdx < 2) {
+                            if (currentIdx === idx) {
+                                dotColor = '#007bff';
+                                borderColor = '#007bff';
                             }
-
+                        } else if (currentIdx >= totalImages - 2) {
+                            if (idx === 3 && currentIdx === totalImages - 1) {
+                                dotColor = '#007bff';
+                                borderColor = '#007bff';
+                            } else if (idx === 2 && currentIdx === totalImages - 2) {
+                                dotColor = '#007bff';
+                                borderColor = '#007bff';
+                            }
+                        } else {
+                            if (idx === 2) {
+                                dotColor = '#007bff';
+                                borderColor = '#007bff';
+                            }
                         }
                     }
 
-                    >
+                    return (
+                        <div
+                            key={idx}
+                            style={{
+                                width: '8px',
+                                height: '8px',
+                                borderRadius: '50%',
+                                backgroundColor: dotColor,
+                                border: `1px solid ${borderColor}`,
+                                transition: 'all 0.3s ease'
+                            }}
+                        />
+                    );
+                })}
+            </div>
+        );
+    };
 
-                        {input.map((element)=>{
-                        return <img
-                        style={{
-                            width:'62vw',
-                            aspectRatio: '1',
-                            objectFit: 'cover'
-                        }}
-                        src={element.getUrl()}
-                        >
-                        </img>
-                        })}
-
+    const photo_dispenser = (input) => {
+        switch(typeof input) {
+            case('object'):
+                return (
+                    <div>
+                        <Link to={`${currentIndex + 1}`}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'start',
+                                    width: '62vw',
+                                    overflow: 'hidden',
+                                    aspectRatio: '1',
+                                    border: 'black solid 3.5px',
+                                    borderRadius: '15px',
+                                    position: 'relative'
+                                }}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={handleTouchMove}
+                                onTouchEnd={handleTouchEnd}
+                            >
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        transform: `translateX(-${currentIndex * 100}%)`,
+                                        transition: 'transform 0.3s ease-out',
+                                        width: '100%'
+                                    }}
+                                >
+                                    {input.map((element, idx) => (
+                                        <img
+                                            key={idx}
+                                            style={{
+                                                minWidth: '100%',
+                                                aspectRatio: '1',
+                                                objectFit: 'cover'
+                                            }}
+                                            src={element.getUrl()}
+                                            alt={`Photo ${idx + 1}`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </Link>
+                        {renderDotIndicators(input.length, currentIndex)}
                     </div>
-                    </Link>
-
-                    <div
-                    style={{
-                        width: 'inherit',
-                        display:"flex",
-                        flexDirection: 'row',
-                        justifyContent: 'center'
-                    }}
-                    >
-                    <span
-                    style={{
-                        padding: '0.5vh 2vw',
-                        backgroundColor: 'white',
-                        borderRadius: '10px',
-                        marginTop: '2vh'
-                    }}
-                    >
-                    {Distance/index+1||1}/{props.photos.length}
-                    </span>
-
-                    </div>
-
-                    </div>
-                    
-
+                );
             case('undefined'):
-            return;
+                return null;
+        }
+    }
+
+    const handleTouchStart = (e) => {
+        setTouchStart(e.touches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.touches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+
+        const distance = touchStart - touchEnd;
+        const minSwipeDistance = 50;
+
+        if (Math.abs(distance) < minSwipeDistance) return;
+
+        if (distance > 0 && currentIndex < props.photos.length - 1) {
+            setCurrentIndex(prev => prev + 1);
         }
 
-    }
+        if (distance < 0 && currentIndex > 0) {
+            setCurrentIndex(prev => prev - 1);
+        }
+
+        setTouchStart(0);
+        setTouchEnd(0);
+    };
 
     const start_dispenser = (input) => {
         let container = [];
