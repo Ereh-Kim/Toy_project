@@ -3,6 +3,7 @@
     width: 20px;
     height: 20px;
     appearance: none;
+    -webkit-appearance: none;
     background-color: white;
     border: 2px solid black;
     border-radius: 5px;
@@ -10,22 +11,17 @@
     cursor: pointer;
 }
 
-.custom-checkbox::before {
+.custom-checkbox:checked {
+    background-color: #e0e0e0;
+}
+
+.custom-checkbox:checked::after {
     content: "✓";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
     font-size: 16px;
     font-weight: bold;
     color: black;
-}
-
-.custom-checkbox:checked {
-    background-color: #e0e0e0;
-}
-
-.custom-checkbox:checked::before {
-    display: block;
 } 

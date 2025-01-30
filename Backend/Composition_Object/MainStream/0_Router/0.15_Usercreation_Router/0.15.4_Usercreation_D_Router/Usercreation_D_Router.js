@@ -13,9 +13,9 @@ class Usercreation_D_Router extends Pure_Router {
         this.Pure_Router.delete('/delete_post', async (req,res)=>{
 
             const DB = new Database_Router_CUCM();
-            const INPUT = Number(req.body.id)
+            const INPUT = req.body.id
 
-            const result = await DB.Delete_Post([INPUT],'user_post','user_post')
+            const result = await DB.Delete_Post( INPUT ,'user_post','user_post')
             res.json({result:result})
         })
     }

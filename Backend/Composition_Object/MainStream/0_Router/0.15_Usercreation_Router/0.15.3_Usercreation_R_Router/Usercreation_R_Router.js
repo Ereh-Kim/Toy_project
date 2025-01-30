@@ -10,7 +10,7 @@ class Usercreation_R_Router extends Pure_Router {
 
     Manage_Loading_PostData_API(){
 
-        this.Pure_Router.get('/read_reviews/:user_id', async (req,res)=>{
+        this.Pure_Router.get('/read_reviews/user/:user_id', async (req,res)=>{
 
             const DB = new Database_Router_CUCM();
             const INPUT = Number(req.params.user_id)
@@ -19,6 +19,16 @@ class Usercreation_R_Router extends Pure_Router {
             res.json({result:result})
         })
 
+        this.Pure_Router.get('/read_reviews/place/:placecode', async (req,res)=>{
+
+            const DB = new Database_Router_CUCM();
+            const INPUT = req.params.placecode
+
+            const result = await DB.Select_Post(['placecode'],[INPUT],'user_post','user_post',10)
+            res.json({result:result})
+            res.end()
+        })
+        
     }
 
 }

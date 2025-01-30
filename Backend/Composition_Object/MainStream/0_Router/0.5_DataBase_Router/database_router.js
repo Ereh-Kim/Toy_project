@@ -1,5 +1,5 @@
 import pg from 'pg'
-const { Pool } = pg
+const { Pool, Client } = pg
 
 import dotenv from 'dotenv'
 dotenv.config();
@@ -38,10 +38,6 @@ export let Database_Router = class Router {
         max: 10,
         idleTimeoutMillis: 30000
     })
-
-    MasterDB.connect()
-    DB.connect()
-    DB_usercreation.connect()
 
     this.MasterDB = MasterDB
     this.DB = DB

@@ -17,6 +17,7 @@ export const My_Reviews = (props) => {
 
     const [ELEMENT ,updateREVIEWS] = useState([])
     const [USERNAME ,updateUSERNAME] = useState({name: ''})
+    const [CHECKBOX, updateCHECKBOX] = useState([])
     
     const [Delete_popup_Activate, setDelete_popup_state] = useState(false)
     const [Delete_review, setDelete_review] = useState({})
@@ -101,165 +102,337 @@ export const My_Reviews = (props) => {
         </React.Fragment>
     }
 
-    const Review_Container = (props) => {
+    const SelectAll_Handler = (props) => {
+        return <div
+        style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 30px)',
+            columnGap: '1vw',
+            justifySelf: 'start',
+            alignItems: 'center',
+        }}
+        >
 
+        <input
+        type="checkbox"
+        className="custom-checkbox"
+        style={{
+            justifySelf: 'start',
+        }}
+        checked={CHECKBOX.length === ELEMENT.length && CHECKBOX.length !== 0}
+        onChange={(e)=>{
+            if(e.target.checked){
+                updateCHECKBOX(ELEMENT.map(element => element.id))
+                setDelete_review({
+                    situation: 'multiple_reviews',
+                    checked: true
+                })
+            } else {
+                updateCHECKBOX([])
+            }
+
+        }}
+        ></input>
+
+        <span
+        style={{
+            justifySelf: 'start',
+            whiteSpace: 'nowrap',
+            fontSize: '20px',
+        }}
+        >
+            Select All
+        </span>
+
+        </div>
+    }
+
+    const Checkbox_Handler = (props) => {
+        switch(CHECKBOX.length){
+            case(0):
+            break;
+
+            default:
+                return <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            padding: '0vh 2.5vw',
+                        }}
+                        >
+                        <span
+                            style={{
+                                fontWeight: 'bold',
+                            }}
+                        >
+                        <span>
+                            Selected {String.fromCharCode(0x0020)}
+                        </span>
+                        <span
+                        style={{
+                            backgroundColor: 'white',
+                            borderRadius: '15px',
+                            padding: '0.25vh 2vw'
+                        }}
+                        >
+                        {CHECKBOX.length} Reviews
+                        </span>
+                        </span>
+
+                        {String.fromCharCode(0x0020)}
+
+                        <div
+                        style={{
+                            justifySelf: 'start',
+                            backgroundColor: 'white',
+                            borderRadius: '7px',
+                            padding: '0.5vh 2.5vw',
+                            margin: '1vh 0vw 0vh 0vw',
+                            textAlign: 'center'
+                            
+                        }}
+                        onClick={
+                            async (e)=>{
+                                setDelete_popup_state(true)
+                                setDelete_review({
+                                    situation: 'multiple_reviews',
+                                    checked: true
+                                })
+                        }}
+
+                        >
+                            <span>
+                                Delete All Selected
+                            </span>
+                            
+                            <img
+                            src={Trashcanbtn}
+                            style={{
+                                position:'relative',
+                                left:'5.5px',
+
+                                width: '15px',
+                                height: '15px'
+                            }}
+                            >
+                            </img>
+                        </div>
+                    
+                    </div>
+                    
+
+        }
+    }
+
+
+
+    const Review_Container = (props) => {
         const ELEMENT = props.ELEMENT
 
         return <React.Fragment>
-
-            <label>
-
             <div
             style={{
                 width:'95%',
-
                 display: 'grid',
                 gridTemplateColumns: '(repeat 1, 1fr)',
                 rowGap: '2vh',
-                
-
-                padding: '2vh 0vw'
+                padding: '0.5vh 0vw 2vh 0vw'
             }}
             >
 
-            {ELEMENT.map((element, index)=>{
-
-                const PICTURES_BINARY_ARRAY = element.user_post_pictures
-                let PICTURES_ARRAY = [];
-
-                PICTURES_BINARY_ARRAY.forEach((element, index)=>{
-                    const DATA = Buffer.from(element)
-                    let encoded_imagesrc = DATA.toString('base64')
-                    encoded_imagesrc = `data:image/jpg;base64,${encoded_imagesrc}`;
-
-                    PICTURES_ARRAY = [...PICTURES_ARRAY, encoded_imagesrc]
-                })
-
-                return <div>
-                <div
-                
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: '(repeat 1, 1fr)',
-                    rowGap: '1vh',
-                    border:'black solid 3px',
-                    borderRadius: '28px',
-                    padding: '1.5vh 3vw 3vh 3vw',
-                    transition: 'all 0.3s ease-in-out'
-                }}
-                >
-
-                <input
-                className="custom-checkbox"
-                type="checkbox"
-                onChange={(e)=>{}}
-                />
-
-                <div
-                    style={{
-                        justifySelf:'center'
-                    }}
-                >
-                    {element.placename}
-                </div>
-
-                <TextDispenser
-                element={element}
-                />
-
                 <div
                 style={{
-                    position:'relative',
-                    bottom: '15px',
-                    justifySelf: 'center'
-                }}
-                >
-                    {`작성자: ${USERNAME.name}`}
-                </div>
-
-                <div
-                style={{
-                    fontSize:'15px',
-                    justifySelf: 'center',
-                    backgroundColor: 'white',
+                    border: 'black solid 3px',
                     borderRadius: '15px',
-                    padding: '0.25vh 2vw'
+                    padding: '1vh 2vw',
+                    width: '90%'
                 }}
                 >
-                    Created
-                </div>
-
-                <div
-                style={{
-                    width: '70%',
-                    justifySelf: 'center',
-                    borderBottom: 'white solid 5px',
-                    textAlign: 'center'
-                }}
-                >
-                    <DateCalculator
-                    date={element.created_at}
+                    <SelectAll_Handler
                     />
                 </div>
 
-                <img
-                src=''
-                style={{
-                    display:'none',
-                    width: '80%',
-                    aspectRatio: '1/1',
-                    objectFit: 'cover',
-                    justifySelf: 'center',
-                    border: 'white solid 3px',
-                    borderRadius: '10px'
-                }}
-                alt="let"
-                onClick={(e)=>{
-                    e.target.style.display = 'none'
-                }}
-                >
-                </img>
+                <Checkbox_Handler
+                CHECKBOX={CHECKBOX}
+                />
 
-                <div
-                style={{
+                <span
+                    style={{
+                        justifySelf: 'center',
+                        fontSize: '15px',
+                        fontWeight: 'bold',
+                        padding: '0.5vh 2.5vw',
+                        borderRadius: '15px',
+                        border: 'black solid 3px'
+                    }}
+                    >
+                    * Total {ELEMENT.length} Reviews *
+                    </span>
+
+                {ELEMENT.map((element, index)=>{
+                    const PICTURES_BINARY_ARRAY = element.user_post_pictures
+                    let PICTURES_ARRAY = [];
+
+                    PICTURES_BINARY_ARRAY.forEach((element, index)=>{
+                        const DATA = Buffer.from(element)
+                        let encoded_imagesrc = DATA.toString('base64')
+                        encoded_imagesrc = `data:image/jpg;base64,${encoded_imagesrc}`;
+
+                        PICTURES_ARRAY = [...PICTURES_ARRAY, encoded_imagesrc]
+                    })
+
+                    return <div>
+                    <div
                     
-                    width:'80%',
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: '(repeat 1, 1fr)',
+                        rowGap: '1vh',
+                        border:'black solid 3px',
+                        borderRadius: '28px',
+                        padding: '1.5vh 3vw 3vh 3vw',
+                        transition: 'all 0.3s ease-in-out'
+                    }}
+                    >
 
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    justifyItems: 'center',
-                    justifySelf: 'center',
-                    alignItems: 'center',
-                    border: 'black solid 3px',
-                    borderRadius:'15px',
+                    <input
+                    className="custom-checkbox"
+                    type="checkbox"
+                    key={index}
+                    checked={CHECKBOX.includes(element.id)}
+                    onChange={(e)=>{
+                        if(e.target.checked){
+                            const EXISTED = [...CHECKBOX]
+                            setDelete_review({
+                                checked: true
+                            })
 
-                    padding: '1.5vh 2vw',
-                    columnGap: '2vw',
-                    rowGap: '1.5vh'
-                }}
-                >
+                            if(!EXISTED.includes(element.id)){
+                                updateCHECKBOX([...EXISTED, element.id])
+                                
+                            }
+                            } else {
+                                const RENEW = CHECKBOX.filter(id => id !== element.id)
+                                updateCHECKBOX(RENEW)
+                            
+                                if(RENEW.length === 0){
+                                    setDelete_review({
+                                        checked: false
+                                    })
+                                }
+                            }
                     
-                    {PICTURES_ARRAY.map((element, index)=>{
-
-                        return <img
-                        src={`${element}`}
-                        style={{
-                            width: '80%',
-                            aspectRatio: '1',
-                            border:'white solid 3px',
-                            borderRadius: '10px'
-                        }}
                         
-                        onClick={(e)=>{
-                            const Target = e.target.parentNode.previousElementSibling
-                            Target.style.display = 'block'
-                            Target.src = e.target.src
-                        }}
-                        >
-                        </img>
-                    })}
-                </div>
                     
+                    }}
+                  ></input>
+
+                    <div
+                        style={{
+                            justifySelf:'center'
+                        }}
+                    >
+                        {element.placename}
+                    </div>
+
+                    <TextDispenser
+                    element={element}
+                    />
+
+                    <div
+                    style={{
+                        position:'relative',
+                        bottom: '15px',
+                        justifySelf: 'center'
+                    }}
+                    >
+                        {`작성자: ${USERNAME.name}`}
+                    </div>
+
+                    <div
+                    style={{
+                        fontSize:'15px',
+                        justifySelf: 'center',
+                        backgroundColor: 'white',
+                        borderRadius: '15px',
+                        padding: '0.25vh 2vw'
+                    }}
+                    >
+                        Created
+                    </div>
+
+                    <div
+                    style={{
+                        width: '70%',
+                        justifySelf: 'center',
+                        borderBottom: 'white solid 5px',
+                        textAlign: 'center'
+                    }}
+                    >
+                        <DateCalculator
+                        date={element.created_at}
+                        />
+                    </div>
+
+                    <img
+                    src=''
+                    style={{
+                        display:'none',
+                        width: '80%',
+                        aspectRatio: '1/1',
+                        objectFit: 'cover',
+                        justifySelf: 'center',
+                        border: 'white solid 3px',
+                        borderRadius: '10px'
+                    }}
+                    alt="let"
+                    onClick={(e)=>{
+                        e.target.style.display = 'none'
+                    }}
+                    >
+                    </img>
+
+                    <div
+                    style={{
+                        
+                        width:'80%',
+
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(3, 1fr)',
+                        justifyItems: 'center',
+                        justifySelf: 'center',
+                        alignItems: 'center',
+                        border: 'black solid 3px',
+                        borderRadius:'15px',
+
+                        padding: '1.5vh 2vw',
+                        columnGap: '2vw',
+                        rowGap: '1.5vh'
+                    }}
+                    >
+                        
+                        {PICTURES_ARRAY.map((element, index)=>{
+
+                            return <img
+                            src={`${element}`}
+                            style={{
+                                width: '80%',
+                                aspectRatio: '1',
+                                border:'white solid 3px',
+                                borderRadius: '10px'
+                            }}
+                            
+                            onClick={(e)=>{
+                                const Target = e.target.parentNode.previousElementSibling
+                                Target.style.display = 'block'
+                                Target.src = e.target.src
+                            }}
+                            >
+                            </img>
+                        })}
+                    </div>
+                        
                         <div
                         style={{
                             width: '90%',
@@ -306,9 +479,10 @@ export const My_Reviews = (props) => {
                                     setDelete_popup_state(true)
                                     setDelete_review({
                                         id: element.id,
-                                        index: index
+                                        index: index,
+                                        situation: 'single_review'
                                     })
-                                    
+                                    updateCHECKBOX([element.id])                                    
                                 }}
 
                                 >
@@ -330,41 +504,39 @@ export const My_Reviews = (props) => {
                                 </div>
 
                         </div>
-                </div>
-                </div>
-
-            })}
+                    </div>
+                    </div>
+                })}
+            </div>
 
             <Delete_popup
             activate={Delete_popup_Activate}
             index={Delete_review.index}
+            situation={Delete_review.situation}
+            checked={Delete_review.checked}
             click_action={async ()=>{
                 await fetch('/usercreation/delete_post',{
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({id: Delete_review.id})
+                    body: JSON.stringify({id: [...CHECKBOX]})
                 })
                 let RENEWED_ALIGN = ELEMENT
-                RENEWED_ALIGN.splice(Delete_review.index, 1)
+                RENEWED_ALIGN = RENEWED_ALIGN.filter(element => !CHECKBOX.includes(element.id))
+                
                 updateREVIEWS([...RENEWED_ALIGN])
             }}
             close_event={()=>{
                 setDelete_popup_state(false)
+                updateCHECKBOX([])
             }}
             />
-
-            </div>
-
-            
-            </label>
         </React.Fragment>
-
     }
 
     const Load_Review = async (user_id, username) => {
-        await fetch(`/usercreation/read_reviews/${user_id}`).then( async (result)=>{
+        await fetch(`/usercreation/read_reviews/user/${user_id}`).then( async (result)=>{
             const review_data = await result.json()
             updateREVIEWS(review_data.result)
             updateUSERNAME({name: username})

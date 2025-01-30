@@ -4,6 +4,7 @@ import {useLocation} from 'react-router-dom'
 const Review_Post_Box = (props) =>{
 
     const [text, setText] = useState('');
+    const [star_rating, setStar_Rating] = useState('');
     const [pictures, setPictures] = useState([]);
     const [pictures_input, setInput] = useState([])
     const textareaRef = useRef(null);
@@ -47,10 +48,11 @@ const Review_Post_Box = (props) =>{
             const placepicture = props.placepicture[0].getUrl()
 
             formData.append('id',ID_data.userinfo.id)
+            formData.append('user_name', ID_data.userinfo.name)
             formData.append('placecode', placecode)
             formData.append('placename', props.placename)
             formData.append('placepicture', placepicture)
-
+            
             const POST_ACTION = await fetch('/usercreation/post_review',{
                 method:`POST`,
                 body: formData
@@ -73,6 +75,47 @@ const Review_Post_Box = (props) =>{
 
         }
     }
+
+        const Star_Reputation = (props) => {
+            return <div
+                style={{
+                    marginTop: '2vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%'
+                }}
+            >
+                <select 
+                    name="star_rating"
+                    required
+                    value={star_rating}
+                    onChange={(e)=>{
+                        setStar_Rating(e.target.value)
+                    }}
+                    style={{
+                        width: '90%',
+                        padding: '1vh 2vw',
+                        borderRadius: '8px',
+                        border: 'black solid 2px',
+                        borderBottom: 'black solid 4px',
+                        backgroundColor: '#ff9933',
+                        fontFamily: '큐트신민상'
+                    }}
+                >
+                    <option value=""
+                        style={{
+                            textAlign: 'center'
+                        }}
+                    >Select Reputation</option>
+                    <option value="5">⭐⭐⭐⭐⭐ (5점)</option>
+                    <option value="4">⭐⭐⭐⭐ (4점)</option>
+                    <option value="3">⭐⭐⭐ (3점)</option>
+                    <option value="2">⭐⭐ (2점)</option>
+                    <option value="1">⭐ (1점)</option>
+                </select>
+            </div>
+        }
 
         const Picture_Status = (props) => {
 
@@ -277,6 +320,8 @@ const Review_Post_Box = (props) =>{
             }}
             >
             </input>
+
+            <Star_Reputation />
 
             <textarea
             name="post_text"

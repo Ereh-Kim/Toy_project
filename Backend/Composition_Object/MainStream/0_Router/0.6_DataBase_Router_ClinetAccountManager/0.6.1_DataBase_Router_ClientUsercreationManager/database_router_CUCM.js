@@ -133,14 +133,35 @@ export class Database_Router_CUCM extends Database_Router {
 
         let DB = await this.DB_usercreation
         let query = `DELETE FROM ${schema}.${table}`
-        let query_request = ` WHERE id = $1`
+        let query_request = ` WHERE id IN`
+        
+        input.forEach((element, index)=>{
+            switch(index){
+                case(0):
+                query_request += ` ( $${index+1},`
+                return;
+
+                case(input.length-1):
+                query_request += ` $${index+1})`
+                return;
+                
+                default:
+                query_request += ` ${element},`
+            }
+        })
+
+        if(input.length === 1){
+            query_request = query_request+` ($1)`
+        }
+
         query = query + query_request + ` RETURNING *`
 
+        console.log(query)
         let result = await DB.query(query,input)
     
         return result
 
-    }
+    }   
 
 }
 

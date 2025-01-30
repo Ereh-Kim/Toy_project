@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom'
-
+import {useLocation} from 'react-router-dom'
 
 import Arrow from '../../../../../1_image_or_icon/Arrow_Button_UpAhead.png'
 import ThumbUp from '../../../../../1_image_or_icon/thumbs-up-icon.png'
@@ -9,13 +9,45 @@ import EditIcon from '../../../../../1_image_or_icon/edit-list-icon.png'
 
 export const Detail_Image_Reviews_Section = (props) => {
 
-    const [touchStart, setTouchStart] = useState(0);
-    const [touchEnd, setTouchEnd] = useState(0);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [swipeState, setSwipeState] = useState({
+        touchStart: 0,
+        touchEnd: 0,
+        currentIndex: 0,
+        isDragging: false,
+        dragOffset: 0
+    });
+    
+    const [reviews, setReviews] = useState([])
+    const [reviews_property_keys, setReviews_property_keys] = useState({
+        
+        origin:{
+            username: 'user_name',
+            rating: 'star_rating',
+            text: 'user_post_text',
+            profile_photo_url: 'profile_photo_url'
+        },
+        
+        google: {
+            username: 'author_name',
+            rating: 'rating',
+            text: 'text',
+            profile_photo_url: 'profile_photo_url'
+        }
+    })
+    
+    const location = useLocation()
+    const placecode = location.pathname.slice(17)
 
     useEffect(()=>{
+
+        review_origin_loader(placecode).then(async (res)=>{
+            let review_result = res.result
+            review_result = Object.values(review_result)
+            setReviews(review_result)
+        })
         
     },[])
+
 
     const renderDotIndicators = (totalImages, currentIdx) => {
         return (
@@ -83,7 +115,7 @@ export const Detail_Image_Reviews_Section = (props) => {
             case('object'):
                 return (
                     <div>
-                        <Link to={`${currentIndex + 1}`}>
+                        <Link to={`${swipeState.currentIndex + 1}`}>
                             <div
                                 style={{
                                     display: 'flex',
@@ -103,8 +135,8 @@ export const Detail_Image_Reviews_Section = (props) => {
                                 <div
                                     style={{
                                         display: 'flex',
-                                        transform: `translateX(-${currentIndex * 100}%)`,
-                                        transition: 'transform 0.3s ease-out',
+                                        transform: `translateX(calc(-${swipeState.currentIndex * 100}% + ${swipeState.dragOffset}px))`,
+                                        transition: swipeState.isDragging ? 'none' : 'transform 0.3s ease-out',
                                         width: '100%'
                                     }}
                                 >
@@ -123,7 +155,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                                 </div>
                             </div>
                         </Link>
-                        {renderDotIndicators(input.length, currentIndex)}
+                        {renderDotIndicators(input.length, swipeState.currentIndex)}
                     </div>
                 );
             case('undefined'):
@@ -132,31 +164,53 @@ export const Detail_Image_Reviews_Section = (props) => {
     }
 
     const handleTouchStart = (e) => {
-        setTouchStart(e.touches[0].clientX);
+        setSwipeState(prev => ({
+            ...prev,
+            isDragging: true,
+            touchStart: e.touches[0].clientX,
+            dragOffset: 0
+        }));
     };
 
     const handleTouchMove = (e) => {
-        setTouchEnd(e.touches[0].clientX);
+        if (!swipeState.isDragging) return;
+        
+        const currentTouch = e.touches[0].clientX;
+        const diff = currentTouch - swipeState.touchStart;
+        setSwipeState(prev => ({
+            ...prev,
+            touchEnd: currentTouch,
+            dragOffset: diff
+        }));
     };
 
     const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) return;
+        if (!swipeState.isDragging) return;
 
-        const distance = touchStart - touchEnd;
+        const distance = swipeState.touchStart - swipeState.touchEnd;
         const minSwipeDistance = 50;
 
-        if (Math.abs(distance) < minSwipeDistance) return;
-
-        if (distance > 0 && currentIndex < props.photos.length - 1) {
-            setCurrentIndex(prev => prev + 1);
+        if (Math.abs(distance) < minSwipeDistance) {
+            setSwipeState(prev => ({
+                ...prev,
+                isDragging: false,
+                dragOffset: 0
+            }));
+            return;
         }
 
-        if (distance < 0 && currentIndex > 0) {
-            setCurrentIndex(prev => prev - 1);
-        }
-
-        setTouchStart(0);
-        setTouchEnd(0);
+        setSwipeState(prev => ({
+            ...prev,
+            isDragging: false,
+            currentIndex: distance > 0 && prev.currentIndex < props.photos.length - 1 
+                ? prev.currentIndex + 1 
+                : distance < 0 && prev.currentIndex > 0 
+                ? prev.currentIndex - 1 
+                : prev.currentIndex,
+            dragOffset: 0,
+            touchStart: 0,
+            touchEnd: 0
+        }));
     };
 
     const start_dispenser = (input) => {
@@ -186,7 +240,9 @@ export const Detail_Image_Reviews_Section = (props) => {
                     maskImage: 'linear-gradient(black, transparent)',
                     height: 'fit-content',
                     maxHeight: '50vh',
-                    overflow: 'scroll'
+                    overflow: 'scroll',
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-all'
                 }}
                 >
                     <span>
@@ -245,50 +301,30 @@ export const Detail_Image_Reviews_Section = (props) => {
         }
     }
 
-    const review_dispenser = (input,index) => {
-        
+    const review_origin_loader = async (input) => {
+        let result = await fetch(`/usercreation/read_reviews/place/${input}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        result = await result.json()
+        return result
+    }
+
+    const review_dispenser = (input,origin) => {
+
+        let property_keys = reviews_property_keys[origin]
+
         switch(typeof input){
             case('object'):
-        
-            let container = []
-            let start =0;
-            for(let i=0; i<input.length; i++){
-                switch(i%index){
-                    case(0):
-                    container.push(input.slice(start,start+index))
-                    start = start+index
-                    default:   
-                }
-            }
+                   return input.map((element)=>{
 
-            return container.map((li)=>{
-                    
-
-                   return <div>
-                   
-                   {li.map((element)=>{
                     return <React.Fragment>
-                    
-                                <span
-                                style={{
-                                    position:'relative',
-                                    left: '48.5vw',
-                                    top: '4vh',
-                                    
-                                }}
-                                >
-                                <img
-                                src={EditIcon}
-                                style={{
-                                    width: '4vw'
-                                }}
-                                >
-                                </img>
-                                <span>Edit</span>
-                                </span>
 
                     <div
                     style={{
+                        display: 'grid',
                         width: '50vw',
                         height: 'fit-content',
                         padding: '1vh 3vw',
@@ -297,14 +333,25 @@ export const Detail_Image_Reviews_Section = (props) => {
                         fontFamily: '큐트신민상',
                         letterSpacing: '1vw',
                         spaceBetween: '5px',
-                        lineHeight: '3.5vh',
-                        margin: '0vh 12vw 5vh 4vw'
-
+                        lineHeight: '3.5vh'
                     }}
                     >
+                                <span
+                                    style={{
+                                        justifySelf: 'end',
+                                        padding: '0 2.5vw 0 0'
+                                    }}
+                                    >
+                                    <img
+                                    src={EditIcon}
+                                    style={{
+                                        width: '4vw'
+                                    }}
+                                    >
+                                    </img>
+                                    <span>Edit</span>
+                                </span>
 
-                        <div>
-                    
                             <div
                             style={{
                                 padding: '1vh 2vw'
@@ -318,7 +365,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                                     }}
                                 >
                                     <img
-                                    src={element.profile_photo_url}
+                                    src={element[property_keys.profile_photo_url]}
                                     style={{
                                     width: '10vw'
                                     }}
@@ -327,13 +374,13 @@ export const Detail_Image_Reviews_Section = (props) => {
                                     style={{
                                     paddingLeft: '10px'
                                     }}
-                                    >{element.author_name}</span>
+                                    >{element[property_keys.username]}</span>
 
 
                             </div>
 
-                            <div>{start_dispenser(element.rating)} 
-                                ({element.rating})</div>
+                            <div>{start_dispenser(element[property_keys.rating])} 
+                                ({element[property_keys.rating]})</div>
 
                             </div>
 
@@ -403,18 +450,17 @@ export const Detail_Image_Reviews_Section = (props) => {
                                 
                             </div>
 
-                        </div>
 
                         <br></br>
 
-                        <div>{review_text_dispenser(element.text)}</div>
+                        <div>{review_text_dispenser(element[property_keys.text])}</div>
 
                         
 
                     </div>
                     
-                    </React.Fragment>})} </div>
-                })
+                    </React.Fragment>})
+                
         }
         
     }
@@ -538,13 +584,19 @@ export const Detail_Image_Reviews_Section = (props) => {
 
         <div
                 style={{
-                    display:'flex',
-                    flexDirection:'row',
+                    display:'grid',
+                    gridTemplateRows: '1fr 1fr',
+                    gridAutoFlow: 'column',
+                    columnGap: '15vw',
+                    rowGap: '5vh',
+
+                    padding: '5vh 0vw 5vh 0vw',
                     overflow: 'scroll',
                     width: '65vw'
-                }}>
-    {review_dispenser(props.reviews,2)}
-
+                }}
+        >
+    {review_dispenser(props.reviews,'google')}
+    {review_dispenser(reviews,'origin')}
         </div>
 
     </React.Fragment>

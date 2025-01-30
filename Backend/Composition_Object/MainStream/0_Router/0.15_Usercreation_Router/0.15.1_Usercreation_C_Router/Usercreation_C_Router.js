@@ -26,9 +26,17 @@ class Usercreation_C_Router extends Pure_Router {
                 PICTURE_BINARY_DATA.push(element.buffer)
             })
 
-            await DB.Create_Post(['user_id','user_post_text', 'placecode','user_post_pictures','placename'],
-                           [id, req.body.post_text, req.body.placecode, PICTURE_BINARY_DATA, req.body.placename], 
-                           'user_post', 'user_post'
+            const star_rating = Number(req.body.star_rating)
+            console.log(star_rating)
+
+            await DB.Create_Post(
+                
+                ['user_id','user_post_text', 'placecode','user_post_pictures',
+                'placename','placepicture','star_rating','user_name'],
+                
+                [id, req.body.post_text, req.body.placecode, PICTURE_BINARY_DATA, 
+                req.body.placename, req.body.placepicture, req.body.star_rating, req.body.user_name], 
+                'user_post', 'user_post'
             )
             res.end()
         })
