@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "./static/css/main.1a823c04.css",
-    "main.js": "./static/js/main.d1191122.js",
-    "static/media/Script_icon.jpg": "./static/media/Script_icon.04c1a243bc035054a8c6.jpg",
-    "static/media/food_script_logo.png": "./static/media/food_script_logo.097e8682e80d398be578.png",
-    "static/media/Pen_icon.jpg": "./static/media/Pen_icon.0089be9beca121e841c7.jpg",
-    "static/media/Door_icon.jpg": "./static/media/Door_icon.bc73cd8c732084aa685a.jpg",
-    "static/media/Profile_Stranger_icon.jpg": "./static/media/Profile_Stranger_icon.25ab90f6ad9d8424249e.jpg",
-    "static/media/Letter_icon.jpg": "./static/media/Letter_icon.0525632efecedd92b3be.jpg",
-    "static/media/Fock_icon.jpg": "./static/media/Fock_icon.f009d463b89ec67409b4.jpg",
-    "static/media/Fock_icon_SearchNear.png": "./static/media/Fock_icon_SearchNear.5377a4e4ebb2add61d80.png",
-    "static/media/Filter_icon.jpg": "./static/media/Filter_icon.910d0d82f6660c96f3b0.jpg",
-    "static/media/Picket_icon.jpg": "./static/media/Picket_icon.bcb0e054268e5cde4bf3.jpg",
-    "static/media/food_script_tabicon.png": "./static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png",
-    "index.html": "./index.html",
-    "main.1a823c04.css.map": "./static/css/main.1a823c04.css.map",
-    "main.d1191122.js.map": "./static/js/main.d1191122.js.map"
+    "main.css": "/search/static/css/main.1a823c04.css",
+    "main.js": "/search/static/js/main.ca8c5cd4.js",
+    "static/media/Script_icon.jpg": "/search/static/media/Script_icon.04c1a243bc035054a8c6.jpg",
+    "static/media/food_script_logo.png": "/search/static/media/food_script_logo.097e8682e80d398be578.png",
+    "static/media/Pen_icon.jpg": "/search/static/media/Pen_icon.0089be9beca121e841c7.jpg",
+    "static/media/Door_icon.jpg": "/search/static/media/Door_icon.bc73cd8c732084aa685a.jpg",
+    "static/media/Profile_Stranger_icon.jpg": "/search/static/media/Profile_Stranger_icon.25ab90f6ad9d8424249e.jpg",
+    "static/media/Letter_icon.jpg": "/search/static/media/Letter_icon.0525632efecedd92b3be.jpg",
+    "static/media/Fock_icon.jpg": "/search/static/media/Fock_icon.f009d463b89ec67409b4.jpg",
+    "static/media/Fock_icon_SearchNear.png": "/search/static/media/Fock_icon_SearchNear.5377a4e4ebb2add61d80.png",
+    "static/media/Filter_icon.jpg": "/search/static/media/Filter_icon.910d0d82f6660c96f3b0.jpg",
+    "static/media/Picket_icon.jpg": "/search/static/media/Picket_icon.bcb0e054268e5cde4bf3.jpg",
+    "static/media/food_script_tabicon.png": "/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png",
+    "index.html": "/search/index.html",
+    "main.1a823c04.css.map": "/search/static/css/main.1a823c04.css.map",
+    "main.ca8c5cd4.js.map": "/search/static/js/main.ca8c5cd4.js.map"
   },
   "entrypoints": [
     "static/css/main.1a823c04.css",
-    "static/js/main.d1191122.js"
+    "static/js/main.ca8c5cd4.js"
   ]
 }
