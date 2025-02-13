@@ -19,7 +19,7 @@ class Session_Router extends Pure_Router {
         async Add_Session(name){
 
         const redisClient = redis.createClient({
-            url: process.env.HEROKU_REDIS_JADE_URL,
+            url: process.env.HEROKU_REDIS_URL,
             tls: {
                 rejectUnauthorized: false  // 자체 서명 인증서 무시
             }
@@ -35,9 +35,9 @@ class Session_Router extends Pure_Router {
             saveUninitialized: false,
             rolling: true,
             cookie: {maxAge: 1000 * 60 * 60 * 6
-                    // ,secure:true
-                    // ,httpOnly: true
-                    // ,sameSite: true
+                    ,secure:true
+                    ,httpOnly: true
+                    ,sameSite: true
             }})
         )}
 
