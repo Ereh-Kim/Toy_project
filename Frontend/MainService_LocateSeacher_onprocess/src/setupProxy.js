@@ -24,7 +24,7 @@ module.exports = function(app) {
   );
 
   app.use(
-    ['/usercreation/**'],
+    ['/usercreation/**','/imagedata/**'],
     createProxyMiddleware({
       target: 'http://localhost:8080',
       changeOrigin: true

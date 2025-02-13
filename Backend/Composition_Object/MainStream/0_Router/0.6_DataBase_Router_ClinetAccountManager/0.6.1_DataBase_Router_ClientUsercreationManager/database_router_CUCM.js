@@ -1,7 +1,5 @@
 import { Database_Router } from "../../0.5_DataBase_Router/database_router.js";
 
-import Database_Router_CAM from "../database_router_CAM.js";
-
 export class Database_Router_CUCM extends Database_Router {
 
     constructor(){
@@ -151,7 +149,7 @@ export class Database_Router_CUCM extends Database_Router {
         })
 
         if(input.length === 1){
-            query_request = query_request+` ($1)`
+            query_request = ` WHERE id IN ($1)`
         }
 
         query = query + query_request + ` RETURNING *`

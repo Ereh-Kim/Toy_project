@@ -239,7 +239,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                 style={{
                     maskImage: 'linear-gradient(black, transparent)',
                     height: 'fit-content',
-                    maxHeight: '50vh',
+                    maxHeight: '30vh',
                     overflow: 'scroll',
                     whiteSpace: 'pre-wrap',
                     wordBreak: 'break-all'

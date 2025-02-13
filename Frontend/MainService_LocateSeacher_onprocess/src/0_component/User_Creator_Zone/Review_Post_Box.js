@@ -48,7 +48,6 @@ const Review_Post_Box = (props) =>{
             const placepicture = props.placepicture[0].getUrl()
 
             formData.append('id',ID_data.userinfo.id)
-            formData.append('user_name', ID_data.userinfo.name)
             formData.append('placecode', placecode)
             formData.append('placename', props.placename)
             formData.append('placepicture', placepicture)

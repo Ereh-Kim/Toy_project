@@ -7,7 +7,7 @@ import My_Journals from './Personailized_Data_ReflectZone/My_Journals';
 import My_Options from './Personailized_Data_ReflectZone/My_Options';
 import My_Alarms from './Personailized_Data_ReflectZone/MY_Alarms'
 
-
+import My_Review from "./Personailized_Data_ReflectZone/My_Review.js";
 
 export const Personalized_Data_Page_integrator = () => {
 
@@ -18,7 +18,9 @@ export const Personalized_Data_Page_integrator = () => {
             },
             status:'unverified'
     }
-    );    
+    );
+    
+    const [ Single_ReviewData, updateREVIEW ] = useState({})
 
     const login_check = async () => {
 
@@ -55,6 +57,7 @@ export const Personalized_Data_Page_integrator = () => {
 
     useEffect(()=>{
         login_check()
+       
     },[])
 
     return <React.Fragment>
@@ -71,6 +74,12 @@ export const Personalized_Data_Page_integrator = () => {
             path="user/:userid/reviews"
             element={<My_Reviews
                 id={UserData}
+            />}
+            />
+
+            <Route
+            path="user/:userid/reviews/review/:reviewid"
+            element={<My_Review
             />}
             />
 

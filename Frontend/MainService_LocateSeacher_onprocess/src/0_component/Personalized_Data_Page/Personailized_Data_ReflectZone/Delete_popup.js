@@ -34,7 +34,6 @@ const Delete_popup = (props) => {
 
     useEffect(()=>{
         if(!selfRef.current){
-            console.log("selfRef is undefined")
             return;
         }
         

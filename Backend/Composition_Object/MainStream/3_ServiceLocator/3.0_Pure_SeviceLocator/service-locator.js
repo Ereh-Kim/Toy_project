@@ -26,6 +26,8 @@ import Usercreation_C_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.
 import Usercreation_R_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.3_Usercreation_R_Router/Usercreation_R_Router.js';
 import Usercreation_D_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.4_Usercreation_D_Router/Usercreation_D_Router.js';
 
+import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image_File_Loader/image_file_loader.js';
+
     export class Service_LocatorClass extends Pure_Server {
  
         constructor(){
@@ -64,6 +66,8 @@ import Usercreation_D_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.
         this.Pure_Server.use('/usercreation', Usercreation_C_Routes)
         this.Pure_Server.use('/usercreation', Usercreation_R_Routes)
         this.Pure_Server.use('/usercreation', Usercreation_D_Routes)
+
+        this.Pure_Server.use('/imagedata', Image_File_Loader_Router)
 
     }
 

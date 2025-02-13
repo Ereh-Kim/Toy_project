@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link, useLocation } from 'react-router-dom';
 
 import Homepage_Btn from './Homepage_Btn.js'
 import DateCalculator from "./DateCalculator.js";
 import Delete_popup from "./Delete_popup.js";
-
-import { Buffer } from "buffer";
 
 import Editbtn from '../../../../src/1_image_or_icon/pen2.png'
 import ArrowBtn from '../../../../src/1_image_or_icon/Arrow_Button_DownAhead.png'
@@ -14,6 +13,9 @@ import './CustomCheckbox.css';
 export const My_Reviews = (props) => {
 
     const containerRef = useRef(null)
+
+    const location = useLocation()    
+    const queryParams = new URLSearchParams(location.search)
 
     const [ELEMENT ,updateREVIEWS] = useState([])
     const [USERNAME ,updateUSERNAME] = useState({name: ''})
@@ -147,6 +149,28 @@ export const My_Reviews = (props) => {
         </div>
     }
 
+    const start_dispenser = (input) => {
+        let container = [];
+        for(let i=0; i<input; i++){
+            container.push("\u2B50")
+        }
+        return <span
+        style={{
+            width: '80%',
+            display: 'flex',
+            justifyContent: 'space-around',
+            border: 'white solid 2px',
+            borderRadius: '15px',
+            padding: '0.4vh 2vw 1vh 2vw',
+            }}
+        >
+            {container.map((element)=>{
+                return <span>{element}</span>
+            })}
+        </span>
+        
+    }
+
     const Checkbox_Handler = (props) => {
         switch(CHECKBOX.length){
             case(0):
@@ -271,16 +295,6 @@ export const My_Reviews = (props) => {
                     </span>
 
                 {ELEMENT.map((element, index)=>{
-                    const PICTURES_BINARY_ARRAY = element.user_post_pictures
-                    let PICTURES_ARRAY = [];
-
-                    PICTURES_BINARY_ARRAY.forEach((element, index)=>{
-                        const DATA = Buffer.from(element)
-                        let encoded_imagesrc = DATA.toString('base64')
-                        encoded_imagesrc = `data:image/jpg;base64,${encoded_imagesrc}`;
-
-                        PICTURES_ARRAY = [...PICTURES_ARRAY, encoded_imagesrc]
-                    })
 
                     return <div>
                     <div
@@ -292,7 +306,7 @@ export const My_Reviews = (props) => {
                         border:'black solid 3px',
                         borderRadius: '28px',
                         padding: '1.5vh 3vw 3vh 3vw',
-                        transition: 'all 0.3s ease-in-out'
+                        // transition: 'all 0.3s ease-in-out'
                     }}
                     >
 
@@ -312,7 +326,7 @@ export const My_Reviews = (props) => {
                                 updateCHECKBOX([...EXISTED, element.id])
                                 
                             }
-                            } else {
+                        } else {
                                 const RENEW = CHECKBOX.filter(id => id !== element.id)
                                 updateCHECKBOX(RENEW)
                             
@@ -412,7 +426,7 @@ export const My_Reviews = (props) => {
                     }}
                     >
                         
-                        {PICTURES_ARRAY.map((element, index)=>{
+                        {element.picture_url_array.map((element, index)=>{
 
                             return <img
                             src={`${element}`}
@@ -432,6 +446,25 @@ export const My_Reviews = (props) => {
                             </img>
                         })}
                     </div>
+                    <div
+                    style={{
+                        justifySelf: 'center',
+                        display: 'grid',
+                        gridTemplateRows: 'repeat(2, 1fr)',
+                        justifyItems: 'center',
+                        alignItems: 'center',
+                        border: 'white solid 2px',
+                        borderRadius: '15px',
+                        padding: '0.5vh 2vw 1.5vh 2vw',
+                        marginBottom: '2.5vh',
+                        width: '80%',
+                        textAlign: 'center'
+                    }}
+                    >
+                        <span>Star Reputation</span>
+                        {start_dispenser(element.star_rating)}
+                    
+                    </div>
                         
                         <div
                         style={{
@@ -443,6 +476,11 @@ export const My_Reviews = (props) => {
                             borderRadius: '5px',                        
                             margin: '1.5vh 0vw 0vh 0vw',
                             }}>
+                                
+                                <Link
+                                to={`review/${element.id}?${queryParams}`}
+                                target="_blank"
+                                >
                                 <div
                                 style={{
                                     justifySelf: 'center',
@@ -463,10 +501,11 @@ export const My_Reviews = (props) => {
 
                                         width: '15px',
                                         height: '15px'
-                                    }}
-                                    >
+                                    }}>
                                     </img>
                                 </div>
+                                </Link>
+
                                 <div
                                 style={{
                                     justifySelf: 'center',
@@ -568,7 +607,9 @@ export const My_Reviews = (props) => {
 
 
                 <Review_Container
+                edit={props.edit}
                 ELEMENT={ELEMENT}
+                username={props.id.userinfo}
                 />
                 
 
