@@ -21,14 +21,12 @@ class Session_Router extends Pure_Router {
         
         async Add_Session(name){
 
-            const certPath = path.join('public', 'redis_ca.pem');
-            const cert = fs.readFileSync(certPath);
+            // const certPath = path.join('public', 'redis_ca.pem');
+            // const cert = fs.readFileSync(certPath);
 
             const redisClient = redis.createClient({
-                url: process.env.HEROKU_REDIS_URL,
-                tls: {
-                    ca: [cert]
-                }
+                url: process.env.REDIS_URL,
+                
             })
             await redisClient.connect()
 
