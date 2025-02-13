@@ -7,6 +7,8 @@ import { local_certificater } from '../0.7_Local_Certification_Router/local_cert
 import { account_updater } from '../0.12_Account_Update_Router/0.12_account_update_router.js'
 
 import session from 'express-session'
+import redis from 'redis'
+import { RedisStore } from 'connect-redis'
 
 class Session_Router extends Pure_Router {
 
@@ -16,8 +18,11 @@ class Session_Router extends Pure_Router {
 
         Add_Session(name){
 
+        const redisClient = redis.createClient()
+
         this.Pure_Router.use(
             session({
+            store: new RedisStore({ client: redisClient }),
             secret:"ereh0325",
             name:`${name}`,
             resave:false,

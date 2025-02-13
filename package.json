@@ -14,9 +14,10 @@
   "type": "module",
   "dependencies": {
     "concurrently": "^7.6.0",
+    "connect-redis": "^8.0.1",
     "gitmoji-cli": "^8.0.0",
     "http-proxy-middleware": "^3.0.3",
-    "nodemon": "^2.0.21"
-  },
-  "devDependencies": {}
+    "nodemon": "^2.0.21",
+    "redis": "^4.7.0"
+  }
 }
