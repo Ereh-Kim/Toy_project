@@ -24,12 +24,12 @@ import { fileURLToPath } from 'url';
 
             })
 
-            this.Pure_Router.get('/*',(req, res)=>{
+            // this.Pure_Router.get('/*',(req, res)=>{
 
-                const ClientPage_path = path.join(__dirname, '../../../../../../Frontend/Homepage_onprocess/build', 'index.html')
-                res.sendFile(ClientPage_path)
+            //     const ClientPage_path = path.join(__dirname, '../../../../../../Frontend/Homepage_onprocess/build', 'index.html')
+            //     res.sendFile(ClientPage_path)
 
-            })
+            // })
 
         }
     }
