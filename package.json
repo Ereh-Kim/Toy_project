@@ -8,7 +8,7 @@
     "backend": "npm run backend --prefix Backend",
     "frontend": "npm start --prefix Frontend/MainService_LocateSeacher_onprocess",
     "start": "npm run backend",
-    "heroku-postbuild": "cd app && cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd app "
   },
   "author": "",
   "license": "ISC",
