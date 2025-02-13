@@ -9,6 +9,7 @@ import { account_updater } from '../0.12_Account_Update_Router/0.12_account_upda
 import session from 'express-session'
 import redis from 'redis'
 import { RedisStore } from 'connect-redis'
+import fs from 'fs'
 
 class Session_Router extends Pure_Router {
 
@@ -19,10 +20,12 @@ class Session_Router extends Pure_Router {
         
         async Add_Session(name){
 
+            const cert = fs.readFileSync('../../../../public/redis_ca.pem')
+
             const redisClient = redis.createClient({
                 url: process.env.HEROKU_REDIS_URL,
                 tls: {
-                    rejectUnauthorized: false  // 자체 서명 인증서 무시
+                    ca: [cert]
                 }
             })
             await redisClient.connect()
@@ -36,9 +39,9 @@ class Session_Router extends Pure_Router {
             saveUninitialized: false,
             rolling: true,
             cookie: {maxAge: 1000 * 60 * 60 * 6
-                    ,secure:true
-                    ,httpOnly: true
-                    ,sameSite: true
+                    // ,secure:true
+                    // ,httpOnly: true
+                    // ,sameSite: true
             }})
         )}
 
