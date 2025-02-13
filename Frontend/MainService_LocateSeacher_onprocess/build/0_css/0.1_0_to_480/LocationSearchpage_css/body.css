@@ -1,0 +1,631 @@
+
+@font-face {
+    font-family:'큐트신민상';
+    src: url("../../../font/CuteMin.ttf") format('truetype');
+  }
+
+body {
+    background-color: #F27536;
+  
+    width: 80vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+  
+    height: 95.5vh;
+    margin-top: 1.5vh;
+    margin-bottom: 3vh;
+  
+  }
+
+  #root{
+    
+    display: flex;
+    flex-direction: row;
+
+    width: inherit;
+    height: inherit;
+
+  }
+
+  /* Personalized_Data_Section_TotalContainer */
+
+  #Personalized_data_Container{
+
+    width: 7vw;
+    height: inherit;
+
+    padding-right: 5vw;
+    padding-top: 1vh;
+    
+    font-family: '큐트신민상';
+    font-weight: bold;
+
+  }  
+
+  #LocationSearch_filter_Container{
+
+    border-left: black solid 2px;
+    height: inherit;
+
+  }
+
+  /* ToggleButton */
+
+  #ToggleButton{
+    
+    display: inline-block;
+
+    width: 7.5vw;
+    
+    margin-left: 0vw;
+    padding: 7px;
+
+    border-radius: 15px;
+
+  }
+
+
+
+  /* Personalized_data_TabNevBar */
+
+  #Personalized_data_TabNevbar_Container{
+
+    width: inherit;
+    height: 25vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+
+    text-align: center;
+
+  }
+
+  .Personalized_data_TabButton{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+
+    width: inherit;
+
+    margin: 1vh 0;
+    padding: 1vw 2vw;
+
+    border: black solid 3px;
+    border-radius: 50px;
+
+    font-size: 3.5vw;
+
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+  }
+
+  .Personalized_data_TabButton:link, .Personalized_data_TabButton:visited{
+    color: black;
+  }
+
+  .Personalized_data_TabButton_Closed{
+
+    width: 7.5vw;
+
+    margin-top: 1vh;
+    padding: 7px;
+
+    border-radius: 15px;
+  }
+  
+  .Personalized_data_TabIcon{
+
+    width: 5vw;
+    height: 5vw;
+
+    margin-right: 2vw;
+    border-radius: 40px;
+
+  }
+
+
+  /* UserProfileZone Container */
+
+  #UserProfile_Section_Container{
+
+    width: inherit;
+    height: fit-content;
+   
+
+    text-align: center;
+
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: 5vh;
+
+  }
+
+  .UserProfile_text{
+
+    width: inherit;
+    height: fit-content;
+
+    font-size: 6vw;
+  }
+
+  .UserProfile_text:nth-child(3){
+    font-size: 3.5vw;
+  }
+
+  #UserProfile_img{
+
+    width: 25vw;
+    height: 25vw;
+    object-fit: cover;
+
+    border: black 3px solid;
+    border-radius:20px;
+
+  }
+
+  /* LocationSearch_Section_Container */
+
+  #Filter_TabBar{
+
+    width: 50vw;
+
+    border: solid black 5px;
+    border-radius: 12px;
+
+    text-align: right;
+
+    margin-left: 9.25vw;
+
+    padding: 0.5vh 3vw 0.5vh 0;
+
+  }
+
+  #Closed_Toggler_Button{
+
+    width: fit-content;
+
+    position: relative;
+    bottom: 4px;
+
+    font-family: '큐트신민상';
+    font-size: 2.5vw;
+    font-weight: bold;
+
+    padding: 2px 6px;
+
+    background-color: white;
+
+    border-radius: 4px;
+
+  }
+  #Closed_Toggler_Button:visited, #Closed_Toggler_Button:link{
+
+    text-decoration: none;
+  }
+
+  /* OpenedFilter_OptionSelectors */
+  
+  .OptionSelector{
+
+    padding: 1vh 0 0.5vh 3vw;
+
+    font-size: 3.5vw;
+    font-family: '큐트신민상';
+
+    text-align: left;
+
+  }
+
+  .OptionSelector_Button{
+
+    background-color: white;
+
+    width: fit-content;
+
+    border: black solid 2.5px;
+    border-radius: 7px;
+
+    font-weight: bold;
+    
+    padding: 0svh 0.5vw;
+
+    margin-top: 0.5vh;
+  
+  }
+
+  .OptionRepresented{
+
+    padding-bottom: 0;
+
+  }
+
+  .Added_Keywords{
+   
+    width: fit-content;
+    height: fit-content;
+
+    border: solid white 3px;
+    border-radius: 10px;
+    
+    padding: 0.5vh 1.5vw;
+
+    margin: 0 1vw;
+
+    text-wrap: nowrap;
+
+  }
+
+  .Added_Keyword_Container{
+
+    height: fit-content;
+
+    line-height: 4.3vh;
+
+    letter-spacing: 0.45vw;
+
+    margin: 0;
+
+    padding: 0.5vh 0;
+
+  }
+
+  /* Keyword_popup_Section */
+
+  #Keyword_popup{
+
+    position: fixed;
+    top: 18vh;
+    right: 19.5vw;
+
+    width: 35vw;
+    height: fit-content;
+
+    background-color: white;
+
+    border: black solid 5px;
+    border-radius: 20px;
+
+    padding: 1vh 3vw;
+
+    text-align: center;
+
+    font-size: 4vw;
+    font-family: '큐트신민상';
+    font-weight: 'bolder';
+
+  }
+
+  #Keyword_popup_input{
+
+    width: 20vw;
+
+    border: black solid 1.5px;
+    border-radius: 6px;
+
+    padding: 0.5vh 2vw;
+
+    margin-top: 1vh;
+  }
+
+  #Keyword_popup_button{
+
+    width: 10vw;
+    height: 2.5vh;
+
+    margin-top: 1vh
+
+  }
+
+  #Keyword_popup_Closed{
+    display: none;
+  }
+
+  /* MainLogo_&_SearchBar */
+
+  #MainLogo_SearchBar_Container{
+    
+    display: flex;
+    flex-direction: column;
+
+    width: 70vw;
+    height: 11vh;
+
+    justify-content: space-around;
+    align-items: center;
+
+    padding-left: 1vw;
+    margin-bottom: 3.5vh;
+
+  }
+
+  #Main_Logo{
+
+    width: 40vw;
+
+    padding-top: 5vh;
+  }
+
+  #SearchBar_Container{
+
+    display: flex;
+    flex-direction: row;
+
+    width: inherit;
+
+    margin-left: 3vw;
+    margin-top: 1vh;
+
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  #SearchBar_Input{
+
+    width: 40vw;
+
+    border: black solid 2.5px;
+    border-radius: 25px;
+
+    padding: 1vh 2vw 1vh 5vw;
+
+    font-size: 10px;
+
+    background-color: white;
+
+  }
+
+  #SearchBar_Input:focus{
+
+    background-color: lightyellow;
+
+  }
+
+  #Reading_Glass_icon{
+
+    position: relative;
+    right: 8vw;
+    top: 0.5vh;
+
+    height: 2vh;
+    
+    aspect-ratio: 1;
+
+  }
+
+#Google_Map{
+
+  width: 50vw;
+  height: 10vh;
+
+  background-color: aliceblue;
+
+}
+
+/* NearBySearchResult_Css */
+
+.Places_Information_TextSection{
+
+  padding-left: 3vw;
+  padding-right: 7vw;
+  font-family: 큐트신민상;
+  
+
+}
+
+/* PlaceDetailPage_Css */
+
+#place_detail_container{
+
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+  height: fit-content;
+  border-left: black solid 3px;
+
+  padding: 7vh 0vw 5vh 10vw
+}
+
+.Default_Info_TextSection{
+
+  font-family: '큐트신민상';
+  text-wrap: nowrap;
+
+}
+
+.Default_Info_HighLighter{
+
+  border: black solid 3px;
+  padding: 1vh 2vw;
+
+  border-radius: 15px;
+
+  border-bottom: black solid 7px;
+  border-right: black solid 7px;
+
+}
+
+.Star_Ranker_Container{
+
+  width: 'inherit';
+
+}
+
+.place_detail_ActionBtn{
+
+  width: 60vw;
+  height: 4.5vh;
+
+  background-color: white;
+
+  border: black solid 3px;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: thick;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  padding: 1.5vh 2vw;
+
+  font-size: 4.5vw;
+  font-family: '큐트신민상';
+  
+  text-align: 'center';
+
+  line-height: 2.5vh;
+}
+
+.place_detail_ActionBtn_Icon{
+  
+  width: 10vw;
+
+  aspect-ratio: 1;
+  object-fit: contain;
+
+  border: black solid 3px;
+  border-radius: 10px;
+
+  padding: 0.5vh 1vw;
+
+  position: relative;
+  left: 6vw;
+
+}
+
+/* My Account Page Component css */
+
+.Personalize_Data_Page_Container{
+  width: inherit;
+  height: inherit;
+  border-left: black solid 2px;
+}
+
+.MyAccount_Dispenser_Container{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+
+  background-color: white;
+  
+  min-height: 6.5vh;
+  border-radius: 10px;
+
+  padding: 1vh 3vw;
+  margin: 1vh 0vw;
+
+  border: black solid 3px
+}
+
+.Personalized_Data_Page_TextTitle{
+  font-family: '큐트신민상';
+  font-size: 7vw;
+
+  border-top: black solid 3px;
+  border-left: black solid 3px;
+
+  border-bottom: black solid 5px;
+  border-right: black solid 5px;
+
+  border-radius: 10px;
+
+  padding: 1vh 3vw;
+
+  letter-spacing: 1vw;
+}
+
+.Personalized_Data_Container_Aligner{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: fit-content;
+  padding: 5vh 0vw 5vh 7vw;
+  font-family: '큐트신민상';
+}
+
+/* Registration_Page_Css */
+
+.Registration_btn{
+  height:15vh;
+                
+  padding: 1vh 6.5vw;
+  margin: 0vh 2vw;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items: center;
+
+  text-align: center;
+
+  border: black solid 3px;
+  border-radius: 15px;
+
+  font-size: 3vw;
+}
+
+
+/* Login_Page_Css */
+
+.Login_Page_Container{
+  width: 80vw;
+  height: 92vh;
+
+  display: grid;
+  place-items: center;
+}
+
+#Login_Box{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  padding: 1vh 5vw;
+
+  width: 60vw;
+  height: fit-content;
+
+  border: black 5px solid;
+  border-bottom: black solid 9px;
+  border-radius: 15px;
+}
+
+.LoginBtn{
+display: flex;
+justify-content: space-around;
+align-items: center;
+
+font-size: 4.5vw;
+font-family: '큐트신민상';
+
+border: black solid 3.5px;
+border-bottom: black solid 7px;
+border-radius: 15px;
+
+padding: 1vh 2vw;
+margin: 1vh 0vw;
+}
+
+.Login_input{
+
+margin: 1vh 0vw; 
+padding: 1vh 4vw;
+
+border: black solid 3px;
+border-bottom: black solid 5px;
+
+border-radius: 20px;
+
+}
