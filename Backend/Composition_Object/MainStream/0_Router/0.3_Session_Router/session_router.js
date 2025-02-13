@@ -11,6 +11,8 @@ import redis from 'redis'
 import { RedisStore } from 'connect-redis'
 import fs from 'fs'
 
+import test from '../../../../public/redis_ca.pem'
+
 class Session_Router extends Pure_Router {
 
         constructor(){
@@ -20,12 +22,10 @@ class Session_Router extends Pure_Router {
         
         async Add_Session(name){
 
-            const cert = fs.readFileSync('../../../../public/redis_ca.pem')
-
             const redisClient = redis.createClient({
                 url: process.env.HEROKU_REDIS_URL,
                 tls: {
-                    ca: [cert]
+                    ca: [test]
                 }
             })
             await redisClient.connect()
