@@ -1,7 +1,7 @@
 {
   "name": "develop",
   "version": "1.0.0",
-  "description": "",
+  "description": "Daily_Update_memo_Folder에 관하여",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +17,6 @@
     "gitmoji-cli": "^8.0.0",
     "http-proxy-middleware": "^3.0.3",
     "nodemon": "^2.0.21"
-  }
+  },
+  "devDependencies": {}
 }
