@@ -1,0 +1,2 @@
+.custom-checkbox{appearance:none;-webkit-appearance:none;background-color:#fff;border:2px solid #000;border-radius:5px;cursor:pointer;height:20px;justify-self:start;position:relative;width:20px}.custom-checkbox:checked{background-color:#e0e0e0}.custom-checkbox:checked:after{color:#000;content:"✓";font-size:16px;font-weight:700;left:50%;position:absolute;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
+/*# sourceMappingURL=main.1a823c04.css.map*/
