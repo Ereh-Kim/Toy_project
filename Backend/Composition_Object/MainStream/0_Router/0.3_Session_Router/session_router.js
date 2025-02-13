@@ -18,7 +18,9 @@ class Session_Router extends Pure_Router {
 
         Add_Session(name){
 
-        const redisClient = redis.createClient()
+        const redisClient = redis.createClient({
+            url: process.env.REDIS_URL
+        })
 
         this.Pure_Router.use(
             session({
