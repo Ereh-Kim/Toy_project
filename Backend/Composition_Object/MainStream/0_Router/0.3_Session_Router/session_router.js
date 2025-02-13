@@ -19,7 +19,7 @@ class Session_Router extends Pure_Router {
         Add_Session(name){
 
         const redisClient = redis.createClient({
-            url: process.env.REDIS_URL
+            url: 'rediss://:p36ed14b2b946fcac8d612cbaa5a395421819d3148a1ec561ad3dd79d199eb4ea@ec2-3-94-23-192.compute-1.amazonaws.com:15470'
         })
 
         this.Pure_Router.use(
