@@ -15,21 +15,21 @@ import { fileURLToPath } from 'url';
             const __filename = fileURLToPath(import.meta.url);
             const __dirname = path.dirname(__filename);
 
-            this.Pure_Router.use(express.static(path.join(__dirname, '../../../../../../Frontend/Homepage_onprocess','build')))
+            this.Pure_Router.use(express.static(path.join(__dirname, '../../../../../Frontend/Homepage_onprocess','build')))
 
             this.Pure_Router.get('/',(req, res)=>{
 
-                const ClientPage_path = path.join(__dirname, '../../../../../../Frontend/Homepage_onprocess/build', 'index.html')
+                const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
                 res.sendFile(ClientPage_path)
 
             })
 
-            // this.Pure_Router.get('/*',(req, res)=>{
+            this.Pure_Router.get('/*',(req, res)=>{
 
-            //     const ClientPage_path = path.join(__dirname, '../../../../../../Frontend/Homepage_onprocess/build', 'index.html')
-            //     res.sendFile(ClientPage_path)
+                const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
+                res.sendFile(ClientPage_path)
 
-            // })
+            })
 
         }
     }
