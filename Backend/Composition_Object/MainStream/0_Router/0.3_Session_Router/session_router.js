@@ -25,9 +25,13 @@ class Session_Router extends Pure_Router {
             // const cert = fs.readFileSync(certPath);
 
             const redisClient = redis.createClient({
-                url: process.env.REDIS_URL,
-                
-            })
+                username: 'default',
+                password: 'cnivn8o4EEYHEtcH0EW0LZoVYFcSlrd9',
+                socket: {
+                    host: 'redis-19543.c90.us-east-1-3.ec2.redns.redis-cloud.com',
+                    port: 19543
+                }
+            });
             await redisClient.connect()
 
         this.Pure_Router.use(
