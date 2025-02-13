@@ -16,7 +16,7 @@ class Session_Router extends Pure_Router {
         super()
         }
 
-        Add_Session(name){
+        async Add_Session(name){
 
         const redisClient = redis.createClient({
             url: process.env.HEROKU_REDIS_JADE_URL,
@@ -24,7 +24,7 @@ class Session_Router extends Pure_Router {
                 rejectUnauthorized: false  // 자체 서명 인증서 무시
             }
         })
-        redisClient.connect()
+        await redisClient.connect()
 
         this.Pure_Router.use(
             session({
