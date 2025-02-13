@@ -1,0 +1,11 @@
+{
+  "name": "3.0_pure_sevicelocator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "service-locator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
