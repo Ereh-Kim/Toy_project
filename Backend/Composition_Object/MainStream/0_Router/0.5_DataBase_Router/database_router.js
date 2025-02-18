@@ -45,6 +45,10 @@ export let Database_Router = class Router {
         
     })
 
+    MasterDB.connect()
+    DB.connect()
+    DB_usercreation.connect()
+
     this.MasterDB = MasterDB
     this.DB = DB
     this.DB_usercreation = DB_usercreation
