@@ -12,22 +12,22 @@ export let Database_Router = class Router {
     constructor(){
 
     let MasterDB = new Pool({
-        connectionString: process.env.DATABASE_URI,
+        connectionString: `${process.env.DATABASE_URI}`,
         max: 10,
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
             ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router/ca.pem')).toString()
-        }  
+        }
     })
 
     let DB = new Pool({
-        connectionString: process.env.DATABASE_URI,
+        connectionString: `${process.env.DATABASE_URI}`,
         max: 10,
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router/ca.pem')).toString()
+            ca: fs.readFileSync(path.join(__dirname, 'ca.pem')).toString()
         }
     })
 
