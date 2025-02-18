@@ -21,7 +21,7 @@ export let Database_Router = class Router {
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router', 'ca.pem')).toString()
+            ca: fs.readFileSync(path.join(__dirname, 'ca.pem')).toString()
         }
     })
 
