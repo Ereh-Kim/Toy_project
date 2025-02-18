@@ -24,7 +24,7 @@ module.exports = function(app) {
   );
 
   app.use(
-    ['/usercreation/**','/imagedata/**'],
+    ['/usercreation/**','/imagedata/**','/google_map_api/**'],
     createProxyMiddleware({
       target: 'http://localhost:8080',
       changeOrigin: true
