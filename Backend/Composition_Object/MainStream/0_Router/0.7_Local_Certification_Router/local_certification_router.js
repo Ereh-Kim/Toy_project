@@ -77,6 +77,7 @@ this.Pure_Router.post('/',async (req,res)=>{
          method: 'PATCH'
       })
       const approved_session_data = await approved_session.json()
+      console.log(approved_session_data)
       
       req.session.data = approved_session_data.user_info
       res.write(`<script>alert('${approved_session_data.message}')</script>`)
