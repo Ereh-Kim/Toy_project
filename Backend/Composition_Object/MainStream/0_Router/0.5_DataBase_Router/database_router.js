@@ -1,5 +1,6 @@
 import pg from 'pg'
 const { Pool, Client } = pg
+import fs from 'fs'
 
 import dotenv from 'dotenv' 
 dotenv.config();
@@ -18,7 +19,7 @@ export let Database_Router = class Router {
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: `${process.env.DATABASE_CA}`
+            ca: fs.readFileSync(`./ca.pem`).toString()
         }  
     })
 
@@ -32,7 +33,7 @@ export let Database_Router = class Router {
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: `${process.env.DATABASE_CA}`
+            ca: fs.readFileSync(`./ca.pem`).toString()
         }
     })
 

@@ -38,7 +38,7 @@ export const foodscript_login_page = () => {
             id='Login_Box'
             >
                 <form
-                action='http://localhost:8080/login'
+                action='/login'
                 method='POST'
                 >
 
