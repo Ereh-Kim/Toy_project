@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/homepage/static/js/main.755aa0e0.js",
+    "main.js": "/homepage/static/js/main.2ee81583.js",
     "static/media/food_script_logo.png": "/homepage/static/media/food_script_logo.097e8682e80d398be578.png",
     "static/media/food_script_tabicon.png": "/homepage/static/media/food_script_tabicon.84572ed23f62add21e41.png",
     "index.html": "/homepage/index.html",
-    "main.755aa0e0.js.map": "/homepage/static/js/main.755aa0e0.js.map"
+    "main.2ee81583.js.map": "/homepage/static/js/main.2ee81583.js.map"
   },
   "entrypoints": [
-    "static/js/main.755aa0e0.js"
+    "static/js/main.2ee81583.js"
   ]
 }

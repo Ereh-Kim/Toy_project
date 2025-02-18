@@ -9,7 +9,7 @@ export const LogInOut_button = () => {
 
     const check_login = async () => {
 
-        let status = await fetch(`http://localhost:8080/login_check`)
+        let status = await fetch(`/login_check`)
         let status_data = await status.json()
      
         console.log(status_data, 'at brower')
