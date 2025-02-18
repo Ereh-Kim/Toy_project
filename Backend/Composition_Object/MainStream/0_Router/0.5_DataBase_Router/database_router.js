@@ -16,21 +16,21 @@ export let Database_Router = class Router {
     constructor(){
 
     let MasterDB = new Pool({
-        connectionString: `${process.env.DATABASE_URI}`,
+        connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
         
     })
 
     let DB = new Pool({
-        connectionString: `${process.env.DATABASE_URI}`,
+        connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
         
     })
 
     let DB_usercreation = new Pool({
-        connectionString: `${process.env.DATABASE_URI}`,
+        connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
         
