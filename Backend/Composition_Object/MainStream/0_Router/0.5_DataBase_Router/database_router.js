@@ -1,6 +1,8 @@
 import pg from 'pg'
 const { Pool, Client } = pg
+
 import fs from 'fs'
+import path from 'path'
 
 import dotenv from 'dotenv' 
 dotenv.config();
@@ -10,30 +12,22 @@ export let Database_Router = class Router {
     constructor(){
 
     let MasterDB = new Pool({
-        user: `${process.env.DATABASE_ROLE}`,
-        password: `${process.env.DATABASE_PASSWORD}`,
-        host: `${process.env.DATABASE_HOST}`,
-        port: `${process.env.DATABASE_PORT}`,
-        database: `${process.env.DATABASE_ACCESSING}`,
+        connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: fs.readFileSync(`./ca.pem`).toString()
+            ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router/ca.pem')).toString()
         }  
     })
 
     let DB = new Pool({
-        user: `${process.env.DATABASE_ROLE}`,
-        password: `${process.env.DATABASE_PASSWORD}`,
-        host: `${process.env.DATABASE_HOST}`,
-        port: `${process.env.DATABASE_PORT}`,
-        database: `${process.env.DATABASE_ACCESSING}`,
+        connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: fs.readFileSync(`./ca.pem`).toString()
+            ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router/ca.pem')).toString()
         }
     })
 
