@@ -15,22 +15,29 @@ export let Database_Router = class Router {
         port: `${process.env.DATABASE_PORT}`,
         database: `${process.env.DATABASE_ACCESSING}`,
         max: 10,
-        idleTimeoutMillis: 30000
-        
+        idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: true,
+            ca: `${process.env.DATABASE_CA}`
+        }  
     })
 
     let DB = new Pool({
-        user: `${process.env.DATABASE_ROLE_1}`,
+        user: `${process.env.DATABASE_ROLE}`,
         password: `${process.env.DATABASE_PASSWORD}`,
         host: `${process.env.DATABASE_HOST}`,
         port: `${process.env.DATABASE_PORT}`,
         database: `${process.env.DATABASE_ACCESSING}`,
         max: 10,
-        idleTimeoutMillis: 30000
+        idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: true,
+            ca: `${process.env.DATABASE_CA}`
+        }
     })
 
     let DB_usercreation = new Pool({
-        user: `${process.env.DATABASE_ROLE_2}`,
+        user: `${process.env.DATABASE_ROLE}`,
         password: `${process.env.DATABASE_PASSWORD}`,
         host: `${process.env.DATABASE_HOST}`,
         port: `${process.env.DATABASE_PORT}`,
