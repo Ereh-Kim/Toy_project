@@ -19,30 +19,21 @@ export let Database_Router = class Router {
         connectionString: `${process.env.DATABASE_URI}`,
         max: 10,
         idleTimeoutMillis: 30000,
-        ssl: {
-            rejectUnauthorized: true,
-            ca: fs.readFileSync(path.join(__dirname, 'ca.pem')).toString()
-        }
+        
     })
 
     let DB = new Pool({
         connectionString: `${process.env.DATABASE_URI}`,
         max: 10,
         idleTimeoutMillis: 30000,
-        ssl: {
-            rejectUnauthorized: true,
-            ca: fs.readFileSync(path.join(__dirname, 'ca.pem')).toString()
-        }
+        
     })
 
     let DB_usercreation = new Pool({
-        user: `${process.env.DATABASE_ROLE}`,
-        password: `${process.env.DATABASE_PASSWORD}`,
-        host: `${process.env.DATABASE_HOST}`,
-        port: `${process.env.DATABASE_PORT}`,
-        database: `${process.env.DATABASE_ACCESSING}`,
+        connectionString: `${process.env.DATABASE_URI}`,
         max: 10,
-        idleTimeoutMillis: 30000
+        idleTimeoutMillis: 30000,
+        
     })
 
     this.MasterDB = MasterDB
