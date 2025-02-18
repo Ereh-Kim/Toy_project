@@ -42,10 +42,11 @@ class Session_Router extends Pure_Router {
             resave:false,
             saveUninitialized: false,
             rolling: true,
-            cookie: {maxAge: 1000 * 60 * 60 * 6
-                    ,secure:true
-                    ,httpOnly: true
-                    ,sameSite: true
+            cookie: {
+                    maxAge: 1000 * 60 * 60 * 6,
+                    secure: false,
+                    httpOnly: true,
+                    sameSite: true
             }})
         )}
 

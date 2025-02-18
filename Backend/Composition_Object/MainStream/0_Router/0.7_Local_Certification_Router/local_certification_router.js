@@ -76,6 +76,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       const approved_session = await fetch(`${process.env.DOMAIN}/locallogin/sessionset`,{
          method: 'PATCH'
       })
+      console.log(approved_session)
       const approved_session_data = await approved_session.json()
       console.log(approved_session_data)
       
