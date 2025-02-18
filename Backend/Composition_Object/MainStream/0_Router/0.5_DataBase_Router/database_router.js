@@ -1,8 +1,12 @@
 import pg from 'pg'
 const { Pool, Client } = pg
 
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import dotenv from 'dotenv' 
 dotenv.config();
@@ -17,7 +21,7 @@ export let Database_Router = class Router {
         idleTimeoutMillis: 30000,
         ssl: {
             rejectUnauthorized: true,
-            ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router/ca.pem')).toString()
+            ca: fs.readFileSync(path.join(__dirname, '0.5 Database_Router', 'ca.pem')).toString()
         }
     })
 
