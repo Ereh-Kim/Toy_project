@@ -58,8 +58,12 @@ this.Pure_Router.post('/',async (req,res)=>{
       case('undefined_user_accessed'):
       await this.Register_rejection()
       
-      const rejected_session = await fetch(`/loginrejected/sessionset`,{
-         method: 'PATCH'
+      const rejected_session = await fetch(`${process.env.DOMAIN}/loginrejected/sessionset`,{
+         method: 'PATCH',
+         headers: {
+            // set Accept header to application/json
+            Accept: 'application/json',
+          }
       })
       const rejected_session_data = await rejected_session.json()
 
@@ -73,8 +77,12 @@ this.Pure_Router.post('/',async (req,res)=>{
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
       
-      const approved_session = await fetch(`/locallogin/sessionset`,{
-         method: 'PATCH'
+      const approved_session = await fetch(`${process.env.DOMAIN}/locallogin/sessionset`,{
+         method: 'PATCH',
+         headers: {
+            // set Accept header to application/json
+            Accept: 'application/json',
+          }
       })
       console.log(approved_session)
       const approved_session_data = await approved_session.json()
