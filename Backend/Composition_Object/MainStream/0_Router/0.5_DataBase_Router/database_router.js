@@ -23,7 +23,9 @@ export let Database_Router = class Router {
         port: `${process.env.DATABASE_PORT}`,
         max: 10,
         idleTimeoutMillis: 30000,
-        
+        ssl: {
+            rejectUnauthorized: true
+        }
         
     })
 
@@ -36,6 +38,9 @@ export let Database_Router = class Router {
 
         max: 10,
         idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: true
+        }
         
         
     })
@@ -48,6 +53,9 @@ export let Database_Router = class Router {
         port: `${process.env.DATABASE_PORT}`,
         max: 10,
         idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: true
+        }
         
         
     })
