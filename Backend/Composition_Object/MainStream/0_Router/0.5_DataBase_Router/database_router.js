@@ -9,7 +9,7 @@ export let Database_Router = class Router {
     constructor(){
 
     let MasterDB = new Pool({
-        user: `postgres`,
+        user: `${process.env.DATABASE_ROLE}`,
         password: `${process.env.DATABASE_PASSWORD}`,
         host: `${process.env.DATABASE_HOST}`,
         port: `${process.env.DATABASE_PORT}`,

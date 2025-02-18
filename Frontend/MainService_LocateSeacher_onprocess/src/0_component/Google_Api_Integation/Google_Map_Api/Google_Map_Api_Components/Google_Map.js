@@ -104,7 +104,7 @@ const [StartSpot, updateStart] = useState();
                 const lat_input = JSON.stringify(spot_data_lat).replaceAll('.','_')
                 const lng_input = JSON.stringify(spot_data_lng).replaceAll('.','_')
 
-                let nearbyresult = await fetch(`http://localhost:8080/google_map_api/fetch_nearbyresult/${type_input}/${lat_input}/${lng_input}/${Google_Map_Search_Option.distance}`,{
+                let nearbyresult = await fetch(`/google_map_api/fetch_nearbyresult/${type_input}/${lat_input}/${lng_input}/${Google_Map_Search_Option.distance}`,{
                     method: 'GET',
                     })
         
@@ -113,7 +113,7 @@ const [StartSpot, updateStart] = useState();
             
         // NearByResult img fetch ---3.1
 
-                let nearbyresult_img = await fetch(`http://localhost:8080/google_map_api/fetch_nearbyresult_img`,{
+                let nearbyresult_img = await fetch(`/google_map_api/fetch_nearbyresult_img`,{
                     method: `POST`,
                     headers: {
                         'Content-Type': 'application/json',
