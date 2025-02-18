@@ -7,7 +7,7 @@ export const UserState_expresser = (props) => {
   
   const check_login = async () => {
 
-   let status = await fetch(`http://localhost:8080/login_check`)
+   let status = await fetch(`/login_check`)
    let status_data = await status.json()
 
     switch(status_data.message){
