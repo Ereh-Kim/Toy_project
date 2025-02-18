@@ -76,7 +76,7 @@ const [StartSpot, updateStart] = useState();
 
         // start_spot fetch --- 1
 
-                let fetch_data = await fetch(`http://localhost:8080/google_map_api/fetch_start_spot/${Keyword}`,{
+                let fetch_data = await fetch(`/google_map_api/fetch_start_spot/${Keyword}`,{
                     method: 'GET'
                 })
                 let fetch_data_result = await fetch_data.json()
@@ -85,7 +85,7 @@ const [StartSpot, updateStart] = useState();
 
         // start_spot img fetch --- 2
 
-                let fetch_data_img = await fetch(`http://localhost:8080/google_map_api/fetch_img/${spot_data.photos[0].photo_reference}`,{
+                let fetch_data_img = await fetch(`/google_map_api/fetch_img/${spot_data.photos[0].photo_reference}`,{
                     method: 'GET'
                 })
 
