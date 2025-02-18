@@ -19,6 +19,9 @@ export let Database_Router = class Router {
         connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: false
+          }
         
     })
 
@@ -26,6 +29,9 @@ export let Database_Router = class Router {
         connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: false
+          }
         
     })
 
@@ -33,6 +39,9 @@ export let Database_Router = class Router {
         connectionString: process.env.DATABASE_URI,
         max: 10,
         idleTimeoutMillis: 30000,
+        ssl: {
+            rejectUnauthorized: false
+          }
         
     })
 
