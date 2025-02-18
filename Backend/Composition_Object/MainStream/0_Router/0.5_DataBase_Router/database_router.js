@@ -15,32 +15,27 @@ export let Database_Router = class Router {
 
     constructor(){
 
-    let MasterDB = new Client({
+    let MasterDB = new Pool({
         connectionString: process.env.DATABASE_URL,
-        
-        ssl: true
-        
-        
-    })
+        ssl: {
+          rejectUnauthorized: false
+        }
+      })
 
-    let DB = new Client({
+    let DB = new Pool({
         connectionString: process.env.DATABASE_URL,
-        
-        ssl: true
-        
-        
-    })
+        ssl: {
+          rejectUnauthorized: false
+        }
+      })
 
-    let DB_usercreation = new Client({
+    let DB_usercreation = new Pool({
         connectionString: process.env.DATABASE_URL,
-        
-        ssl: true
-        
-        
-    })
-    MasterDB.connect()
-    DB.connect()
-    DB_usercreation.connect()
+        ssl: {
+          rejectUnauthorized: false
+        }
+      })
+    
 
     this.MasterDB = MasterDB
     this.DB = DB
