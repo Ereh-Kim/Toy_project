@@ -12,7 +12,7 @@ import MARKER from "./Google_Map_Markers";
 
 export const Google_Map = () => {
 
-const Keyword = useSelector(state => state.urlToString)
+const Keyword = useSelector(state => ({urlToString : state.urlObject.toString()}))
 const GoogleMap_Deafult_Option = useSelector(state => state.urlObject)
 const dispatch = useDispatch()
 
@@ -76,7 +76,7 @@ const [StartSpot, updateStart] = useState();
 
         // start_spot fetch --- 1
 
-                let fetch_data = await fetch(`/google_map_api/fetch_start_spot/${Keyword}`,{
+                let fetch_data = await fetch(`/google_map_api/fetch_start_spot/${Keyword.urlToString}`,{
                     method: 'GET'
                 })
                 let fetch_data_result = await fetch_data.json()
@@ -256,7 +256,7 @@ const [StartSpot, updateStart] = useState();
 
     useEffect(()=>{
 
-        switch(Keyword){
+        switch(Keyword.urlToString){
 
             case(''):
             Current_Location_Loading()
