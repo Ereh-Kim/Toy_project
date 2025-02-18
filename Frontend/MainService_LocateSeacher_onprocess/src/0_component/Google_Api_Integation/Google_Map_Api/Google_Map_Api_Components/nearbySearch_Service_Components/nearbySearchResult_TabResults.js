@@ -283,7 +283,7 @@ export const NearbySearch_TabResults = (props) => {
             paddingBottom: '2vh'
         }}>
             <a 
-            href={`search/location/${place.name}`}
+            href={`location/${place.name}`}
             target="_blank"
             >
             
