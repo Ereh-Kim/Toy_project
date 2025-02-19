@@ -4,7 +4,7 @@ import Session_Crypto from '../../0.10_Tools/0.10.3_Session_Crypto/session_crypt
 
 import { google_certificater } from '../../0.2_Google_Certification_Router/google_certification_router.js'
 import { local_certificater } from '../../0.7_Local_Certification_Router/local_certification_router.js'
-import { account_updater } from '../0.12_Account_Update_Router/0.12_account_update_router.js'
+import { account_updater } from '../../0.12_Account_Update_Router/0.12_account_update_router.js'
 
 class Session_Path_Router extends Session_Router {
 
@@ -14,7 +14,7 @@ class Session_Path_Router extends Session_Router {
 
         async Patch_SessionData(path,data,message,destiny){
 
-        console.log(data+ 'data is in')
+        console.log(data + 'data is in')
 
         this.Pure_Router.patch(`${path}`,async (req,res)=>{
             
