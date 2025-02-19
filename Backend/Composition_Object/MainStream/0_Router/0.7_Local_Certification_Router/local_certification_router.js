@@ -41,6 +41,7 @@ let result = await this.Load_UserData(verify_list, input)
       break;
 
       case('object'):
+      result = 'verified'
       break;
    }
    return result;
@@ -63,7 +64,7 @@ this.Pure_Router.post('/',async (req,res)=>{
          headers: {
             // set Accept header to application/json
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            
           }
       })
       const rejected_session_data = await rejected_session.json()
@@ -72,18 +73,18 @@ this.Pure_Router.post('/',async (req,res)=>{
       res.write(`<script>alert('${rejected_session_data.message}')</script>`)
       res.write(`<script>window.location=\"${rejected_session_data.redirectUrl}\"</script>`);
       res.end()
-      return;
+      break;
 
-      default:
+      case('verified'):
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
       
       const approved_session = await fetch(`${process.env.DOMAIN}/sessionset/locallogin`,{
-         method: 'PATCH',
+         method: 'GET',
          headers: {
             // set Accept header to application/json
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
+            
           }
       })
       console.log(approved_session)
