@@ -1,6 +1,6 @@
 import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
-import session from 'express-session'
+import session from 'cookie-session'
 
 
 class Session_Router extends Pure_Router {
@@ -20,7 +20,7 @@ class Session_Router extends Pure_Router {
             secret:"ereh0325",
             name:`${name}`,
             resave:false,
-            saveUninitialized: true,
+            saveUninitialized: false,
             rolling: true,
             cookie: {
                     maxAge: 1000 * 60 * 60 * 6,
