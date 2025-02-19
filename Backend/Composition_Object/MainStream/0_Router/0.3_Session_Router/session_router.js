@@ -47,9 +47,9 @@ class Session_Router extends Pure_Router {
             cookie: {
                     maxAge: 1000 * 60 * 60 * 6,
                     // secure: true,
-                    httpOnly: true,
-                    domain: '.foodscript.co.kr',
-                    sameSite: 'None'
+                    // httpOnly: true,
+                    // domain: '.foodscript.co.kr',
+                    // sameSite: 'None'
             }})
         )}
 
