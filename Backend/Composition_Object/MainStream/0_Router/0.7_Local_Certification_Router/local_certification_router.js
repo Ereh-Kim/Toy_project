@@ -78,6 +78,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       console.log(condition)
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
+      console.log(local_certificater)
       
       const approved_session = await fetch(`${process.env.DOMAIN}/sessionset/locallogin`,{
          method: 'GET',
