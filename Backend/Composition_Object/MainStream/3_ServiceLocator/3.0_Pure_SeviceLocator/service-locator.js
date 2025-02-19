@@ -37,6 +37,14 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
 
         Inject_Dependency()
         {
+
+        this.Pure_Server.use((req, res, next) => {
+            if (req.headers['x-forwarded-proto'] !== 'https') {
+                return res.redirect('https://' + req.headers.host + req.url);
+            }
+            next();
+            });
+
         this.Pure_Server.set('trust proxy', 1)
 
         this.Pure_Server.use(express.json({ limit: '50mb' }))

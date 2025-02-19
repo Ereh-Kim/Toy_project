@@ -1,0 +1,5 @@
+{
+    "env": {
+      "FORCE_SSL": "true"
+    }
+  }
