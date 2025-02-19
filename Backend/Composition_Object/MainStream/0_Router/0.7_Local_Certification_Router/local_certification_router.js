@@ -75,7 +75,6 @@ this.Pure_Router.post('/',async (req,res)=>{
       break;
 
       default:
-      console.log('condition')
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
       
@@ -87,12 +86,8 @@ this.Pure_Router.post('/',async (req,res)=>{
             
           }
       })
-      console.log(approved_session)
-      const approved_session_data = await approved_session.json()
-      
-      
+      const approved_session_data = await approved_session.json()      
       req.session.data = approved_session_data.user_info
-      console.log(req.session.data + 'from cer router')
 
       req.session.save(()=>{
       res.write(`<script>alert('${approved_session_data.message}')</script>`)
