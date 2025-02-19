@@ -1,11 +1,5 @@
 import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
-import Session_Crypto from '../0.10_Tools/0.10.3_Session_Crypto/session_crypto.js'
-
-import { google_certificater } from '../0.2_Google_Certification_Router/google_certification_router.js'
-import { local_certificater } from '../0.7_Local_Certification_Router/local_certification_router.js'
-import { account_updater } from '../0.12_Account_Update_Router/0.12_account_update_router.js'
-
 import session from 'express-session'
 import redis from 'redis'
 import { RedisStore } from 'connect-redis'
