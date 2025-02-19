@@ -1,10 +1,6 @@
 import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
 import cookieSession from 'cookie-session';
-import Redis from 'redis';
-import connectRedis from 'connect-redis';
-import fs from 'fs'
-import path from 'path'
 
 class Session_Router extends Pure_Router {
 
