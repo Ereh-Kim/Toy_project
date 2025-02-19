@@ -19,13 +19,19 @@ class Session_Router extends Pure_Router {
             // const cert = fs.readFileSync(certPath);
 
             let redisClient = createClient({
-                username: 'default',
-                password: 'Fl52rbEQM4o9rUJjmbfHoQsBcJDG9zIH',
+                url: process.env.REDISCLOUD_URL,
                 socket: {
-                    host: 'redis-18716.c270.us-east-1-3.ec2.redns.redis-cloud.com',
-                    port: 18716
+                    tls: true, // Redis Cloud 보안 연결에 필요
+                    rejectUnauthorized: false, // 자체 서명된 인증서 허용
                 }
             })
+            redisClient.on('error', (err) => {
+                console.error('Redis connection error:', err);
+              });
+
+              redisClient.on('connect', () => {
+                console.log('Connected to Redis Cloud');
+              });
 
             redisClient.connect().catch(console.error)
 
