@@ -44,7 +44,7 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         this.Pure_Server.use(URL_History_Recorder_Routes)
         this.Pure_Server.use(Cors_Setter_Routes)
 
-        this.Pure_Server.use(Session_Path_Routes)
+        this.Pure_Server.use('/sessionset', Session_Path_Routes)
         this.Pure_Server.use('/homepage',MainPage_Routes)
         this.Pure_Server.use('/search' ,SearchPage_Routes)
         this.Pure_Server.use('/login' ,SearchPage_Routes)
