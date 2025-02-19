@@ -1,8 +1,8 @@
 import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
 import session from 'express-session'
-import Redis from 'redis';
-import * as connectRedis from 'connect-redis';
+import {createClient} from 'redis';
+import {RedisStore} from 'connect-redis';
 import fs from 'fs'
 import path from 'path'
 
@@ -18,28 +18,24 @@ class Session_Router extends Pure_Router {
             // const certPath = path.join('public', 'redis_ca.pem');
             // const cert = fs.readFileSync(certPath);
 
-            const RedisStore = connectRedis(session)
-
-            const client = Redis.createClient({
+            let redisClient = createClient({
                 username: 'default',
                 password: 'Fl52rbEQM4o9rUJjmbfHoQsBcJDG9zIH',
                 socket: {
                     host: 'redis-18716.c270.us-east-1-3.ec2.redns.redis-cloud.com',
                     port: 18716
                 }
-            });
+            })
 
-            client.on('error', err => console.log('Redis Client Error', err));
+            redisClient.connect().catch(console.error)
 
-            await client.connect();
-
-            await client.set('foo', 'bar');
-            const result = await client.get('foo');
-            console.log(result)
+            let redisStore = new RedisStore({
+                client: redisClient
+            })
 
         this.Pure_Router.use(
             session({
-            store: new RedisStore({client: client}),
+            store: redisStore,
             secret:"ereh0325",
             name:`${name}`,
             resave:false,
