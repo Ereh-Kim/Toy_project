@@ -76,6 +76,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       break;
 
       case('verified'):
+      console.log(condition)
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
       
@@ -89,7 +90,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       })
       console.log(approved_session)
       const approved_session_data = await approved_session.json()
-      console.log(approved_session_data)
+      
       
       req.session.data = approved_session_data.user_info
       res.write(`<script>alert('${approved_session_data.message}')</script>`)
