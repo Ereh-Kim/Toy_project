@@ -20,10 +20,7 @@ class Session_Router extends Pure_Router {
 
             let redisClient = createClient({
                 url: process.env.REDISCLOUD_URL,
-                socket: {
-                    tls: true, // Redis Cloud 보안 연결에 필요
-                    rejectUnauthorized: false, // 자체 서명된 인증서 허용
-                }
+                
             })
             redisClient.on('error', (err) => {
                 console.error('Redis connection error:', err);
