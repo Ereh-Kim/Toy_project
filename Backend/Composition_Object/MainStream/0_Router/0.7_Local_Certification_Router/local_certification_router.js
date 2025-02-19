@@ -93,9 +93,12 @@ this.Pure_Router.post('/',async (req,res)=>{
       
       req.session.data = approved_session_data.user_info
       console.log(req.session.data + 'from cer router')
+
+      req.session.save(()=>{
       res.write(`<script>alert('${approved_session_data.message}')</script>`)
       res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
       res.end()
+      })
       break;
    }
 
