@@ -14,12 +14,12 @@ class Session_Path_Router extends Session_Router {
 
         async Patch_SessionData(path,data,message,destiny){
 
-        console.log(data + 'data is in')
-
         this.Pure_Router.patch(`${path}`,async (req,res)=>{
             
             const session_crypto = new Session_Crypto()
             const input = await session_crypto.en_crypto(JSON.stringify(data))
+
+            console.log(data + 'data is in ' + path + input)
 
             res.json({
                 message: `${message}`,
