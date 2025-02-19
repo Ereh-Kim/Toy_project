@@ -75,7 +75,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       break;
 
       default:
-      console.log('condition')
+      console.log(condition)
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
       
