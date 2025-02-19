@@ -39,7 +39,6 @@ class Login_Checker_Api extends PureRouter {
 
         this.Pure_Router.get('/',async (req,res)=>{
 
-            console.log(req.session.data , 'from client side')
             let condition = req.session
             let result;
 
