@@ -11,6 +11,7 @@ import Account_Logout_Routes from '../../0_Router/0.13_Account_Logout_Router/acc
 import {Account_Register_Routes} from '../../0_Router/0.8_Account_Register_Router/account_register_router.js';
 
 import {Session_Routes} from '../../0_Router/0.3_Session_Router/session_router.js';
+import { Session_Path_Routes } from '../../0_Router/0.3_Session_Router/0.3.2_Session_Path_Router/session_path_router.js';
 import Body_Parser_Routes from '../../0_Router/0.4_Body_Parser_Router/body_parser.js';
 import {Cors_Setter_Routes} from '../../0_Router/0.10_Tools/0.13_Cors_Setter/cors_setter.js';
 
@@ -43,6 +44,7 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         this.Pure_Server.use(URL_History_Recorder_Routes)
         this.Pure_Server.use(Cors_Setter_Routes)
 
+        this.Pure_Server.use('/',Session_Path_Routes)
         this.Pure_Server.use('/homepage',MainPage_Routes)
         this.Pure_Server.use('/search' ,SearchPage_Routes)
         this.Pure_Server.use('/login' ,SearchPage_Routes)
