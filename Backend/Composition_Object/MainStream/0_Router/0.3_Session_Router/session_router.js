@@ -2,7 +2,7 @@ import Pure_Router from '../0.0_Pure_Router/pure_router.js'
 
 import session from 'express-session'
 import Redis from 'redis';
-import { createClient as connectRedis } from 'connect-redis';
+import * as connectRedis from 'connect-redis';
 import fs from 'fs'
 import path from 'path'
 
