@@ -1,6 +1,6 @@
 import { Session_Router } from '../session_router.js'
 
-import Session_Crypto from '../0.10_Tools/0.10.3_Session_Crypto/session_crypto.js'
+import Session_Crypto from '../../0.10_Tools/0.10.3_Session_Crypto/session_crypto.js'
 
 import { google_certificater } from '../0.2_Google_Certification_Router/google_certification_router.js'
 import { local_certificater } from '../0.7_Local_Certification_Router/local_certification_router.js'
