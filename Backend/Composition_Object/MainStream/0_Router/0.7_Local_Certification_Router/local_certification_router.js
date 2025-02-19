@@ -41,7 +41,6 @@ let result = await this.Load_UserData(verify_list, input)
       break;
 
       case('object'):
-      result = 'verified'
       break;
    }
    return result;
@@ -75,8 +74,8 @@ this.Pure_Router.post('/',async (req,res)=>{
       res.end()
       break;
 
-      case('verified'):
-      console.log(condition)
+      default:
+      console.log('condition')
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
       
