@@ -62,7 +62,8 @@ this.Pure_Router.post('/',async (req,res)=>{
          method: 'PATCH',
          headers: {
             // set Accept header to application/json
-            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
           }
       })
       const rejected_session_data = await rejected_session.json()
@@ -81,7 +82,8 @@ this.Pure_Router.post('/',async (req,res)=>{
          method: 'PATCH',
          headers: {
             // set Accept header to application/json
-            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
           }
       })
       console.log(approved_session)
