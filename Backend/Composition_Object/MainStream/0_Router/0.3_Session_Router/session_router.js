@@ -86,13 +86,13 @@ class Session_Router extends Pure_Router {
 
         async Manage_session_Routes(){
 
-        this.Add_Session('local_session')
+        await this.Add_Session('local_session')
         
-        this.Patch_SessionData(`/googlelogin/sessionset`,google_certificater, 'Google Login Completed','/homepage')
-        this.Patch_SessionData(`/locallogin/sessionset`,local_certificater, 'Food Script Login Completed','/homepage')
-        this.Patch_SessionData(`/loginrejected/sessionset`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
-        this.Patch_SessionData(`/update_AccountData/sessionset`,account_updater, 'Your Account got updated', '/search')
-        this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
+        await this.Patch_SessionData(`/googlelogin/sessionset`,google_certificater, 'Google Login Completed','/homepage')
+        await this.Patch_SessionData(`/locallogin/sessionset`,local_certificater, 'Food Script Login Completed','/homepage')
+        await this.Patch_SessionData(`/loginrejected/sessionset`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
+        await this.Patch_SessionData(`/update_AccountData/sessionset`,account_updater, 'Your Account got updated', '/search')
+        await this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
 
         }
     }
