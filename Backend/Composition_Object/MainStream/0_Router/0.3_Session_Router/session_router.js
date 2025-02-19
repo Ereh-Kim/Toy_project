@@ -49,7 +49,8 @@ class Session_Router extends Pure_Router {
                     secure: true,
                     httpOnly: true,
                     domain: 'foodscript.co.kr',
-                    sameSite: true
+                    sameSite: 'None',
+                    domain: '.foodscript.co.kr'
             }})
         )}
 
