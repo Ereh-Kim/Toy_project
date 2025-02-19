@@ -28,7 +28,7 @@ import Usercreation_R_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.
 import Usercreation_D_Routes from '../../0_Router/0.15_Usercreation_Router/0.15.4_Usercreation_D_Router/Usercreation_D_Router.js';
 
 import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image_File_Loader/image_file_loader.js';
-import sslRedirect from 'heroku-ssl-redirect';
+
     export class Service_LocatorClass extends Pure_Server {
  
         constructor(){
@@ -37,8 +37,7 @@ import sslRedirect from 'heroku-ssl-redirect';
 
         Inject_Dependency()
         {
-        this.Pure_Server.use(sslRedirect());
-        
+
 
         this.Pure_Server.set('trust proxy', 1)
 
