@@ -61,7 +61,7 @@ class Session_Path_Router extends Session_Router {
             const session_crypto = new Session_Crypto()
             const input = await session_crypto.en_crypto(JSON.stringify(local_certificater))
 
-            console.log(data + 'data is in ' + path + input)
+            console.log(local_certificater + 'data is in ' + '/locallogin' + input)
 
             res.json({
                 message: 'Food Script Login Completed',
