@@ -46,9 +46,9 @@ class Session_Router extends Pure_Router {
             rolling: true,
             cookie: {
                     maxAge: 1000 * 60 * 60 * 6,
-                    secure: true,
-                    httpOnly: true,
-                    sameSite: true
+                    // secure: true,
+                    // httpOnly: true,
+                    // sameSite: true
             }})
         )}
 
