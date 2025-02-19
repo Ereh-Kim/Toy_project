@@ -75,10 +75,9 @@ this.Pure_Router.post('/',async (req,res)=>{
       break;
 
       default:
-      console.log(condition)
+      console.log('condition')
       let userinfo = condition
       await this.Register_verified_UserInfo(userinfo)
-      console.log(local_certificater)
       
       const approved_session = await fetch(`${process.env.DOMAIN}/sessionset/locallogin`,{
          method: 'GET',
@@ -93,6 +92,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       
       
       req.session.data = approved_session_data.user_info
+      console.log(req.session + 'from cer router')
       res.write(`<script>alert('${approved_session_data.message}')</script>`)
       res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
       res.end()
