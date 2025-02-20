@@ -38,7 +38,7 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         Inject_Dependency()
         {
 
-        this.Pure_Server.set('trust proxy', 1)
+        this.Pure_Server.set('trust proxy', true)
 
         this.Pure_Server.use(express.json({ limit: '50mb' }))
         this.Pure_Server.use(Session_Routes)
