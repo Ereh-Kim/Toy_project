@@ -39,6 +39,15 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         {
 
         this.Pure_Server.set('trust proxy', true)
+        this.Pure_Server.enable('trust proxy')
+
+        this.Pure_Server.use(function (req, res, next) {
+            if (req.headers['x-forwarded-proto'] !== 'https'){
+              return res.status(404).send('Not found');
+            } else {
+            next();
+            }
+        })
 
         this.Pure_Server.use(express.json({ limit: '50mb' }))
         this.Pure_Server.use(Session_Routes)
