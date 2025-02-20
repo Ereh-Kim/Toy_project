@@ -34,7 +34,7 @@ import { fileURLToPath } from 'url';
                 res.sendFile(ClientPage_path)
                 console.log(req.session + " session data")
                 console.log(req.protocol + ' protocol')
-                console.log(req.headers + ' headers')
+                console.log(JSON.stringify(req.headers) + ' headers')
 
             })
 
