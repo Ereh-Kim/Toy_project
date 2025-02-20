@@ -32,7 +32,8 @@ import { fileURLToPath } from 'url';
 
                 const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
                 res.sendFile(ClientPage_path)
-                console.log(req.session)
+                console.log(req.session + " session data")
+                console.log(req.protocol + ' protocol')
 
             })
 
