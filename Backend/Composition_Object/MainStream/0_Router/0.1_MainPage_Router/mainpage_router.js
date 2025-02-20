@@ -20,9 +20,6 @@ import { fileURLToPath } from 'url';
             this.Pure_Router.get('/',(req, res)=>{
 
                 const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
-                console.log(req.session + " session data")
-                console.log(req.protocol + ' protocol')
-                console.log(req.headers + ' headers')
                 res.sendFile(ClientPage_path)
                 
 
@@ -32,9 +29,6 @@ import { fileURLToPath } from 'url';
 
                 const ClientPage_path = path.join(__dirname, '../../../../../Frontend/Homepage_onprocess/build', 'index.html')
                 res.sendFile(ClientPage_path)
-                console.log(req.session + " session data")
-                console.log(req.protocol + ' protocol')
-                console.log(JSON.stringify(req.headers) + ' headers')
 
             })
 
