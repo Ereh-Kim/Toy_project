@@ -169,7 +169,7 @@ export class google_certification_router extends Pure_Router {
 
         // }
 
-        res.send(RequestOrigin + access_token + UserInfo)
+        res.send(RequestOrigin + ' <- this is link ' + access_token + ' <- this is token ' + UserInfo +' <- this is userobject ')
     })
 
     
