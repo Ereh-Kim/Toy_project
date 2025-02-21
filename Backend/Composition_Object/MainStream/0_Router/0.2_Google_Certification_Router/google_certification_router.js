@@ -105,7 +105,7 @@ export class google_certification_router extends Pure_Router {
                     return;
 
                     default:
-                        const approved_session = await fetch('/googlelogin/sessionset',{
+                        const approved_session = await fetch(`${process.env.DOMAIN}/googlelogin/sessionset`,{
                             method: 'PATCH'
                         })
                         const approved_session_data = await approved_session.json()
