@@ -92,7 +92,7 @@ export const Registration_Field_Page = (props) => {
                         transform: 'rotate(270deg)'
                     }}
                     ></img>
-                    </Link>
+                </Link>
 
                 <span
                 style={{
@@ -123,7 +123,7 @@ export const Registration_Field_Page = (props) => {
                 >( as {props.purpose} )</span>
 
                 <form
-                action='/registration'
+                action={`${process.env.DOMAIN}/registration`}
                 method='POST'
                 encType="multipart/form-data"
                 >

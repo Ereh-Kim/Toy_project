@@ -118,7 +118,7 @@ export class google_certification_router extends Pure_Router {
                 }
                 break;
 
-            case('/search/static/css/main.1a823c04.css.map'):
+            case('/search/font/CuteMin.ttf'):
             const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
                 console.log(status)
                 switch(status){
