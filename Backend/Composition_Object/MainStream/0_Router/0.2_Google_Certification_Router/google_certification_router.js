@@ -79,6 +79,7 @@ export class google_certification_router extends Pure_Router {
 
         const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
         let DB = new Account_Register_Router();
+        console.log(RequestOrigin + ' this is link ')
         const Mulit = '/search/font/CuteMin.ttf'||'/search/static/css/main.1a823c04.css.map'||'/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'
 
         switch(RequestOrigin){
