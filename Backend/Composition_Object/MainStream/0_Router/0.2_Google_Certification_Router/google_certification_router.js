@@ -54,8 +54,7 @@ export class google_certification_router extends Pure_Router {
 
     return this.userinfo}
 
-
-
+    
 
     Manage_google_certification_Routes(){
     
@@ -63,9 +62,9 @@ export class google_certification_router extends Pure_Router {
         
         let url = 'https://accounts.google.com/o/oauth2/v2/auth';
         url += `?client_id=${process.env.GOOGLE_CLIENT_ID}`
-        url += `&redirect_uri=/login/google/redirect`
+        url += `&redirect_uri=https://www.foodscript.co.kr/login/google/redirect`
         url += `&response_type=code`
-        url += `&scope=email profile`
+        url += `&scope=email&profile`
 
         console.log(url + ' url get in')
         console.log('/login/google')

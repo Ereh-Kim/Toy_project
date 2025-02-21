@@ -19,8 +19,6 @@ class Session_Path_Router extends Session_Router {
             const session_crypto = new Session_Crypto()
             const input = await session_crypto.en_crypto(JSON.stringify(data))
 
-            console.log(data + 'data is in ' + path + input)
-
             res.json({
                 message: `${message}`,
                 redirectUrl: `${destiny}`,
@@ -49,8 +47,6 @@ class Session_Path_Router extends Session_Router {
 
 
         async Manage_session_path_Routes(){
-
-            console.log(local_certificater + 'data is in ' + '/locallogin')
 
         await this.Patch_SessionData(`/googlelogin/sessionset`,google_certificater, 'Google Login Completed','/homepage')
         await this.Patch_SessionData(`/locallogin/sessionset`,local_certificater, 'Food Script Login Completed','/homepage')
