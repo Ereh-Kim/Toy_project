@@ -79,7 +79,7 @@ this.Pure_Router.post('/',async (req,res)=>{
       await this.Register_verified_UserInfo(userinfo)
       
       const approved_session = await fetch(`${process.env.DOMAIN}/sessionset/locallogin`,{
-         method: 'GET',
+         method: 'PATCH',
          headers: {
             // set Accept header to application/json
             'Content-Type': 'application/json',
