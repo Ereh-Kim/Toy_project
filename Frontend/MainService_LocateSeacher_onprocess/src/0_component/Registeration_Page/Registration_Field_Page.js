@@ -123,7 +123,7 @@ export const Registration_Field_Page = (props) => {
                 >( as {props.purpose} )</span>
 
                 <form
-                action="http://localhost:8080/registration"
+                action={`${process.env.DOMAIN}/registration`}
                 method='POST'
                 encType="multipart/form-data"
                 >

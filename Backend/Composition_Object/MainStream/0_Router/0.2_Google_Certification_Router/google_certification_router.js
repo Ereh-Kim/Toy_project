@@ -117,7 +117,7 @@ export class google_certification_router extends Pure_Router {
                 }
                 break;
 
-            case('/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'):
+            case('/search/static/css/main.1a823c04.css.map'):
             const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
                 console.log(status)
                 switch(status){
