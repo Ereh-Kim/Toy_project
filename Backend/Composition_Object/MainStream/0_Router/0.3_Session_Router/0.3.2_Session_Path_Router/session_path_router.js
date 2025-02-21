@@ -12,23 +12,23 @@ class Session_Path_Router extends Session_Router {
         super()
         }
 
-        // async Patch_SessionData(path,data,message,destiny){
+        async Patch_SessionData(path,data,message,destiny){
 
-        // this.Pure_Router.patch(`${path}`,async (req,res)=>{
+        this.Pure_Router.patch(`${path}`,async (req,res)=>{
             
-        //     const session_crypto = new Session_Crypto()
-        //     const input = await session_crypto.en_crypto(JSON.stringify(data))
+            const session_crypto = new Session_Crypto()
+            const input = await session_crypto.en_crypto(JSON.stringify(data))
 
-        //     console.log(data + 'data is in ' + path + input)
+            console.log(data + 'data is in ' + path + input)
 
-        //     res.json({
-        //         message: `${message}`,
-        //         redirectUrl: `${destiny}`,
-        //         user_info: input
-        //     })
-        // })
+            res.json({
+                message: `${message}`,
+                redirectUrl: `${destiny}`,
+                user_info: input
+            })
+        })
 
-        // }
+        }
 
         async Clear_SessionData_Partial(path,message,destiny){
 
@@ -50,25 +50,11 @@ class Session_Path_Router extends Session_Router {
 
         async Manage_session_path_Routes(){
 
-            console.log(local_certificater + 'data is in ' + '/locallogin')
-
-        // await this.Patch_SessionData(`/googlelogin/sessionset`,google_certificater, 'Google Login Completed','/homepage')
-        // await this.Patch_SessionData(`/locallogin/sessionset`,local_certificater, 'Food Script Login Completed','/homepage')
-        // await this.Patch_SessionData(`/loginrejected/sessionset`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
-        // await this.Patch_SessionData(`/update_AccountData/sessionset`,account_updater, 'Your Account got updated', '/search')
-        // await this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
-
-        this.Pure_Router.get(`/locallogin`,async (req,res)=>{
-            
-            const session_crypto = new Session_Crypto()
-            const input = await session_crypto.en_crypto(JSON.stringify(local_certificater))
-
-            res.json({
-                message: 'Food Script Login Completed',
-                redirectUrl: '/homepage',
-                user_info: input
-            })
-        })
+        await this.Patch_SessionData(`/googlelogin/sessionset`,google_certificater, 'Google Login Completed','/homepage')
+        await this.Patch_SessionData(`/locallogin/sessionset`,local_certificater, 'Food Script Login Completed','/homepage')
+        await this.Patch_SessionData(`/loginrejected/sessionset`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
+        await this.Patch_SessionData(`/update_AccountData/sessionset`,account_updater, 'Your Account got updated', '/search')
+        await this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
 
         }
     }
