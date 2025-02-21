@@ -64,9 +64,9 @@ export class google_certification_router extends Pure_Router {
         url += `?client_id=${process.env.GOOGLE_CLIENT_ID}`
         url += `&redirect_uri=https://www.foodscript.co.kr/login/google/redirect`
         url += `&response_type=code`
-        url += `&scope=email profile`
+        url += `scope=profile email`
 
-        res.send(url)
+        res.redirect(url)
     })
 
 
@@ -74,101 +74,102 @@ export class google_certification_router extends Pure_Router {
     this.Pure_Router.get('/redirect',async (req,res, next)=>{      
     
         
-        const access_token = await this.Issue_Google_Access_Token(req.query.code)
-        const UserInfo= await this.Get_UserInfo_From_AccessToken(access_token)
+        // const access_token = await this.Issue_Google_Access_Token(req.query.code)
+        // const UserInfo= await this.Get_UserInfo_From_AccessToken(access_token)
 
-        const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
-        let DB = new Account_Register_Router();
+        // const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
+        // let DB = new Account_Register_Router();
 
-        switch(RequestOrigin){
-            case('/registeration/signup-with-google'):
-            await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified', 'google')
+        // switch(RequestOrigin){
+        //     case('/registeration/signup-with-google'):
+        //     await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified', 'google')
             
-            let password_genarator = new Password_Genarator();
-            let file_reader = new File_Reader();
+        //     let password_genarator = new Password_Genarator();
+        //     let file_reader = new File_Reader();
 
 
 
-            let condition = await DB.Create_NewUser(UserInfo.email, 
-                [`${UserInfo.email}`,
-                 `${UserInfo.name}`,
-                  await file_reader.read_file(`./public/Profile_Stranger_icon.jpg`),
-                  `${password_genarator.genarate_password(8)}`,
-                  `reviewer`])
+        //     let condition = await DB.Create_NewUser(UserInfo.email, 
+        //         [`${UserInfo.email}`,
+        //          `${UserInfo.name}`,
+        //           await file_reader.read_file(`./public/Profile_Stranger_icon.jpg`),
+        //           `${password_genarator.genarate_password(8)}`,
+        //           `reviewer`])
             
-            switch(condition){
+        //     switch(condition){
                 
-                case('Need_To_Find'):
-                res.redirect('/login')
-                return;
+        //         case('Need_To_Find'):
+        //         res.redirect('/login')
+        //         return;
 
-                default:
-                    const approved_session = await fetch('/googlelogin/sessionset',{
-                        method: 'PATCH'
-                     })
-                     const approved_session_data = await approved_session.json()
+        //         default:
+        //             const approved_session = await fetch('/googlelogin/sessionset',{
+        //                 method: 'PATCH'
+        //              })
+        //              const approved_session_data = await approved_session.json()
                      
-                     req.session.data = approved_session_data.user_info
-                     res.write(`<script>alert('${approved_session_data.message}')</script>`)
-                     res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
-                     res.end()
-                break;
-            }
-            break;
+        //              req.session.data = approved_session_data.user_info
+        //              res.write(`<script>alert('${approved_session_data.message}')</script>`)
+        //              res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
+        //              res.end()
+        //         break;
+        //     }
+        //     break;
 
-            case('/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'):
-            const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
-                console.log(status)
-                switch(status){
+        //     case('/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'):
+        //     const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
+        //         console.log(status)
+        //         switch(status){
 
-                    case('Need_Registeration'):
-                    await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified', 'google')
+        //             case('Need_Registeration'):
+        //             await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified', 'google')
                         
-                        const temporary_session = await fetch('/googlelogin/sessionset',{
-                            method: 'PATCH'
-                        })
-                        const temporary_session_data = await temporary_session.json()
+        //                 const temporary_session = await fetch('/googlelogin/sessionset',{
+        //                     method: 'PATCH'
+        //                 })
+        //                 const temporary_session_data = await temporary_session.json()
                 
-                        req.session.data = temporary_session_data.user_info
-                        res.write(`<script>alert('${temporary_session_data.message}')</script>`)
-                        res.write(`<script>window.location=\"${temporary_session_data.redirectUrl}\"</script>`);
-                        res.end()
-                    return;
+        //                 req.session.data = temporary_session_data.user_info
+        //                 res.write(`<script>alert('${temporary_session_data.message}')</script>`)
+        //                 res.write(`<script>window.location=\"${temporary_session_data.redirectUrl}\"</script>`);
+        //                 res.end()
+        //             return;
 
-                    case('Account_already_exist'):
-                    const Pre_Existed_AcccountData = await DB.Load_UserData(['email'],[`${UserInfo.email}`])
-                    await this.Register_verified_UserInfo(Pre_Existed_AcccountData, 'verified', 'verified', 'foodscript(local)')
+        //             case('Account_already_exist'):
+        //             const Pre_Existed_AcccountData = await DB.Load_UserData(['email'],[`${UserInfo.email}`])
+        //             await this.Register_verified_UserInfo(Pre_Existed_AcccountData, 'verified', 'verified', 'foodscript(local)')
                         
-                        const approved_session = await fetch('/googlelogin/sessionset',{
-                            method: 'PATCH'
-                        })
-                        const approved_session_data = await approved_session.json()
+        //                 const approved_session = await fetch('/googlelogin/sessionset',{
+        //                     method: 'PATCH'
+        //                 })
+        //                 const approved_session_data = await approved_session.json()
                 
-                        req.session.data = approved_session_data.user_info
-                        res.write(`<script>alert('${approved_session_data.message}')</script>`)
-                        res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
-                        res.end()
-                    return;
-                }
-            return;
+        //                 req.session.data = approved_session_data.user_info
+        //                 res.write(`<script>alert('${approved_session_data.message}')</script>`)
+        //                 res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
+        //                 res.end()
+        //             return;
+        //         }
+        //     return;
 
-            default:
-            await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified')
+        //     default:
+        //     await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified')
                 
-                const default_session = await fetch('/googlelogin/sessionset',{
-                    method: 'PATCH'
-                })
-                const default_session_data = await default_session.json()
+        //         const default_session = await fetch('/googlelogin/sessionset',{
+        //             method: 'PATCH'
+        //         })
+        //         const default_session_data = await default_session.json()
         
-                req.session.data = default_session_data.user_info
-                res.write(`<script>alert('${default_session_data.message}')</script>`)
-                res.write(`<script>window.location=\"${default_session_data.redirectUrl}\"</script>`);
-                res.end()
-            return;
+        //         req.session.data = default_session_data.user_info
+        //         res.write(`<script>alert('${default_session_data.message}')</script>`)
+        //         res.write(`<script>window.location=\"${default_session_data.redirectUrl}\"</script>`);
+        //         res.end()
+        //     return;
             
 
-        }
-        
+        // }
+
+        res.send('hi')
 
     })
 
