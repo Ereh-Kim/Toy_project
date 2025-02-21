@@ -24,7 +24,7 @@ export class google_certification_router extends Pure_Router {
         code: `${code}`,
         client_id: `${process.env.GOOGLE_CLIENT_ID}`,
         client_secret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-        redirect_uri: `http://localhost:8080/login/google/redirect`,
+        redirect_uri: `/login/google/redirect`,
         grant_type: 'authorization_code',
     })
 
@@ -63,7 +63,7 @@ export class google_certification_router extends Pure_Router {
         
         let url = 'https://accounts.google.com/o/oauth2/v2/auth';
         url += `?client_id=${process.env.GOOGLE_CLIENT_ID}`
-        url += `&redirect_uri=http://localhost:8080/login/google/redirect`
+        url += `&redirect_uri=/login/google/redirect`
         url += `&response_type=code`
         url += `&scope=email profile`
 
@@ -107,7 +107,7 @@ export class google_certification_router extends Pure_Router {
                 return;
 
                 default:
-                    const approved_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                    const approved_session = await fetch('/googlelogin/sessionset',{
                         method: 'PATCH'
                      })
                      const approved_session_data = await approved_session.json()
@@ -128,7 +128,7 @@ export class google_certification_router extends Pure_Router {
                     case('Need_Registeration'):
                     await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified', 'google')
                         
-                        const temporary_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                        const temporary_session = await fetch('/googlelogin/sessionset',{
                             method: 'PATCH'
                         })
                         const temporary_session_data = await temporary_session.json()
@@ -143,7 +143,7 @@ export class google_certification_router extends Pure_Router {
                     const Pre_Existed_AcccountData = await DB.Load_UserData(['email'],[`${UserInfo.email}`])
                     await this.Register_verified_UserInfo(Pre_Existed_AcccountData, 'verified', 'verified', 'foodscript(local)')
                         
-                        const approved_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                        const approved_session = await fetch('/googlelogin/sessionset',{
                             method: 'PATCH'
                         })
                         const approved_session_data = await approved_session.json()
@@ -159,7 +159,7 @@ export class google_certification_router extends Pure_Router {
             default:
             await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified')
                 
-                const default_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
+                const default_session = await fetch('/googlelogin/sessionset',{
                     method: 'PATCH'
                 })
                 const default_session_data = await default_session.json()
