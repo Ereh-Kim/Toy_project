@@ -66,10 +66,7 @@ export class google_certification_router extends Pure_Router {
         url += `&response_type=code`
         url += `&scope=email profile`
 
-        console.log(url + ' url get in')
-        console.log('/login/google')
-
-        res.redirect(url)
+        res.send(url)
     })
 
 
@@ -82,9 +79,6 @@ export class google_certification_router extends Pure_Router {
 
         const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
         let DB = new Account_Register_Router();
-
-        console.log(RequestOrigin)
-        console.log(req.session.url_history)
 
         switch(RequestOrigin){
             case('/registeration/signup-with-google'):
