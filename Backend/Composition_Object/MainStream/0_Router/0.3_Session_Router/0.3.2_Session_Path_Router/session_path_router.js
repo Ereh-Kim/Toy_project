@@ -50,10 +50,10 @@ class Session_Path_Router extends Session_Router {
 
         async Manage_session_path_Routes(){
 
-        await this.Patch_SessionData(`/googlelogin/sessionset`,google_certificater, 'Google Login Completed','/homepage')
-        await this.Patch_SessionData(`/locallogin/sessionset`,local_certificater, 'Food Script Login Completed','/homepage')
-        await this.Patch_SessionData(`/loginrejected/sessionset`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
-        await this.Patch_SessionData(`/update_AccountData/sessionset`,account_updater, 'Your Account got updated', '/search')
+        await this.Patch_SessionData(`/googlelogin`,google_certificater, 'Google Login Completed','/homepage')
+        await this.Patch_SessionData(`/locallogin`,local_certificater, 'Food Script Login Completed','/homepage')
+        await this.Patch_SessionData(`/loginrejected`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
+        await this.Patch_SessionData(`/update_AccountData`,account_updater, 'Your Account got updated', '/search')
         await this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
 
         }
