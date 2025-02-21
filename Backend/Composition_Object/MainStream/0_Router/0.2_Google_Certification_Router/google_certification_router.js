@@ -128,7 +128,7 @@ export class google_certification_router extends Pure_Router {
                     case('Need_Registeration'):
                     await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified', 'google')
                         
-                        const temporary_session = await fetch('/googlelogin/sessionset',{
+                        const temporary_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
                             method: 'PATCH'
                         })
                         const temporary_session_data = await temporary_session.json()
@@ -143,7 +143,7 @@ export class google_certification_router extends Pure_Router {
                     const Pre_Existed_AcccountData = await DB.Load_UserData(['email'],[`${UserInfo.email}`])
                     await this.Register_verified_UserInfo(Pre_Existed_AcccountData, 'verified', 'verified', 'foodscript(local)')
                         
-                        const approved_session = await fetch('/googlelogin/sessionset',{
+                        const approved_session = await fetch('http://localhost:8080/googlelogin/sessionset',{
                             method: 'PATCH'
                         })
                         const approved_session_data = await approved_session.json()
