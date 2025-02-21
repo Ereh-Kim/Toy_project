@@ -67,6 +67,9 @@ export class google_certification_router extends Pure_Router {
         url += `&response_type=code`
         url += `&scope=email profile`
 
+        console.log(url + ' url get in')
+        console.log('/login/google')
+
         res.redirect(url)
     })
 
