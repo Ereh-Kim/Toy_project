@@ -74,11 +74,11 @@ export class google_certification_router extends Pure_Router {
     this.Pure_Router.get('/redirect',async (req,res, next)=>{      
     
         
-        // const access_token = await this.Issue_Google_Access_Token(req.query.code)
-        // const UserInfo= await this.Get_UserInfo_From_AccessToken(access_token)
+        const access_token = await this.Issue_Google_Access_Token(req.query.code)
+        const UserInfo= await this.Get_UserInfo_From_AccessToken(access_token)
 
-        // const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
-        // let DB = new Account_Register_Router();
+        const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
+        let DB = new Account_Register_Router();
 
         // switch(RequestOrigin){
         //     case('/registeration/signup-with-google'):
@@ -96,25 +96,25 @@ export class google_certification_router extends Pure_Router {
         //           `${password_genarator.genarate_password(8)}`,
         //           `reviewer`])
             
-        //     switch(condition){
-                
-        //         case('Need_To_Find'):
-        //         res.redirect('/login')
-        //         return;
+        //         switch(condition){
+                    
+        //             case('Need_To_Find'):
+        //             res.redirect('/login')
+        //             return;
 
-        //         default:
-        //             const approved_session = await fetch('/googlelogin/sessionset',{
-        //                 method: 'PATCH'
-        //              })
-        //              const approved_session_data = await approved_session.json()
-                     
-        //              req.session.data = approved_session_data.user_info
-        //              res.write(`<script>alert('${approved_session_data.message}')</script>`)
-        //              res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
-        //              res.end()
+        //             default:
+        //                 const approved_session = await fetch('/googlelogin/sessionset',{
+        //                     method: 'PATCH'
+        //                 })
+        //                 const approved_session_data = await approved_session.json()
+                        
+        //                 req.session.data = approved_session_data.user_info
+        //                 res.write(`<script>alert('${approved_session_data.message}')</script>`)
+        //                 res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
+        //                 res.end()
+        //             break;
+        //         }
         //         break;
-        //     }
-        //     break;
 
         //     case('/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'):
         //     const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
@@ -169,8 +169,7 @@ export class google_certification_router extends Pure_Router {
 
         // }
 
-        res.send('hi')
-
+        res.send(RequestOrigin + access_token + UserInfo)
     })
 
     
