@@ -12,7 +12,7 @@ class Session_Path_Router extends Session_Router {
         super()
         }
 
-        async Patch_SessionData(path,data,message,destiny){
+        Patch_SessionData(path,data,message,destiny){
 
         this.Pure_Router.patch(`${path}`,async (req,res)=>{
             
@@ -50,11 +50,13 @@ class Session_Path_Router extends Session_Router {
 
         async Manage_session_path_Routes(){
 
-        await this.Patch_SessionData(`/googlelogin`,google_certificater, 'Google Login Completed','/homepage')
-        await this.Patch_SessionData(`/locallogin`,local_certificater, 'Food Script Login Completed','/homepage')
-        await this.Patch_SessionData(`/loginrejected`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
-        await this.Patch_SessionData(`/update_AccountData`,account_updater, 'Your Account got updated', '/search')
-        await this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
+            console.log(local_certificater + 'data is in ' + '/locallogin')
+
+         this.Patch_SessionData(`/googlelogin`,google_certificater, 'Google Login Completed','/homepage')
+         this.Patch_SessionData(`/locallogin`,local_certificater, 'Food Script Login Completed','/homepage')
+         this.Patch_SessionData(`/loginrejected`,local_certificater, 'You should check your email & password again','/login/foodscript-login')
+         this.Patch_SessionData(`/update_AccountData`,account_updater, 'Your Account got updated', '/search')
+         this.Clear_SessionData_Partial(`/logout`,'logout 확인','/homepage')
 
         }
     }
