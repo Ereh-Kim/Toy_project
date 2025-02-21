@@ -62,6 +62,8 @@ export const Registration_Field_Page = (props) => {
 
     }
 
+    console.log(`${process.env.DOMAIN}`)
+
     return <React.Fragment>
             <div
             style={{
@@ -123,7 +125,7 @@ export const Registration_Field_Page = (props) => {
                 >( as {props.purpose} )</span>
 
                 <form
-                action='https://www.foodscript.co.kr/registration'
+                action={`${process.env.REACT_APP_DOMAIN}/registration`}
                 method='POST'
                 encType="multipart/form-data"
                 >
