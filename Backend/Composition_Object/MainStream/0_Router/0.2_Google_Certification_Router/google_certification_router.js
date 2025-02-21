@@ -64,7 +64,7 @@ export class google_certification_router extends Pure_Router {
         url += `?client_id=${process.env.GOOGLE_CLIENT_ID}`
         url += `&redirect_uri=https://www.foodscript.co.kr/login/google/redirect`
         url += `&response_type=code`
-        url += `scope=profile email`
+        url += `&scope=profile email`
 
         res.redirect(url)
     })
