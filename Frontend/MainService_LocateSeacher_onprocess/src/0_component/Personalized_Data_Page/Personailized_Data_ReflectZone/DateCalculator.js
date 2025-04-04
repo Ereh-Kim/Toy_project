@@ -6,6 +6,7 @@ export const DateCalculator = (props) => {
     const containerRef = useRef(null)
 
     useEffect(() => {
+
         const container = containerRef.current
         if (!container) return
 
@@ -23,6 +24,17 @@ export const DateCalculator = (props) => {
             resizeObserver.disconnect()
         }
     }, [])
+
+    const RECORDTIMELINE = () =>{
+
+        let result;
+
+        if(props.date !== undefined){
+            result = props.date.slice(0,10).replaceAll('-','.')
+        }
+
+        return result
+    }
 
     const Define_Today = () =>{
 
@@ -180,13 +192,15 @@ export const DateCalculator = (props) => {
         <div 
             ref={containerRef}
             style={{
-                fontSize: `calc(${parentWidth}vw * 0.12)`,
+                fontSize: `calc(${parentWidth}vw * 0.12)`
             }}
         >
             {Datedata}
             <br></br>
             
-            - {Today_Data.Year}. {Today_Data.Month}. {Today_Data.Date} -
+            - <RECORDTIMELINE
+            date={props}
+            /> -
         </div>
     )
 }

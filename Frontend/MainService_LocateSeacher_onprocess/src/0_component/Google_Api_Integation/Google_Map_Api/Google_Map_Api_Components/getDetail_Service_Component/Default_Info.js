@@ -32,20 +32,27 @@ export const Default_Info = () => {
         position : {lat: 0, lng: 0}
     } 
 
+    const [cameraProps, setCameraProps] = useState(INITIAL_CAMERA);
+    const [markerProps, setMarkerProps] = useState(INITIAL_MARKER);
+    const [PlaceInfo, updateInfo] = useState({})
     
     const Place_Pocket_Icon_Inspector = (input) => {
+        
         switch(typeof input.types){
             case('object'):
-            switch(input.types[0]){
-                case('cafe'):
-                return Pocket_Icon_Cafe
             
-                case('restaurant'):
-                return Pocket_Icon_Restaurant
+                if(input.types.includes('cafe')){
+                console.log('cafe')
+                return Pocket_Icon_Cafe}
+            
+                if(input.types.includes('restaurant')){
+                console.log('restaurant')
+                return Pocket_Icon_Restaurant}
                 
-                case('bar'):
-                return Pocket_Icon_Bar
-            }
+                if(input.types.includes('bar')){
+                console.log('bar')
+                return Pocket_Icon_Bar}
+            
             case('undefined'):
             return
         }
@@ -98,18 +105,15 @@ export const Default_Info = () => {
 
     const GetDetail = async (input) => {
         
-        let result = await fetch(`http://localhost:8080/google_map_api/fetch_getDetail/${input}`)
+        let result = await fetch(`/google_map_api/fetch_getDetail/${input}`,{
+            method: 'GET'
+        })
+
         const result_data = await result.json()
         console.log(result_data)
 
-        // updateInfo(result_data.data)
-
-
+        
     }
-
-    const [cameraProps, setCameraProps] = useState(INITIAL_CAMERA);
-    const [markerProps, setMarkerProps] = useState(INITIAL_MARKER);
-    const [PlaceInfo, updateInfo] = useState({})
 
     useEffect(()=>{
         if (!Place_Library || !Map_Instance) return;
@@ -123,6 +127,12 @@ export const Default_Info = () => {
             ],
             placeId: params.placeid,
         },(result)=>{
+        
+            if(result === null){
+                alert(`Service isn't good enough, we'll be back with more compact search engine`)
+                return;
+            }
+
             updateInfo(result)
             setCameraProps({
                 defaultZoom : 15,
@@ -238,8 +248,9 @@ export const Default_Info = () => {
 
             <AdvancedMarker
             {...markerProps}>
-                <Marker src={Fork_Icon} border={`solid black 3.5px`}/>
+                <Marker src={Fork_Icon} border={`solid black 3.5px`} width={'6vw'}/>
             </AdvancedMarker>
+
 
         </Map>
 

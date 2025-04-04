@@ -52,16 +52,17 @@ export const NearbySearch_TabResults = (props) => {
     }
 
     const Place_Pocket_Icon_Inspector = (input) => {
-        switch(input.types[0]){
-            case('cafe'):
-            return Pocket_Icon_Cafe
+        if(input.types.includes('cafe')){
+            console.log('cafe')
+            return Pocket_Icon_Cafe}
         
-            case('restaurant'):
-            return Pocket_Icon_Restaurant
+            if(input.types.includes('restaurant')){
+            console.log('restaurant')
+            return Pocket_Icon_Restaurant}
             
-            case('bar'):
-            return Pocket_Icon_Bar
-        }
+            if(input.types.includes('bar')){
+            console.log('bar')
+            return Pocket_Icon_Bar}
     }
 
     const Place_Reputation_Inspector = (input) => {
@@ -283,7 +284,7 @@ export const NearbySearch_TabResults = (props) => {
             paddingBottom: '2vh'
         }}>
             <a 
-            href={`location/${place.name}`}
+            href={`/search/location/${place.name}`}
             target="_blank"
             >
             

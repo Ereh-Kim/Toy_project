@@ -50,10 +50,10 @@ export class Database_Router_CUCM extends Database_Router {
         return result
     }
 
-    async Update_Post( request, input, section){
+    async Update_Post( request, input, table, schema){
 
         let DB = await this.DB_usercreation
-        let query = `UPDATE user_creation.${section} `
+        let query = `UPDATE "${schema}".${table} `
         let query_request_1 = `SET `
         request.forEach((element, index)=>{
             switch(index){
@@ -67,9 +67,10 @@ export class Database_Router_CUCM extends Database_Router {
             }
         })
 
-        let query_request_2 = `WHERE id = $${request.length+1}`
+        let query_request_2 = `WHERE id = $${request.length+1} AND user_id = $${request.length+2}`
         query = query + query_request_1 + query_request_2 + ` RETURNING *`
         
+        console.log(query)
         let result = await DB.query(query,input)
         
         return result

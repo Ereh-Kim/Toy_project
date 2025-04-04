@@ -7,6 +7,8 @@ import ThumbUp from '../../../../../1_image_or_icon/thumbs-up-icon.png'
 import Pen from '../../../../../1_image_or_icon/Pen_icon.jpg'
 import EditIcon from '../../../../../1_image_or_icon/edit-list-icon.png'
 
+import TIMESTAMP from "./Timestamp.js";
+
 export const Detail_Image_Reviews_Section = (props) => {
 
     const [swipeState, setSwipeState] = useState({
@@ -21,17 +23,21 @@ export const Detail_Image_Reviews_Section = (props) => {
     const [reviews_property_keys, setReviews_property_keys] = useState({
         
         origin:{
-            username: 'user_name',
+            username: 'reviewer_name',
             rating: 'star_rating',
             text: 'user_post_text',
-            profile_photo_url: 'profile_photo_url'
+            profile_photo_url: 'profile_photo_url',
+            picture_url_array: 'picture_url_array',
+            reviewer_profile: 'reviewer_profile',
+            time: 'created_at'
         },
         
         google: {
             username: 'author_name',
             rating: 'rating',
             text: 'text',
-            profile_photo_url: 'profile_photo_url'
+            profile_photo_url: 'profile_photo_url',
+            time: 'time'
         }
     })
     
@@ -42,12 +48,13 @@ export const Detail_Image_Reviews_Section = (props) => {
 
         review_origin_loader(placecode).then(async (res)=>{
             let review_result = res.result
+            console.log(review_result)
             review_result = Object.values(review_result)
+            console.log(review_result)
             setReviews(review_result)
         })
         
     },[])
-
 
     const renderDotIndicators = (totalImages, currentIdx) => {
         return (
@@ -242,7 +249,12 @@ export const Detail_Image_Reviews_Section = (props) => {
                     maxHeight: '30vh',
                     overflow: 'scroll',
                     whiteSpace: 'pre-wrap',
-                    wordBreak: 'break-all'
+                    wordBreak: 'break-all',
+                    margin: '0vh 2.5vw',
+                    padding: '0vh 2.5vw',
+                    border: 'white solid 5px',
+                    backgroundColor: 'white',
+                    borderRadius: '15px'
                 }}
                 >
                     <span>
@@ -288,17 +300,72 @@ export const Detail_Image_Reviews_Section = (props) => {
                 case(false):
                 return <div
                 style={{
-                    width:'45vw',
-                    margin: '0 3vw'
+                    width:'77.5%',
+                    
+                    margin: '0vh 2.5vw 2.5vh 2.5vw',
+
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-all',
+                    padding: '0vh 2.5vw',
+                    border: 'white solid 5px',
+                    backgroundColor: 'white',
+                    borderRadius: '15px'
                 }}
                 >
-                {input}
+                    <span>
+                        {input}
+                    </span>
+                    
+                
                 </div>
             }
             
             case('undefined'):
             return;
         }
+    }
+
+    const picture_dispenser = (input, situation) => {
+
+        switch(typeof input){
+            case 'object':
+
+                switch(situation){
+
+                case 'review_pictures':    
+                    return input.map((element)=>{
+                        return <img
+                        src={element}
+                        style={{
+                            width: '80%',
+                            aspectRatio: '1/1',
+                            objectFit: 'cover',
+                            border: 'white 3px solid',
+                            borderRadius: '15px'
+
+                        }}
+
+                        >
+                        </img>
+                    })
+                
+                case 'profile_img':
+                    return <img
+                        src={input[0]}
+                        style={{
+                            width: '17.5%',
+                            aspectRatio: '1/1',
+                            objectFit: 'cover',
+                            border: 'white 3px solid',
+                            borderRadius: '15px'
+
+                        }}
+
+                        >
+                        </img>
+                }
+        }
+
     }
 
     const review_origin_loader = async (input) => {
@@ -311,6 +378,7 @@ export const Detail_Image_Reviews_Section = (props) => {
         result = await result.json()
         return result
     }
+
 
     const review_dispenser = (input,origin) => {
 
@@ -333,7 +401,8 @@ export const Detail_Image_Reviews_Section = (props) => {
                         fontFamily: '큐트신민상',
                         letterSpacing: '1vw',
                         spaceBetween: '5px',
-                        lineHeight: '3.5vh'
+                        lineHeight: '3.5vh',
+                        justifyContent: 'center'
                     }}
                     >
                                 <span
@@ -352,35 +421,54 @@ export const Detail_Image_Reviews_Section = (props) => {
                                     <span>Edit</span>
                                 </span>
 
-                            <div
-                            style={{
-                                padding: '1vh 2vw'
-                            }}>
-
                                 <div
                                 style={{
-                                    display:'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'center'
-                                    }}
-                                >
-                                    <img
-                                    src={element[property_keys.profile_photo_url]}
+                                    padding: '1vh 2vw'
+                                }}>
+
+                                    <div
                                     style={{
-                                    width: '10vw'
-                                    }}
-                                    ></img>
-                                    <span
-                                    style={{
-                                    paddingLeft: '10px'
-                                    }}
-                                    >{element[property_keys.username]}</span>
+                                        display:'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyItems: 'center'
+                                        }}
+                                    >
+                                        { element[property_keys.profile_photo_url] !== undefined
+                                        ? <img
+                                        src={element[property_keys.profile_photo_url]}
+                                        style={{
+                                        width: '10vw'
+                                        }}
+                                        ></img>
+                                        : ``
+                                        }
+
+                                        {picture_dispenser(element[property_keys.reviewer_profile], 'profile_img')}
+
+                                        <span
+                                        style={{
+                                        paddingLeft: '10px'
+                                        }}
+                                        >{element[property_keys.username]}</span>
 
 
-                            </div>
+                                </div>
 
-                            <div>{start_dispenser(element[property_keys.rating])} 
-                                ({element[property_keys.rating]})</div>
+
+                                <div>{start_dispenser(element[property_keys.rating])} 
+                                    ({element[property_keys.rating]})
+                                </div>
+
+                                
+                                { element[property_keys.time] !== undefined
+                                  ? <TIMESTAMP
+                                  timestamp = {element[property_keys.time]}
+                                  />
+                                  : ''
+                                }
+                                
+                                
 
                             </div>
 
@@ -453,8 +541,31 @@ export const Detail_Image_Reviews_Section = (props) => {
 
                         <br></br>
 
-                        <div>{review_text_dispenser(element[property_keys.text])}</div>
+                        { element !== undefined && element[property_keys.picture_url_array] !== undefined
+                            
+                            ? <div
+                            style={{
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1fr 1fr',
+                                justifyItems: 'center',
+                                rowGap: '1vh',
+                                border: 'white solid 3px',
+                                padding: '10px',
+                                borderRadius: '15px'
+                            }}
+                            >
+                                {picture_dispenser(element[property_keys.picture_url_array], 'review_pictures')}
 
+                            </div>
+                            :''    
+                        }
+                        { element !== undefined && element[property_keys.picture_url_array] !== undefined
+                            ? <br></br>
+                            : ``
+                        }
+                        
+                        <div>{review_text_dispenser(element[property_keys.text])}</div>
+                        
                         
 
                     </div>
@@ -582,22 +693,41 @@ export const Detail_Image_Reviews_Section = (props) => {
 
         <br></br>
 
-        <div
+            <div
                 style={{
-                    display:'grid',
-                    gridTemplateRows: '1fr 1fr',
-                    gridAutoFlow: 'column',
-                    columnGap: '15vw',
-                    rowGap: '5vh',
-
-                    padding: '5vh 0vw 5vh 0vw',
+                    display: 'flex',
+                    flexDirection: 'row',
                     overflow: 'scroll',
                     width: '65vw'
                 }}
-        >
-    {review_dispenser(props.reviews,'google')}
-    {review_dispenser(reviews,'origin')}
-        </div>
+            >
+                <div
+                        style={{
+                            display:'grid',
+                            gridTemplateRows: '65vh 65vh',
+                            
+                            gridAutoFlow: 'column',
+                            columnGap: '5vw',
+                            rowGap: '5vh',
+
+                            padding: '5vh 0vw 5vh 5vw'
+                        }}
+                >
+                    {review_dispenser(props.reviews,'google')}
+                </div>
+
+                <div
+                        style={{
+                            display:'grid',
+                            gridAutoFlow: 'column',
+                            columnGap: '5vw',
+
+                            padding: '5vh 5vw 5vh 5vw'
+                        }}
+                >
+                    {review_dispenser(reviews,'origin')}
+                </div>
+            </div>
 
     </React.Fragment>
 

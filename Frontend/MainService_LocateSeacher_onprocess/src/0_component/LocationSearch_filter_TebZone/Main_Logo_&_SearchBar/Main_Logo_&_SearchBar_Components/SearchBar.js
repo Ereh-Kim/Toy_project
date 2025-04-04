@@ -40,15 +40,20 @@ export const SearchBar = () => {
                     onKeyUp={
                         
                             ()=>{
-                                if(window.event.keyCode === 13){
+                                console.log(`/search?${Url.toString()}`)
+                                if(window.event.keyCode === 13 && Url.has('FilterTabBar') ===  false){
                                     document.location.href = `/search?${Url.toString()}&FilterTabBar=opened`
+                                }
+                                
+                                if(window.event.keyCode === 13 && Url.has('FilterTabBar') ===  true){
+                                    document.location.href = `/search?${Url.toString()}`
                                 }
                     }}>
                 </input>
 
                 <a
                 id = 'Search_Keyword_&_Options' 
-                href={`/search?${Url.toString()}&FilterTabBar=opened`}>
+                href={`/search?${Url.toString()}`}>
                 <img id="Reading_Glass_icon" src={GlassIcon}>
                 </img>
                 </a>

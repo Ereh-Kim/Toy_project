@@ -7,7 +7,7 @@ import My_Journals from './Personailized_Data_ReflectZone/My_Journals';
 import My_Options from './Personailized_Data_ReflectZone/My_Options';
 import My_Alarms from './Personailized_Data_ReflectZone/MY_Alarms'
 
-import My_Review from "./Personailized_Data_ReflectZone/My_Review.js";
+import My_Review from "./Personailized_Data_ReflectZone/My_Review";
 
 export const Personalized_Data_Page_integrator = () => {
 
@@ -19,8 +19,6 @@ export const Personalized_Data_Page_integrator = () => {
             status:'unverified'
     }
     );
-    
-    const [ Single_ReviewData, updateREVIEW ] = useState({})
 
     const login_check = async () => {
 
@@ -80,6 +78,7 @@ export const Personalized_Data_Page_integrator = () => {
             <Route
             path="user/:userid/reviews/review/:reviewid"
             element={<My_Review
+                id={UserData}
             />}
             />
 

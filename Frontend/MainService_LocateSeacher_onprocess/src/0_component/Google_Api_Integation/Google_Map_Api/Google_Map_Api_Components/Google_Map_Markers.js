@@ -7,7 +7,7 @@ export const Marker = (props) => {
     const MarkerIcon = document.createElement('img')
     MarkerIcon.src = props.src
     
-    MarkerIcon.style.width = '10vw'
+    MarkerIcon.style.width = props.width
     MarkerIcon.style.borderRadius = '50px'
     MarkerIcon.style.transform = `rotate(45deg)`
     MarkerIcon.style.border = props.border

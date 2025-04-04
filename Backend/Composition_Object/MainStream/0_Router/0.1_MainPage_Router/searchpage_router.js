@@ -44,6 +44,13 @@ import { fileURLToPath } from 'url';
                 res.sendFile(ClientPage_path)
 
             })
+
+            this.Pure_Router.get(['/user/**'],(req, res)=>{
+
+                const ClientPage_path = path.join(__dirname, '../../../../../Frontend/MainService_LocateSeacher_onprocess/build', 'index.html')
+                res.sendFile(ClientPage_path)
+
+            })
         }
     }
 

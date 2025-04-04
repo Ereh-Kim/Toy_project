@@ -14,7 +14,7 @@ export const nearbySearch_Result = (props) => {
             position={{ lat:place.location.latitude
                        ,lng:place.location.longitude}}>
             
-                <Google_Map_Marker src={Src}/>
+                <Google_Map_Marker src={Src} width={'10vw'}/>
             </AdvancedMarker>
         })
     }

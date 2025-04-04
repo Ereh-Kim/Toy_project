@@ -48,7 +48,7 @@ export const My_Reviews = (props) => {
         const Container = containerRef.current
         if(!Container) return;
 
-    },[props])
+    },[])
 
     const TextDispenser = (props) => {
         let TextContent = props.element.user_post_text
@@ -305,8 +305,7 @@ export const My_Reviews = (props) => {
                         rowGap: '1vh',
                         border:'black solid 3px',
                         borderRadius: '28px',
-                        padding: '1.5vh 3vw 3vh 3vw',
-                        // transition: 'all 0.3s ease-in-out'
+                        padding: '1.5vh 3vw 3vh 3vw'
                     }}
                     >
 
@@ -342,13 +341,36 @@ export const My_Reviews = (props) => {
                     }}
                   ></input>
 
+                    <a
+                    href={`/search/location/places/${element.placecode}`}
+                    target="_blank"
+                    >
                     <div
                         style={{
-                            justifySelf:'center'
+                            justifySelf:'center',
+                            textAlign:'center',
+                            backgroundColor: 'white',
+                            height: 'fit-content',
+                            alignContent: 'center',
+                            width: '90%',
+                            borderRadius: '15px',
+                            padding: '1vh 0',
+                            lineHeight: '30px'
                         }}
                     >
                         {element.placename}
+                        <br></br>
+                        
+                        <span
+                        style={{
+                            fontSize: '13px'
+                        }}
+                        >
+                        ( Link Here )
+                        </span>
+
                     </div>
+                    </a>
 
                     <TextDispenser
                     element={element}
@@ -575,10 +597,13 @@ export const My_Reviews = (props) => {
     }
 
     const Load_Review = async (user_id, username) => {
-        await fetch(`/usercreation/read_reviews/user/${user_id}`).then( async (result)=>{
+        await fetch(`/usercreation/read_reviews/user/${user_id}`
+            ).then( async (result)=>{
             const review_data = await result.json()
+            console.log(review_data)
             updateREVIEWS(review_data.result)
             updateUSERNAME({name: username})
+
         })
     }
 
