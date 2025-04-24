@@ -48,7 +48,8 @@ class Google_Map_API extends Pure_Router {
         this.Pure_Router.get('/fetch_start_spot_ver_new/:input',async (req,res)=>{
 
             const params = {
-                textQuery: `${req.params.input}`
+                textQuery: `${req.params.input}`,
+                regionCode: 'KR'
                 }
     
             let result = await fetch(`https://places.googleapis.com/v1/places:searchText`,{
@@ -62,6 +63,7 @@ class Google_Map_API extends Pure_Router {
             )
 
             let data = await result.json()
+                console.log(data)
                 res.json(data)
         })
 
@@ -100,7 +102,7 @@ class Google_Map_API extends Pure_Router {
                         "longitude": lng_input},
                     "radius": distance_input
                     }
-                }
+                } 
             }
 
 
@@ -209,9 +211,24 @@ class Google_Map_API extends Pure_Router {
             let getDetail_result = await getDetail.json()
             res.json({data: getDetail_result})
 
+            })
+    
+        this.Pure_Router.get('/fetch_currentLocation', async (req, res)=>{
+
+            
+
+            const currentLocation = await fetch(`https://www.googleapis.com/geolocation/v1/geolocate`,{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-Goog-api-Key':`${process.env.REACT_APP_API}`
+                }
+            })
+
+            const data = await currentLocation.json()
+            res.json({data: data})
+
         })
-    
-    
     
     }
 }

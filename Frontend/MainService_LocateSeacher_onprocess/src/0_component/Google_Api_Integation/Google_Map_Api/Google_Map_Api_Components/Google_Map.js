@@ -117,7 +117,11 @@ const [StartSpot, updateStart] = useState();
                         let result = await response.json();
                         resolve(result);
                     },
-                    (error) => reject(error)
+                    (error) => reject(error),
+                    {
+                        enableHighAccuracy: true,
+                        maximumAge: 0
+                    }
                 );
             } else {
                 reject("Geolocation을 지원하지 않는 브라우저입니다.");
@@ -141,6 +145,7 @@ const [StartSpot, updateStart] = useState();
                     method: 'GET'
                 })
                 let fetch_data_result = await fetch_data.json()
+                console.log(fetch_data)
                 let spot_data = fetch_data_result.places[0]
 
         // // start_spot img fetch --- 2
