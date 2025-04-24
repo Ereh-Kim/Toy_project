@@ -45,7 +45,7 @@ class Google_Map_API extends Pure_Router {
                 res.json(data)
         })
 
-        this.Pure_Router.get('/fetch_start_spot_ver_new/:input',async (req,res)=>{
+        this.Pure_Router.get('/fetch_start_spot_ver_new/:input/:lat/:lng',async (req,res)=>{
 
             const params = {
                 textQuery: `${req.params.input}`,
