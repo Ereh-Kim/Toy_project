@@ -49,7 +49,7 @@ class Google_Map_API extends Pure_Router {
 
             const params = {
                 textQuery: `${req.params.input}`,
-                regionCode: 'KR'
+                rankPreference: 'DISTANCE'
                 }
     
             let result = await fetch(`https://places.googleapis.com/v1/places:searchText`,{
