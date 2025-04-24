@@ -141,7 +141,7 @@ const [StartSpot, updateStart] = useState();
 
                 // start_spot fetch --- 1
 
-                let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}`,{
+                let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}/${CLIENT_markerProps.lat}/${CLIENT_markerProps.lng}`,{
                     method: 'GET'
                 })
                 let fetch_data_result = await fetch_data.json()

@@ -49,7 +49,16 @@ class Google_Map_API extends Pure_Router {
 
             const params = {
                 textQuery: `${req.params.input}`,
-                rankPreference: 'DISTANCE'
+                rankPreference: 'DISTANCE',
+                locationBias:{
+                    circle:{
+                        center:{
+                            "latitude": req.params.lat,
+                            "longitude": req.params.lng
+                        },
+                        radius: 5000.0
+                    }
+                }
                 }
     
             let result = await fetch(`https://places.googleapis.com/v1/places:searchText`,{
@@ -63,7 +72,6 @@ class Google_Map_API extends Pure_Router {
             )
 
             let data = await result.json()
-                console.log(data)
                 res.json(data)
         })
 
