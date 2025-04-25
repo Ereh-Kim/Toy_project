@@ -70,19 +70,39 @@ const [StartSpot, updateStart] = useState();
         }
     }
 
-    const Load_Only_UserPosition = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                
-            (position)=>{
-                let latitude = position.coords.latitude;
-                let longitude = position.coords.longitude;                  
-                setCLIENT_MarkerProps({
-                    position: {lat: latitude, lng: longitude}
-                })    
+    const Load_Only_UserPosition = async () => {
+        
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        let lat = position.coords.latitude;
+                        let lng = position.coords.longitude;
+                            setCLIENT_MarkerProps({
+                                position: {lat: lat, lng: lng}
+                            })
+                            resolve({lat: lat, lng: lng});
+                    },
+                    (error) => reject(error)
+                );
+            } else {
+                reject("Geolocation을 지원하지 않는 브라우저입니다.");
             }
+        });
+        
+        // if (navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition(
+                
+        //     (position)=>{
+        //         let latitude = position.coords.latitude;
+        //         let longitude = position.coords.longitude;                  
+        //         setCLIENT_MarkerProps({
+        //             position: {lat: latitude, lng: longitude}
+        //         })
+        //         return {lat: latitude, lng: longitude}    
+        //     }
 
-            )}
+        //     )}
     }
 
     const Location_Loaded_Success_CallBack = (position) => {
@@ -139,9 +159,12 @@ const [StartSpot, updateStart] = useState();
         let TEXTINPUT;
         TEXTINPUT = Keyword
 
+                const latlng = await Load_Only_UserPosition()
+                console.log(latlng)
+
                 // start_spot fetch --- 1
 
-                let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}/${CLIENT_markerProps.lat}/${CLIENT_markerProps.lng}`,{
+                let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}/${latlng.lat}/${latlng.lng}`,{
                     method: 'GET'
                 })
                 let fetch_data_result = await fetch_data.json()
