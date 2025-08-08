@@ -3,6 +3,7 @@ import Pure_Server from '../../2_Server/2.0_Pure_Server/pure_server.js';
 
 import MainPage_Routes from '../../0_Router/0.1_MainPage_Router/mainpage_router.js';
 import SearchPage_Routes from '../../0_Router/0.1_MainPage_Router/searchpage_router.js';
+import DefaultSlash_Routes from '../../0_Router/0.1_MainPage_Router/defaultslash_router.js';
 
 import {Google_certificater_Routes} from '../../0_Router/0.2_Google_Certification_Router/google_certification_router.js';
 import {Local_Certificater_Routes} from '../../0_Router/0.7_Local_Certification_Router/local_certification_router.js';
@@ -48,6 +49,8 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         this.Pure_Server.use(Cors_Setter_Routes)
 
         this.Pure_Server.use(Session_Path_Routes)
+
+        this.Pure_Server.use('/' ,DefaultSlash_Routes)
         this.Pure_Server.use('/homepage',MainPage_Routes)
         this.Pure_Server.use('/search' ,SearchPage_Routes)
         this.Pure_Server.use('/login' ,SearchPage_Routes)

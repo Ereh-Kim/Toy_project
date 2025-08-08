@@ -72,6 +72,7 @@ class Google_Map_API extends Pure_Router {
             )
 
             let data = await result.json()
+            console.log(data.places.length, 'text_search')
                 res.json(data)
         })
 
@@ -89,6 +90,52 @@ class Google_Map_API extends Pure_Router {
             
             res.json({src: result.url})            
             
+        })
+
+        this.Pure_Router.get('/fetch_img_new_ver/places/:spot', async (req, res)=>{
+
+            let PhotoCode = await fetch(`https://places.googleapis.com/v1/places/${req.params.spot}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type':'application/json',
+                    'X-Goog-api-Key':`${process.env.REACT_APP_API}`,
+                    'X-Goog-FieldMask':`photos`
+                }
+            })
+
+            PhotoCode = await PhotoCode.json()
+
+            if(PhotoCode.photos === undefined){}
+            else{
+                console.log(PhotoCode.photos.length)
+                PhotoCode = PhotoCode.photos[0].name}
+            
+            let params = new URLSearchParams({
+                maxWidthPx: 400,
+                maxHeightPx: 400,
+                key:`${process.env.REACT_APP_API}`,
+                skipHttpRedirect: true
+            })
+
+            let PhotoURL = await fetch(`https://places.googleapis.com/v1/${PhotoCode}/media?${params}`,{
+                method: 'GET'
+            })
+
+            if(PhotoURL.status === 404){
+                console.log()
+                PhotoURL = {
+                    photoUri : ''
+                }
+            }
+            else{
+                PhotoURL = await PhotoURL.json()
+            }
+
+            
+            
+            // console.log(PhotoURL)
+            // console.log(`https://places.googleapis.com/v1/${PhotoCode}/media?${params}`)
+            res.send({url: PhotoURL.photoUri})
         })
 
         this.Pure_Router.get('/fetch_nearbyresult/:type/:lat/:lng/:distance', async (req, res)=>{

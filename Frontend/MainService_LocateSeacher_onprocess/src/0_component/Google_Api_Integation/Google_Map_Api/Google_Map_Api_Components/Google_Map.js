@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { ActionCreater } from "../../../../2_reducer/reducer";
 
-import { Map, AdvancedMarker, useMapsLibrary, useMap} from '@vis.gl/react-google-maps'
+import { Map, AdvancedMarker } from '@vis.gl/react-google-maps'
 import NEARBYSEARCH_NORESULT from "./nearbySearch_Service_Components/nearbySearchResult_NoResult";
 import NEARBYSEARCHRESULT_MARKER from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_Marker'
 import NEARBYSEARCH_RESULT_TABRESULT from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_TabResults'
@@ -11,14 +11,14 @@ import FORK_ICON from '../../../../1_image_or_icon/Fock_icon.jpg'
 import USERSUB_ICON from '../../../../1_image_or_icon/user_sub_icon_map.jpg'
 import MARKER from "./Google_Map_Markers";
 
+import Google_placePhoto_Encoder from "./Google_placePhoto_Encoder";
+import Spinner from "./Reusable_Components/spinner";
+
 export const Google_Map = () => {
 
 const Keyword = useSelector(state => state.urlToString)
 const GoogleMap_Deafult_Option = useSelector(state => state.urlObject)
 const dispatch = useDispatch()
-
-let Map_Instance = useMap('Google_Map');
-let Place_Library = useMapsLibrary('places');
 
 
 const INITIAL_CAMERA = {
@@ -38,10 +38,27 @@ const [Google_Map_Search_Option, updateOption ] = useState({
     type: ['restaurant'],
     distance: GoogleMap_Deafult_Option.get('distance')||500
 })
+
 const [List_Around_spot, updateSpots] = useState([]);
 const [Opening_Hours, updatePeriod ] = useState({});
 const [PhoneNumbers, updaateNumbers]= useState([]);
 const [StartSpot, updateStart] = useState();
+const [SimilarSpot, updateSimilar] = useState([]);
+
+const [swipeState, setSwipeState] = useState({
+    touchStart: 0,
+    touchEnd: 0,
+    currentIndex: 0,
+    isDragging: false,
+    dragOffset: 0,
+    divwidth: 0
+});
+
+const [spinnerState, updateSpinner] = useState({
+    MapSpinner : false,
+    TS_ResultSpinner : false,
+    NB_ResultSpinner : false
+})
 
     const UpdateMap = (latitude, longitude, situation) => {
 
@@ -90,19 +107,6 @@ const [StartSpot, updateStart] = useState();
             }
         });
         
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(
-                
-        //     (position)=>{
-        //         let latitude = position.coords.latitude;
-        //         let longitude = position.coords.longitude;                  
-        //         setCLIENT_MarkerProps({
-        //             position: {lat: latitude, lng: longitude}
-        //         })
-        //         return {lat: latitude, lng: longitude}    
-        //     }
-
-        //     )}
     }
 
     const Location_Loaded_Success_CallBack = (position) => {
@@ -113,6 +117,7 @@ const [StartSpot, updateStart] = useState();
     }
 
     const Current_Location_Loading = async () => {
+
             if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 
@@ -149,27 +154,37 @@ const [StartSpot, updateStart] = useState();
         });
     };
     
-    
+    const spinnerTest = async () => {
+        return new Promise( resolve => setTimeout(resolve,40000) )
+    }
 
     const Load_Existed_Keyword = async () => {
-        
-        if (!Place_Library || !Map_Instance) return;
-        const svc = new Place_Library.PlacesService(Map_Instance);      
 
         let TEXTINPUT;
         TEXTINPUT = Keyword
 
                 const latlng = await Load_Only_UserPosition()
-                console.log(latlng)
-
+                
                 // start_spot fetch --- 1
 
                 let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}/${latlng.lat}/${latlng.lng}`,{
                     method: 'GET'
                 })
                 let fetch_data_result = await fetch_data.json()
-                console.log(fetch_data)
                 let spot_data = fetch_data_result.places[0]
+                console.log(fetch_data_result.places.length)
+                
+                let similarSpot_result = []
+                fetch_data_result.places.map((element, index)=>{
+                    if(index != 0){
+                        similarSpot_result.push(element)
+                    }
+                    else{
+                        return
+                    }
+                })
+                
+                updateSimilar(similarSpot_result)
 
         // // start_spot img fetch --- 2
 
@@ -236,18 +251,17 @@ const [StartSpot, updateStart] = useState();
 
     const Load_From_Current_Location = async (input) => {
         
-        
-        if (!Place_Library || !Map_Instance) return;
-        const svc = new Place_Library.PlacesService(Map_Instance);      
-
         let TEXTINPUT;
         TEXTINPUT = input
 
+        const latlng = await Load_Only_UserPosition()
+
         // start_spot fetch --- 1
 
-                let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}`,{
+                let fetch_data = await fetch(`/google_map_api/fetch_start_spot_ver_new/${TEXTINPUT}/${latlng.lat}/${latlng.lng}`,{
                     method: 'GET'
                 })
+                console.log(fetch_data)
                 let fetch_data_result = await fetch_data.json()
                 let spot_data = fetch_data_result.places[0]
 
@@ -313,18 +327,18 @@ const [StartSpot, updateStart] = useState();
         
         updaateNumbers(PhoneStamp)
         updatePeriod(TimeStamp)
-                return spot_data
+        
     }
 
     const StartSpot_Align = (input) => {
+        
         let Included_Anchor = ''
 
         if(typeof input !== 'undefined'){
             input.types.forEach((element)=>{
-                if(element === 'restaurant'){
-                    Included_Anchor = `/search/location/places/${input.place_id}`
+                if(element === 'restaurant'||'cafe'){
+                    Included_Anchor = `/search/location/${input.name}`
                 }
-                console.log(Included_Anchor)
             })
         }
         
@@ -335,113 +349,127 @@ const [StartSpot, updateStart] = useState();
 
             case('object'):
             return <React.Fragment>
-
-            <div
-            style={{
-                width: 'inherit',
-                // height: '30vh',
-                border: 'black solid 3px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent:'space-around',
-                alignItems: 'center',
-                margin: '3vh 9vw',
-                borderRadius: '10px',
-                padding: '',
-                position: 'relative',
-                left: '2vw'
-            }}
-            >
-
-            
-                <a
-                href={Included_Anchor}
-                target="_blank"
+                <div
                 style={{
-                    display: 'grid'
+                    width:'80%',
+                    padding: '0 5vw'
                 }}
-                >    
+                >
                     <div
                     style={{
-                        textAlign: 'center',
-                        margin: '1vh 0vw',
-                        width: 'inherit',
-                        backgroundColor: 'white',
-                        padding: '1vh 16vw',
-                        lineHeight: '2.5vh',
-                        fontSize: '3vw',
+                        border: 'black solid 3px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent:'space-around',
+                        alignItems: 'center',
                         borderRadius: '10px',
-                        border: 'black solid 3px'
+                        padding: '0 1vw'
                     }}
                     >
-                        Location 
-                        <br></br>
-                        You Entered
-                    </div>
-                
-            
-                    <img
-                        style={{
-                            width: '40vw',
-                            aspectRatio: '1',
-                            objectFit: 'cover',
-                            borderRadius: '10px',
-                            border: 'solid white 3px',
-                            justifySelf: 'center'
-                        }}
 
-                        src={input.photos}
-                        alt="none"
-                    ></img>
                     
+                        <a
+                        href={`${
+                            input.types.filter(type => 
+                                type === 'restaurant' ||
+                                type === 'cafe' ||
+                                type === 'bar' 
+                                ).length > 0 
+                            ? Included_Anchor 
+                            : '#'}`}
+                        target= '_blank'
+                        style={{
+                            display: 'grid'
+                        }}
+                        onClick={
+                            
+                            (e)=>{
+                                
+                                switch(input.types.filter(type => 
+                                    type === 'restaurant' ||
+                                    type === 'cafe' ||
+                                    type === 'bar' 
+                                    ).length > 0){
 
-                </a>
-            <div
-            style={{
-                backgroundColor: 'white',
-                border: 'black solid 3px',
-                borderRadius: '10px',
-                margin: '1vh 0vw 0vh 0vw',
-                fontSize: '3vw',
-                padding: '0.5vh 2vw'
-            }}
-            >
-            {input.displayName
-            ?input.displayName.text
-            :input.name
-            }
-            </div>
+                                    case(true):
+                                        break;
+                                    case(false):
+                                        e.preventDefault()
+                                }
+                            }
+                        }
+                        >    
+                            <div
+                            style={{
+                                justifySelf: 'center',
+                                textAlign: 'center',
+                                margin: '1vh 0vw',
+                                width: '75%',
+                                backgroundColor: 'white',
+                                padding: '1vh 0vw',
+                                lineHeight: '2.5vh',
+                                fontSize: '3vw',
+                                borderRadius: '10px',
+                                border: 'black solid 3px'
+                            }}
+                            >
+                                Location 
+                                <br></br>
+                                You Entered
+                            </div>
+                        
+                            <Google_placePhoto_Encoder
+                            spot = {input.name}
+                            in_road = {input.types.includes('street_address')}
+                            />
 
-            <div
-            style={{
-                backgroundColor: 'white',
-                border: 'black solid 3px',
-                borderRadius: '10px',
-                margin: '1vh 0vw',
-                fontSize: '3vw',
-                padding: '0.5vh 2vw',
-            }}
-            >
-            {input.formatted_address
-            ?input.formatted_address.split(' ').map((element,index)=>{
-                switch(index){
-                    case(2):
-                    return <React.Fragment>
-                        <br></br>
-                        <span> &nbsp; {element}</span> 
-                    </React.Fragment>
+                        </a>
+                    <div
+                    style={{
+                        backgroundColor: 'white',
+                        border: 'black solid 3px',
+                        borderRadius: '10px',
+                        margin: '1vh 0vw 0vh 0vw',
+                        fontSize: '3vw',
+                        padding: '0.5vh 2vw'
+                    }}
+                    >
+                    {input.displayName
+                    ?input.displayName.text
+                    :input.name
+                    }
+                    </div>
 
-                    default: return <span>
-                    &nbsp; {element} 
-                    </span>
-                }
-            })
-            :input.formattedAddress
-            }
-            </div>
+                    <div
+                    style={{
+                        backgroundColor: 'white',
+                        border: 'black solid 3px',
+                        borderRadius: '10px',
+                        margin: '1vh 0vw',
+                        fontSize: '3vw',
+                        padding: '0.5vh 2vw',
+                    }}
+                    >
+                    {input.formatted_address
+                    ?input.formatted_address.split(' ').map((element,index)=>{
+                        switch(index){
+                            case(2):
+                            return <React.Fragment>
+                                <br></br>
+                                <span> &nbsp; {element}</span> 
+                            </React.Fragment>
 
-            </div>
+                            default: return <span>
+                            &nbsp; {element} 
+                            </span>
+                        }
+                    })
+                    :input.formattedAddress
+                    }
+                    </div>
 
+                    </div>
+                </div>
             </React.Fragment>
 
             default:
@@ -451,15 +479,34 @@ const [StartSpot, updateStart] = useState();
 
     useEffect(()=>{
 
+        const run = async () => 
+{
         switch(Keyword){
 
             case(''):
-            Current_Location_Loading()
+
+                await Current_Location_Loading()
+
             return;
             
 
             default:
-            Load_Existed_Keyword()
+
+                updateSpinner((prev)=>({
+                    ...prev,
+                    TS_ResultSpinner: true,
+                    NB_ResultSpinner: true
+                }))
+
+                // await spinnerTest()
+                await Load_Existed_Keyword()
+
+                updateSpinner((prev)=>({
+                    ...prev,
+                    TS_ResultSpinner: false,
+                    NB_ResultSpinner: false
+                }))
+
             break;
             
         }
@@ -479,11 +526,12 @@ const [StartSpot, updateStart] = useState();
 
             default:
             break;
-        }
+        }}
 
+        run()
         // console.log(Opening_Hours)
 
-    },[Place_Library, Map_Instance])
+    },[])
 
 return <React.Fragment>
 
@@ -494,7 +542,6 @@ return <React.Fragment>
                     style={ 
                         { width:'inherit',
                         height:'20vh',
-                        backgroundColor:'white',
                         margin: '3vh 6vw 0 10vw',
                         border: 'black solid 5px'
                         }}
@@ -523,7 +570,44 @@ return <React.Fragment>
 
                         <NEARBYSEARCHRESULT_MARKER places={List_Around_spot}/>
 
+                        <div
+                        style={{
+                            position: 'fixed',
+                            display: `${spinnerState.MapSpinner
+                                        ? ''
+                                        : 'none'
+                            }`,
+                            bottom: '60%',
+                            left: '45%',
+                            zIndex: 10
+                        
+                        }}
+                        >
+                            <Spinner/>
+                        </div>
+
+                        
+                        <div
+                        style={{
+                            position: 'absolute',
+                            display: `${spinnerState.MapSpinner
+                                ? ''
+                                : 'none'
+                            }`,
+                            bottom: '0%',
+                            opacity: 0.5,
+                            
+                            backgroundColor: 'black',
+                            width: '100%',
+                            height: '100%',
+                            zIndex: 1
+                        }}
+                        >
+
+                        </div>
+
                 </Map>
+
 
                 <input type="button"
                 value={`${"\u{1F52D}"} Find From My Location ${"\u{1F52D}"}`}
@@ -543,7 +627,7 @@ return <React.Fragment>
                 onClick={
                  async ()=>{
                     let current_address = await Current_Address_Loading()
-                    // console.log(current_address)
+                    console.log(current_address)
 
                     let result = await Load_From_Current_Location(current_address)
                     console.log(result)
@@ -567,20 +651,35 @@ return <React.Fragment>
                     border: 'black solid 2px'
                 }}
                 onClick={
-                    ()=>{
+                    async ()=>{
 
-                        if(markerProps.position.lat === INITIAL_MARKER.position.lat
-                            && markerProps.position.lng === INITIAL_MARKER.position.lng
-                        ){
-                            alert(' Any Spot yet Searched ')
-                            return;
-                        }
+                        updateSpinner(prev=>({
+                            ...prev,
+                            MapSpinner: true
+                        }))
 
-                        setCameraProps({
-                            zoom: 15,
-                            center: {
-                                lat: markerProps.position.lat,
-                                lng: markerProps.position.lng}})
+                        await new Promise((resolve) => setTimeout(resolve, 2000))
+
+                            setCameraProps({
+                                zoom: 15,
+                                center: {
+                                    lat: markerProps.position.lat,
+                                    lng: markerProps.position.lng}})
+
+                            if(markerProps.position.lat === INITIAL_MARKER.position.lat
+                                && markerProps.position.lng === INITIAL_MARKER.position.lng
+                            ){
+                                alert(' Any Spot yet Searched ')
+                            }
+                            else{
+                                alert(`Return to spot ( Searched Spot )`)
+                            }
+                    
+                        updateSpinner(prev=>({
+                            ...prev,
+                            MapSpinner: false
+                        }))
+                    
                     }
                 }
                 >
@@ -600,18 +699,196 @@ return <React.Fragment>
                     border: 'black solid 2px'
                 }}
                 onClick={
-                    ()=>{
+                    async ()=>{
+
+                        updateSpinner(prev=>({
+                            ...prev,
+                            MapSpinner: true
+                        }))
+
+                        await new Promise((resolve) => setTimeout(resolve, 2000))
+
                         setCameraProps({
                             zoom: 15,
                             center: {
                                 lat: CLIENT_markerProps.position.lat,
                                 lng: CLIENT_markerProps.position.lng}})
+            
+                        alert('Return to Spot ( Current Position )')
+
+                        updateSpinner(prev=>({
+                            ...prev,
+                            MapSpinner: false
+                        }))
                     }
                 }
                 >
                 </input>
 
-            {StartSpot_Align(StartSpot)}           
+                {spinnerState.TS_ResultSpinner === true
+
+                    ? <div
+                    ><Spinner/>
+                    </div>
+
+                    : <React.Fragment>
+                            <div
+                            style={{
+                                
+                                display: `${SimilarSpot.length >= 1
+                                            ? ''
+                                            : 'none'
+                                }`,
+                                borderLeft: 'black solid 4px',
+                                borderBottom: 'black solid 6px',
+
+                                borderTop: 'black solid 2px',
+                                borderRight: 'black solid 2px',
+
+                                position: 'relative',
+                                padding: '1vh 3vw 1.5vh 3vw',
+                                left: '5vw',
+                                width: 'fit-content',
+                                margin: '10vh 0 0 0',
+                                borderRadius: '10px',
+                                fontWeight: 'bold'
+
+                            }}
+                        >
+                            <div
+                                style={{
+                                    fontFamily: '큐트신민상',
+                                    textAlign: 'start',
+                                    whiteSpace: 'nowrap',
+                                    wordSpacing: '5px'
+                                }}
+                            >
+
+                            <span>&bull;</span> <span
+                            style={{
+                                backgroundColor: 'white',
+                                padding: '3px 7px',
+                                borderRadius: '50px'
+                                
+                            }}
+                            >{SimilarSpot.length >= 1
+                                    ? SimilarSpot.length
+                                    : ''} similar searches matched</span> <span>&bull;</span>
+                            
+                            </div>
+                            
+                        </div>
+
+                        <div
+                        style={{
+                            display: `${SimilarSpot.length >= 1
+                                ? ''
+                                : 'none'
+                            }`,
+                            width: 'fit-content',
+                            fontFamily: '큐트신민상',
+                            position: 'relative',
+                            top: 10,
+                            left: 35,
+                            fontSize: '15px',
+                            letterSpacing: '1.5px',
+                            fontWeight: 'bolder',
+                            padding: '0 0 5px 0',
+                            borderBottom: 'white solid 3px'
+
+                        }}
+                        >
+                            || Swipe for matched searches <span>&gt;</span><span>&gt;</span>
+                        </div>
+
+                <div
+                style={{
+                    width: '200px',
+                    overflow: 'hidden',
+                    // justifySelf: 'center'
+                    position: 'relative',
+                    left: '35px'
+                }}
+
+                    onTouchStart={(e) => {
+                        const width = e.currentTarget.firstElementChild.firstElementChild.offsetWidth
+                        console.log(width)
+
+                        setSwipeState(prev => ({
+                            ...prev,
+                            isDragging: true,
+                            touchStart: e.touches[0].clientX,
+                            dragOffset: 0,
+                            divwidth: width
+                        }))}}
+
+                    onTouchMove={(e) => {
+                        if (!swipeState.isDragging) return;
+                        
+                        const currentTouch = e.touches[0].clientX;
+                        const diff = currentTouch - swipeState.touchStart;
+                        setSwipeState(prev => ({
+                            ...prev,
+                            touchEnd: currentTouch,
+                            dragOffset: diff
+                        }))}}
+
+                    onTouchEnd={(e) => {
+                        if (!swipeState.isDragging) return;
+
+                        
+                        const distance = swipeState.touchStart - swipeState.touchEnd;
+                        const minSwipeDistance = 50;
+
+                        if (Math.abs(distance) < minSwipeDistance) {
+                            setSwipeState(prev => ({
+                                ...prev,
+                                isDragging: false,
+                                dragOffset: 0
+                            }));
+                            return;
+                        }
+
+                        setSwipeState(prev => ({
+                            ...prev,
+                            isDragging: false,
+                            currentIndex: distance > 0 && prev.currentIndex < SimilarSpot.length
+                                ? prev.currentIndex + 1 
+                                : distance < 0 && prev.currentIndex > 0 
+                                ? prev.currentIndex - 1 
+                                : prev.currentIndex,
+                            dragOffset: 0,
+                            touchStart: 0,
+                            touchEnd: 0
+                        }));}}
+
+                >
+                        <div
+                        style={{
+                            display:"flex",
+                            margin: '3vh 2vw',
+                            width: 'inherit',
+                            transform: `translateX(calc(-${
+                                swipeState.divwidth*swipeState.currentIndex}px + ${swipeState.dragOffset}px))`,
+                            transition: swipeState.isDragging ? 'none' : 'transform 0.3s ease-out'
+                        }}
+                        >
+                            {StartSpot_Align(StartSpot)}
+                            {SimilarSpot.map((element, index)=>{
+                                if(SimilarSpot.length>0){
+                                    return StartSpot_Align(element)
+                                }
+                            })}
+                            
+                        
+                        </div>
+
+                </div>
+
+                </React.Fragment>
+
+                
+                }
 
                 <div id='Google_Map_Option_Selector'
                 style={{
@@ -730,13 +1007,19 @@ return <React.Fragment>
 
                 </div>
 
-                        <NEARBYSEARCH_RESULT_TABRESULT 
-                            places={List_Around_spot}
-                            timestamp={Opening_Hours}
-                            phonestamp={PhoneNumbers}/>
+                        { spinnerState.NB_ResultSpinner === true
 
-                        {/* <NEARBYSEARCH_NORESULT
-                            places={List_Around_spot}/> */}
+                        ? <div
+                        ><Spinner/>
+                        </div>
+
+                        : <NEARBYSEARCH_RESULT_TABRESULT 
+                        places={List_Around_spot}
+                        timestamp={Opening_Hours}
+                        phonestamp={PhoneNumbers}/>
+
+                        }
+
 
 </React.Fragment>
 
