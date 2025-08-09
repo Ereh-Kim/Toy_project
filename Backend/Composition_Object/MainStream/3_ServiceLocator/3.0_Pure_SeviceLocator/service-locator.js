@@ -41,7 +41,6 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         {
 
         this.Pure_Server.post('/webhook',(req,res)=>{
-            res.send('webhook')
             
             exec('/home/foodscript/srv/Toy_project/deploy.sh', (error, stdout, stderr) => {
             if (error) {
