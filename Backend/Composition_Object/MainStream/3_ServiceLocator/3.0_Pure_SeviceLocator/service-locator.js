@@ -40,6 +40,19 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         Inject_Dependency()
         {
 
+        this.Pure_Server.post('/webhook',(req,res)=>{
+            res.send('webhook')
+            
+            exec('/home/foodscript/srv/Toy_project/deploy.sh', (error, stdout, stderr) => {
+            if (error) {
+            console.error(`Deploy error: ${error.message}`);
+            return res.status(500).send('Deploy failed');
+            }
+            console.log(`Deploy output: ${stdout}`);
+            res.send('Deploy success');
+        });
+        })
+
         this.Pure_Server.set('trust proxy',1)
 
         this.Pure_Server.use(express.json({ limit: '50mb' }))
