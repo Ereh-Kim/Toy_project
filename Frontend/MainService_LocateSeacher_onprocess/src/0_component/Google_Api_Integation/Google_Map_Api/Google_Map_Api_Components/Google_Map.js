@@ -10,7 +10,7 @@ import NEARBYSEARCH_RESULT_TABRESULT from '../Google_Map_Api_Components/nearbySe
 import FORK_ICON from '../../../../1_image_or_icon/Fock_icon.jpg'
 import USERSUB_ICON from '../../../../1_image_or_icon/user_sub_icon_map.jpg'
 import MARKER from "./Google_Map_Markers";
-
+ 
 import Google_placePhoto_Encoder from "./Google_placePhoto_Encoder";
 import Spinner from "./Reusable_Components/spinner";
 
