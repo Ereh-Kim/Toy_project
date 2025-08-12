@@ -149,7 +149,7 @@ class Google_Map_API extends Pure_Router {
 
             let params = {
                 "includedTypes": type_input,
-                "maxResultCount": 3,
+                "maxResultCount": 10,
                 "locationRestriction": {
                     "circle": {
                     "center": {

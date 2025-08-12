@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Pin } from "@vis.gl/react-google-maps";
 
 export const Marker = (props) => {
+
+    const [PopUp ,updatePopup] = useState(props.showup)
 
     const MarkerIcon = document.createElement('img')
     MarkerIcon.src = props.src
@@ -14,10 +16,14 @@ export const Marker = (props) => {
     MarkerIcon.style.position = `relative`
     MarkerIcon.style.top = '10px'
 
+
+
     return <React.Fragment>
 
-    
-    <Pin glyph={MarkerIcon} scale={0}></Pin>
+ 
+
+            <Pin glyph={MarkerIcon} scale={0}></Pin>
+        
 
     </React.Fragment>
 

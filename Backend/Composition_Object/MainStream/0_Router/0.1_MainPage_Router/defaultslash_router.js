@@ -10,7 +10,7 @@ import Pure_Router from "../0.0_Pure_Router/pure_router.js";
 
             this.Pure_Router.get('/',(req, res)=>{
 
-                res.redirect('/search')                
+                res.redirect('/search')          
             
             })
 

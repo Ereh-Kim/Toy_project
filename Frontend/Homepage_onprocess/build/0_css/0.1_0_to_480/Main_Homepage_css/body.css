@@ -2,7 +2,7 @@
 
 @font-face {
   font-family:'큐트신민상';
-  src: "C:\Users\82104\Downloads\큐트신민상v1_01.ttf" format('woff');
+  src: url("../../../font/CuteMin.ttf") format('truetype');
 }
 
 body {

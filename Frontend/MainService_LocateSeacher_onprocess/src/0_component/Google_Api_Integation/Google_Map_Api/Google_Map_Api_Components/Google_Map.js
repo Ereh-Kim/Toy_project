@@ -10,9 +10,10 @@ import NEARBYSEARCH_RESULT_TABRESULT from '../Google_Map_Api_Components/nearbySe
 import FORK_ICON from '../../../../1_image_or_icon/Fock_icon.jpg'
 import USERSUB_ICON from '../../../../1_image_or_icon/user_sub_icon_map.jpg'
 import MARKER from "./Google_Map_Markers";
- 
+
 import Google_placePhoto_Encoder from "./Google_placePhoto_Encoder";
 import Spinner from "./Reusable_Components/spinner";
+import Google_Map_InfoWindow from "./Google_Map_InfoWindow";
 
 export const Google_Map = () => {
 
@@ -493,7 +494,7 @@ const [spinnerState, updateSpinner] = useState({
             default:
 
                 updateSpinner((prev)=>({
-                    ...prev,
+                    MapSpinner: true,
                     TS_ResultSpinner: true,
                     NB_ResultSpinner: true
                 }))
@@ -502,7 +503,7 @@ const [spinnerState, updateSpinner] = useState({
                 await Load_Existed_Keyword()
 
                 updateSpinner((prev)=>({
-                    ...prev,
+                    MapSpinner: false,
                     TS_ResultSpinner: false,
                     NB_ResultSpinner: false
                 }))
@@ -565,20 +566,28 @@ return <React.Fragment>
 
                         <AdvancedMarker
                         {...CLIENT_markerProps}>
-                            <MARKER src={USERSUB_ICON} border={`solid black 3px`} width={'6vw'}/>
+                            <MARKER src={USERSUB_ICON} border={`solid black 3px`} width={'6vw'}
+                            showup={true}/>
                         </AdvancedMarker>
+
+                        <Google_Map_InfoWindow
+                        Latlng={CLIENT_markerProps.position}
+                        InfoText='현재 위치'
+                        state= {true}
+                        />
 
                         <NEARBYSEARCHRESULT_MARKER places={List_Around_spot}/>
 
                         <div
                         style={{
-                            position: 'fixed',
+                            width: '100%',
+                            justifySelf: 'center',
+                            position: 'absolute',
                             display: `${spinnerState.MapSpinner
                                         ? ''
                                         : 'none'
                             }`,
-                            bottom: '60%',
-                            left: '45%',
+                            top: '15%',
                             zIndex: 10
                         
                         }}
@@ -629,9 +638,21 @@ return <React.Fragment>
                     let current_address = await Current_Address_Loading()
                     console.log(current_address)
 
+                    updateSpinner((prev)=>({
+                        MapSpinner: true,
+                        TS_ResultSpinner: true,
+                        NB_ResultSpinner: true
+                    }))
+
                     let result = await Load_From_Current_Location(current_address)
                     console.log(result)
                     
+                    updateSpinner((prev)=>({
+                        MapSpinner: false,
+                        TS_ResultSpinner: false,
+                        NB_ResultSpinner: false
+                    }))
+
                  }   
                 }
                 >
