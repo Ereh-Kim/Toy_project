@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "main":"npm run main --prefix Backend",
     "backend": "npm run backend --prefix Backend",
     "frontend": "npm start --prefix Frontend/MainService_LocateSeacher_onprocess",
     "start": "concurrently \"npm run backend\" \"npm run frontend\""

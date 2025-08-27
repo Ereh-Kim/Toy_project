@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "main":"node Composition_Object/MainStream/4_MainArea/4.0_Pure_MainArea/main_area.js",
     "backend": "nodemon Composition_Object/MainStream/4_MainArea/4.0_Pure_MainArea/main_area.js",
     "frontend": "npm start Frontend/MainService_LocateSeacher_onprocess/src/index.js"
   },

@@ -23,14 +23,14 @@ export let Database_Router = class Router {
       })
 
     let DB = new Pool({
-        connectionString: process.env.DATABASE_URL,
+        connectionString: process.env.DATABASE_URL_CAM,
         ssl: {
           rejectUnauthorized: false
         }
       })
 
     let DB_usercreation = new Pool({
-        connectionString: process.env.DATABASE_URL,
+        connectionString: process.env.DATABASE_URL_CUCM,
         ssl: {
           rejectUnauthorized: false
         }
