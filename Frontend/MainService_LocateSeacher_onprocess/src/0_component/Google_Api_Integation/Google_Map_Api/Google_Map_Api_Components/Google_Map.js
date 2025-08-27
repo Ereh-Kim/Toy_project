@@ -6,14 +6,15 @@ import { ActionCreater } from "../../../../2_reducer/reducer";
 import { Map, AdvancedMarker } from '@vis.gl/react-google-maps'
 import NEARBYSEARCH_NORESULT from "./nearbySearch_Service_Components/nearbySearchResult_NoResult";
 import NEARBYSEARCHRESULT_MARKER from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_Marker'
-import NEARBYSEARCH_RESULT_TABRESULT from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_TabResults'
+import NEARBYSEARCH_RESULT_TABRESULT from '../Google_Map_Api_Components/nearbySearch_Service_Components/nearbySearchResult_TabResults.js'
 import FORK_ICON from '../../../../1_image_or_icon/Fock_icon.jpg'
 import USERSUB_ICON from '../../../../1_image_or_icon/user_sub_icon_map.jpg'
 import MARKER from "./Google_Map_Markers";
 
 import Google_placePhoto_Encoder from "./Google_placePhoto_Encoder";
 import Spinner from "./Reusable_Components/spinner";
-import Google_Map_InfoWindow from "./Google_Map_InfoWindow";
+import Google_Map_InfoWindow_CL from "./Google_map_InfoWindow/Google_Map_InfoWindow_CL.js";
+import Google_Map_InfoWindow_TA from "./Google_map_InfoWindow/Google_Map_InfoWindwo_TA.js";
 
 export const Google_Map = () => {
 
@@ -45,6 +46,14 @@ const [Opening_Hours, updatePeriod ] = useState({});
 const [PhoneNumbers, updaateNumbers]= useState([]);
 const [StartSpot, updateStart] = useState();
 const [SimilarSpot, updateSimilar] = useState([]);
+
+const [Info_Window_State, update_Info] = useState({
+    clientPosition: true,
+    targetPosition: true,
+    NB_search_Positions: {
+
+    }
+});
 
 const [swipeState, setSwipeState] = useState({
     touchStart: 0,
@@ -154,10 +163,6 @@ const [spinnerState, updateSpinner] = useState({
             }
         });
     };
-    
-    const spinnerTest = async () => {
-        return new Promise( resolve => setTimeout(resolve,40000) )
-    }
 
     const Load_Existed_Keyword = async () => {
 
@@ -560,20 +565,56 @@ return <React.Fragment>
                     >
                 
                         <AdvancedMarker
-                        {...markerProps}>
+                        {...markerProps}
+                        onClick={ ()=>{
+                            update_Info(prev=>({
+                                ...prev,
+                                targetPosition: !Info_Window_State.targetPosition}
+                            ))
+                            console.log(` 검색한 위치 : ${Info_Window_State.targetPosition}
+                                사용자 위치 : ${Info_Window_State.clientPosition} `)
+                        }}
+                        >
                             <MARKER src={FORK_ICON} border={`solid black 3px`} width={'6vw'}/>
                         </AdvancedMarker>
 
+                        <Google_Map_InfoWindow_TA
+                        Latlng={markerProps.position}
+                        target_info='검색한 위치'
+                        target_state={Info_Window_State.targetPosition}
+                        target_toggler={()=>{
+                            console.log('TA')
+                            update_Info(prev=>({
+                                ...prev,
+                                targetPosition: !Info_Window_State.targetPosition}
+                            ))
+                        }}
+                        />
+
                         <AdvancedMarker
-                        {...CLIENT_markerProps}>
-                            <MARKER src={USERSUB_ICON} border={`solid black 3px`} width={'6vw'}
-                            showup={true}/>
+                        {...CLIENT_markerProps}
+                            onClick={ ()=>{
+                                update_Info(prev=>({
+                                    ...prev,
+                                    clientPosition: !Info_Window_State.clientPosition
+                                }
+                                ))
+                            }}>
+                                <MARKER src={USERSUB_ICON} border={`solid black 3px`} width={'6vw'}/>
                         </AdvancedMarker>
 
-                        <Google_Map_InfoWindow
+                        <Google_Map_InfoWindow_CL
                         Latlng={CLIENT_markerProps.position}
-                        InfoText='현재 위치'
-                        state= {true}
+                        client_info='현재 위치'
+                        client_state={Info_Window_State.clientPosition}
+                        client_toggler={()=>{
+                            console.log('CL')
+                            update_Info(prev=>({
+                                ...prev,
+                                clientPosition: !Info_Window_State.clientPosition}
+                            ))
+
+                        }}
                         />
 
                         <NEARBYSEARCHRESULT_MARKER places={List_Around_spot}/>
@@ -617,6 +658,7 @@ return <React.Fragment>
 
                 </Map>
 
+                
 
                 <input type="button"
                 value={`${"\u{1F52D}"} Find From My Location ${"\u{1F52D}"}`}

@@ -14,7 +14,8 @@ const Keyword = () => {
 
 export const initial_State = {
     urlObject : Url,
-    urlToString : Keyword()
+    urlToString : Keyword(),
+    SpotStorage : {}
 }
 
 export function AppReducer(state = initial_State, action){
@@ -49,6 +50,17 @@ export function AppReducer(state = initial_State, action){
             return {...state};
         }
 
+        case 'InitailizeSpots':{
+            return {...state,
+                SpotStorage : action.param
+            }
+        }
+
+        case 'UpdateList':{
+            return {...state,
+                SpotStorage: action.param
+            }
+        }
         
         default: return {...state};
     }
