@@ -5,6 +5,8 @@ import { Account_Register_Router } from "../0.8_Account_Register_Router/account_
 import { Password_Genarator } from "../0.10_Tools/0.10.1_Password_Genagrator_API/password_genarator_api.js";
 import { File_Reader } from "../0.10_Tools/0.10.2_File_Reader_API/file_reader.js";
 
+import Database_Router_CAM from '../../0_Router/0.6_DataBase_Router_ClinetAccountManager/database_router_CAM.js';
+
 import axios from 'axios'
 import dotenv from 'dotenv'
 
@@ -71,61 +73,36 @@ export class google_certification_router extends Pure_Router {
 
 
 
-    this.Pure_Router.get('/redirect',async (req,res, next)=>{      
-    
+    this.Pure_Router.get('/redirect',async (req,res, next)=>{   
         
         const access_token = await this.Issue_Google_Access_Token(req.query.code)
         const UserInfo= await this.Get_UserInfo_From_AccessToken(access_token)
 
         const RequestOrigin = await req.session.url_history[req.session.url_history.length-1]
         let DB = new Account_Register_Router();
-        console.log(RequestOrigin + ' this is link ')
-        const Mulit = '/search/font/CuteMin.ttf'||'/search/static/css/main.1a823c04.css.map'||'/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'
+        // const Mulit = '/search/font/CuteMin.ttf'||'/search/static/css/main.1a823c04.css.map'||'/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'
 
         switch(RequestOrigin){
-            case('/registeration/signup-with-google'):
-            await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified', 'google')
             
-            let password_genarator = new Password_Genarator();
-            let file_reader = new File_Reader();
-
-
-
-            let condition = await DB.Create_NewUser(UserInfo.email, 
-                [`${UserInfo.email}`,
-                 `${UserInfo.name}`,
-                  await file_reader.read_file(`./public/Profile_Stranger_icon.jpg`),
-                  `${password_genarator.genarate_password(8)}`,
-                  `reviewer`])
-            
-                switch(condition){
-                    
-                    case('Need_To_Find'):
-                    res.redirect('/login')
-                    return;
-
-                    default:
-                        const approved_session = await fetch(`${process.env.DOMAIN}/googlelogin/sessionset`,{
-                            method: 'PATCH'
-                        })
-                        const approved_session_data = await approved_session.json()
-                        
-                        req.session.data = approved_session_data.user_info
-                        res.write(`<script>alert('${approved_session_data.message}')</script>`)
-                        res.write(`<script>window.location=\"${approved_session_data.redirectUrl}\"</script>`);
-                        res.end()
-                    break;
-                }
-                break;
-
+            case('/search/static/media/food_script_logo.097e8682e80d398be578.png'):
+            case('/search/static/media/food_script_tabicon.5f9cb8eda6e2f9aa61c6.png'):
             case('/search/font/CuteMin.ttf'):
             const status = await DB.Check_User_Exist(['email'],[`${UserInfo.email}`])
-                console.log(status)
                 switch(status){
 
                     case('Need_Registeration'):
-                    await this.Register_verified_UserInfo(UserInfo, 'unverified', 'verified', 'google')
-                        
+                    await this.Register_verified_UserInfo(UserInfo, 'verified', 'verified', 'google')
+                
+                    let password_genarator = new Password_Genarator();
+                    let file_reader = new File_Reader();
+
+                    await DB.Create_NewUser(UserInfo.email,
+                                            [`${UserInfo.email}`,
+                                            `${UserInfo.name}`,
+                                            await file_reader.read_file(`./public/Profile_Stranger_icon.jpg`),
+                                            `${password_genarator.genarate_password(8)}`,
+                                            `reviewer`])
+
                         const temporary_session = await fetch(`${process.env.DOMAIN}/googlelogin/sessionset`,{
                             method: 'PATCH'
                         })

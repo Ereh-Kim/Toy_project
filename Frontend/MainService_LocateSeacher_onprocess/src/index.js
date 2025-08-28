@@ -14,6 +14,7 @@ import GETDETAILS_INTEGRATOR from './0_component/Google_Api_Integation/Google_Ma
 
 import PERSONAILZED_DATA_PAGE_INTEGRATOR from './0_component/Personalized_Data_Page/Personalized_Data_Page_integrator'
 import REGISTRATION_PAGE from './0_component/Registeration_Page/Registration_Page'
+import Register_Page_integrator from './0_component/Register_page/Register_page_integrator'
 
 import LOGIN_PAGE_INTEGRATOR from './0_component/Login_page/Login_page_integrator'
 import FOODSCRIPT_LOGIN_PAGE from './0_component/Login_page/foodscript_version_LocalVersion/foodscript_login_page'
@@ -34,7 +35,26 @@ root.render(
         </Routers>
            
         <Routers basename='/registration'>
-            <REGISTRATION_PAGE/>
+            <Routes>
+                <Route
+                    path='/'
+                    element={<Register_Page_integrator/>}
+                />
+                <Route
+                    path='/fieldpage'
+                    element={<REGISTRATION_PAGE/>}
+                >
+                    <Route
+                        path='business'
+                        element={<REGISTRATION_PAGE/>}
+                    />
+                    <Route
+                        path='reviewer'
+                        element={<REGISTRATION_PAGE/>}
+                    />
+
+                </Route>
+            </Routes>
         </Routers>
 
         <Routers basename='/login'>

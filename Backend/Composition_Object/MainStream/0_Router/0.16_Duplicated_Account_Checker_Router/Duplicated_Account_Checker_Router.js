@@ -12,12 +12,48 @@ class Duplicated_Account_Checker_Router extends Pure_Router {
         this.Pure_Router.get('/account_name', async (req,res)=>{
     
             let DB = new Database_Router_DC
-            
-            let result = await DB.Check_duplicated_resource(req.query.name,'foodscript_user','user_info')
+            let result = await DB.Check_duplicated_resource('name', req.query.name,'foodscript_user', 'user_info')
 
+            switch(result.length){
+                case(0): 
+                result = {
+                    check_result: true,
+                    messsage: "No duplicate names"
+                }
+                break;
 
+                default:                
+                result = {
+                    check_result: false,
+                    messsage: "duplicate names exist"
+                }
+            }
 
-            res.send(result)
+            res.json(result)
+
+        })
+
+        this.Pure_Router.get('/account_email', async(req,res)=>{
+
+            let DB = new Database_Router_DC
+            let result = await DB.Check_duplicated_resource('email', req.query.email,'foodscript_user', 'user_info')
+
+            switch(result.length){
+            case(0): 
+            result = {
+                check_result: true,
+                messsage: "No duplicate emails"
+            }
+            break;
+
+            default:                
+            result = {
+                check_result: false,
+                messsage: "duplicate emails exist"
+            }
+            }
+
+            res.json(result)
 
         })
 

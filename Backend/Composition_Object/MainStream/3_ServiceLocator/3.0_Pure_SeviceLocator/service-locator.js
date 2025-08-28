@@ -73,6 +73,7 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
 
         this.Pure_Server.use('/login',Local_Certificater_Routes)
         this.Pure_Server.use('/login/google',Google_certificater_Routes)
+        // this.Pure_Server.use('/signup',)
 
         this.Pure_Server.use('/check_duplicates', Duplicated_Account_Checker_Routes)
         this.Pure_Server.use('/registration',Account_Register_Routes)

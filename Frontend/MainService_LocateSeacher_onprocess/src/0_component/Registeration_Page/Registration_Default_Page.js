@@ -25,7 +25,7 @@ export const Registration_Default_Page = () => {
     >
 
     <a
-    href="../"
+    href="./"
     >
     <img
     src={Arrow}
@@ -48,7 +48,7 @@ export const Registration_Default_Page = () => {
         }}
         >
 
-            <Link to='/business'>
+            <Link to='/fieldpage/business'>
                 <div
                 className="Registration_btn"
                 >
@@ -66,7 +66,7 @@ export const Registration_Default_Page = () => {
 
 
 
-            <Link to='/reviewer'>
+            <Link to='/fieldpage/reviewer'>
                 <div
                 className="Registration_btn"
                 >

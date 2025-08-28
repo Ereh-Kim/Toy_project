@@ -17,14 +17,14 @@ module.exports = function(app) {
   );  
 
   app.use(
-    createProxyMiddleware([`/login_check`,`/update`,`/delete`,`/check_duplication`],{
+    createProxyMiddleware([`/login_check`,`/update`,`/delete`],{
       target: 'http://localhost:8080',
       changeOrigin: true
     })
   );
 
   app.use(
-    ['/usercreation/**','/imagedata/**','/google_map_api/**', `/read_review/**`],
+    ['/usercreation/**','/imagedata/**','/google_map_api/**', `/read_review/**`, `/check_duplicates/**`],
     createProxyMiddleware({
       target: 'http://localhost:8080',
       changeOrigin: true

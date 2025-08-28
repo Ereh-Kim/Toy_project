@@ -17,7 +17,7 @@ export const Login_Page_integrator = () => {
         className='Login_Page_Container'>
 
             <a
-            href='/homepage'
+            href='/search'
             style={{
                 position: 'absolute',
                 right: '85vw',

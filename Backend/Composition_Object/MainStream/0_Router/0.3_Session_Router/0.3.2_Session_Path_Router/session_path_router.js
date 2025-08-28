@@ -35,8 +35,6 @@ class Session_Path_Router extends Session_Router {
             let refined_session_data = req.session
             delete refined_session_data.data
 
-            console.log(refined_session_data, 'logout_check')
-
             res.send(`<script>
                 alert('${message}')
                 window.location=\"${destiny}\"

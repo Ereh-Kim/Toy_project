@@ -9,11 +9,23 @@ import Arrow from '../../1_image_or_icon/Arrow_Button_UpAhead.png'
 export const Registration_Field_Page = (props) => {
 
     const [imageURL, updateURL] = useState(false)
+    const [notice,      updateNOTICE] = useState({
+        nameField: { status: false,
+                     OKorErr: true,
+                     OK_message: ' This name is available',
+                     Err_message: ' This name is already in use' },
+        emailField: { status: false,
+                     OKorErr: true,
+                     OK_message: ' This email is available',
+                     Err_message: ' This email is already in use' }
+            })
 
     let nameTimer;
     let emailTimer;
 
-    const Field_Dispenser = (type,name,id,value,readonly,staticText, event) => {
+    const Field_Dispenser = ( type, name, id, value, 
+                            readonly, staticText, event, 
+                            notice_option, notice_boolean, notice_section) => {
 
         return <React.Fragment>
 
@@ -35,14 +47,31 @@ export const Registration_Field_Page = (props) => {
         }}
         >
 
-            <label htmlFor={id}
-            style={{
-
-            }}
-            >
+            <label htmlFor={id}>
             {name.slice(0,1).toUpperCase()}{name.slice(1)}/
             </label>
+
+            {notice_option?<label
+                                style={{
+                                    fontSize:'15px',
+                                    letterSpacing: '2px',
+                                    width:'fit-content',
+                                    padding: '3px 7px',
+                                    borderRadius: '4px',
+                                    margin: '5px 0px 0px 0px',
+                                    border: notice_boolean?'':'',
+                                    
+                                    backgroundColor: notice_boolean?'#FFC300':'red'
+                                }}
+
             
+                            >
+                            {notice_boolean
+                            ?notice[`${notice_section}`][`OK_message`]
+                            :notice[`${notice_section}`][`Err_message`]}
+                            </label>
+                            :''}
+
             <input 
             type={type}
             name={name}
@@ -151,27 +180,119 @@ export const Registration_Field_Page = (props) => {
                     }}
                     >
                         
-                        {Field_Dispenser('text','name','name', null, false, '', 
+                        {Field_Dispenser('text','name','name', null, false, '',
                             async (e)=>{
-                                console.log(e.target.value)
+                                const nameRegex = /^[a-zA-Z0-9가-힣]*$/;
                                 clearTimeout(nameTimer)
                                 
-                                nameTimer = setTimeout(()=>{
-                                    console.log('3s')
-                                },3000)
-                            }
-                            
+                                nameTimer = setTimeout(async ()=>{
+                                        const nameVaild = nameRegex.test(e.target.value)
+
+                                        switch(nameVaild){
+                                            case(true):
+                                            const result = await fetch(`/check_duplicates/account_name?name=${e.target.value}`)
+                                            const result_data = await result.json()
+                                            console.log(result_data)
+                                            
+                                            if(e.target.value.length>0 && result_data.check_result == true){
+                                                updateNOTICE(prev=>({
+                                                ...prev,
+                                                nameField: { status: true,
+                                                            OKorErr: true,
+                                                            OK_message: 'This name is available',
+                                                            Err_message: 'This name is already in use' }
+
+                                            }))
+                                            }
+
+                                            if(e.target.value.length==0){
+                                                updateNOTICE(prev=>({
+                                                ...prev,
+                                                nameField: { status: false,
+                                                            OKorErr: true,
+                                                            OK_message: 'This name is available',
+                                                            Err_message: 'This name is already in use' }
+
+                                            }))
+                                            }
+
+                                            if(e.target.value.length>0 && result_data.check_result == false){
+                                                updateNOTICE(prev=>({
+                                                ...prev,
+                                                nameField: { status: true,
+                                                            OKorErr: false,
+                                                            OK_message: 'This name is available',
+                                                            Err_message: 'This name is already in use' }
+                                            }))
+                                            }
+                                            break;
+                                        
+                                            case(false):
+                                            updateNOTICE(prev=>({
+                                                ...prev,
+                                                nameField: { status: true,
+                                                            OKorErr: false,
+                                                            OK_message: 'This name is available',
+                                                            Err_message: 'Invaild user name...' }
+                                            }))
+                                        
+                                        }
+                                },500)
+                            },notice.nameField.status, notice.nameField.OKorErr,'nameField'
                         )}
 
                         {Field_Dispenser('email','email','email', null, false, '',
                             async (e)=>{
-                                console.log(e.target.value)
-                                clearTimeout(emailTimer)
 
-                                emailTimer = setTimeout(()=>{
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                clearTimeout(nameTimer)
+                                
+                                nameTimer = setTimeout(async ()=>{
+                                    const emailVaild = emailRegex.test(e.target.value)
+
                                     
-                                })
-                            }
+                                    switch(emailVaild){
+                                        case(true):
+                                            const result = await fetch(`/check_duplicates/account_email?email=${e.target.value}`)
+                                            const result_data = await result.json()
+                                            console.log(result_data)
+                                            
+                                            if(result_data.check_result == true){
+                                                updateNOTICE(prev=>({
+                                                ...prev,
+                                                emailField: { status: true,
+                                                            OKorErr: true,
+                                                            OK_message: ' This email is available',
+                                                            Err_message: ' This email is already in use'}       
+
+                                            }))
+                                            }
+
+                                            if(result_data.check_result == false){
+                                                updateNOTICE(prev=>({
+                                                ...prev,
+                                                emailField: { status: true,
+                                                            OKorErr: false,
+                                                            OK_message: ' This email is available',
+                                                            Err_message: ' This email is already in use'}       
+
+                                            }))
+                                            }
+
+                                            break;
+
+                                        case(false):
+                                            updateNOTICE(prev=>({
+                                                ...prev,
+                                                emailField: { status: true,
+                                                            OKorErr: false,
+                                                            OK_message: ' This email is available',
+                                                            Err_message: ' Invaild email address... '}
+                                            }))
+
+                                    }
+                                    },500)
+                            }, notice.emailField.status, notice.emailField.OKorErr, 'emailField'
                          )}
 
                             <div
@@ -213,11 +334,11 @@ export const Registration_Field_Page = (props) => {
                                  
                                  >
                                     {imageURL?'':'Picture'}
-                                
+                                    
                                     <img
                                  src={imageURL}
                                  style={{
-                                    width:`${imageURL.length}`?'0%':'70%'
+                                    width: imageURL.length?'70%':'0%'
                                  }}
                                  >
                                  </img>
