@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 import { Buffer } from "buffer";
@@ -8,7 +8,12 @@ import Arrow from '../../1_image_or_icon/Arrow_Button_UpAhead.png'
 
 export const Registration_Field_Page = (props) => {
 
-    const Field_Dispenser = (type,name,id,value,readonly,event) => {
+    const [imageURL, updateURL] = useState(false)
+
+    let nameTimer;
+    let emailTimer;
+
+    const Field_Dispenser = (type,name,id,value,readonly,staticText, event) => {
 
         return <React.Fragment>
 
@@ -52,7 +57,7 @@ export const Registration_Field_Page = (props) => {
                 borderRadius: '7px',
 
             }}
-            readOnly={readonly}
+            readOnly={readonly?staticText:null}
             onChange={event}
             ></input>
 
@@ -146,9 +151,28 @@ export const Registration_Field_Page = (props) => {
                     }}
                     >
                         
-                        {Field_Dispenser('text','name','name', null, false)}
+                        {Field_Dispenser('text','name','name', null, false, '', 
+                            async (e)=>{
+                                console.log(e.target.value)
+                                clearTimeout(nameTimer)
+                                
+                                nameTimer = setTimeout(()=>{
+                                    console.log('3s')
+                                },3000)
+                            }
+                            
+                        )}
 
-                        {Field_Dispenser('email','email','email', null, false)}
+                        {Field_Dispenser('email','email','email', null, false, '',
+                            async (e)=>{
+                                console.log(e.target.value)
+                                clearTimeout(emailTimer)
+
+                                emailTimer = setTimeout(()=>{
+                                    
+                                })
+                            }
+                         )}
 
                             <div
                             style={{
@@ -181,13 +205,27 @@ export const Registration_Field_Page = (props) => {
                                 <label 
                                  htmlFor={`picture`}
                                  id='picture_label'
+                                 onChange={(e)=>{
+                                    const target = e.target.files
+                                    const reader = new FileReader()
+                                    reader.readAsDataURL(target[0])
+                                 }}
+                                 
                                  >
-                                    Picture
-                                </label>
+                                    {imageURL?'':'Picture'}
                                 
+                                    <img
+                                 src={imageURL}
+                                 style={{
+                                    width:`${imageURL.length}`?'0%':'70%'
+                                 }}
+                                 >
+                                 </img>
+                                
+                                </label>
 
                                 </div>
-                                
+
                                 <input 
                                 type='file'
                                 name='picture'
@@ -207,10 +245,11 @@ export const Registration_Field_Page = (props) => {
         
                                         if (file) {
                                         const reader = new FileReader();
-                                        reader.readAsArrayBuffer(file);
+                                        reader.readAsDataURL(file);
         
                                         reader.onload = function(e) {
-                                            const arrayBuffer = e.target.result;  
+                                            const arrayBuffer = e.target.result;
+                                            updateURL(arrayBuffer)  
                                             console.log(arrayBuffer)
                                         };
         
@@ -225,9 +264,10 @@ export const Registration_Field_Page = (props) => {
 
                             </div>
 
-                        {Field_Dispenser('text','password','password', null, false)}
+                        {Field_Dispenser('text','password','password', null, false, '', null
+                        )}
 
-                        {Field_Dispenser('text', 'position', 'position', `${props.purpose}`, true)}
+                        {Field_Dispenser('text', 'position', 'position', `${props.purpose}`, `${props.purpose}`, false)}
 
                         <input
                         type="submit"

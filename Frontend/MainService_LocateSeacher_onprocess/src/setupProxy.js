@@ -17,7 +17,7 @@ module.exports = function(app) {
   );  
 
   app.use(
-    createProxyMiddleware([`/login_check`,`/update`,`/delete`],{
+    createProxyMiddleware([`/login_check`,`/update`,`/delete`,`/check_duplication`],{
       target: 'http://localhost:8080',
       changeOrigin: true
     })

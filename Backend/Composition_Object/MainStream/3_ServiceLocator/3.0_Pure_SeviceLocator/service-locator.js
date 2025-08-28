@@ -10,6 +10,7 @@ import {Google_certificater_Routes} from '../../0_Router/0.2_Google_Certificatio
 import {Local_Certificater_Routes} from '../../0_Router/0.7_Local_Certification_Router/local_certification_router.js';
 import Account_Logout_Routes from '../../0_Router/0.13_Account_Logout_Router/account_logout_router.js';
 
+import {Duplicated_Account_Checker_Routes} from '../../0_Router/0.16_Duplicated_Account_Checker_Router/Duplicated_Account_Checker_Router.js'
 import {Account_Register_Routes} from '../../0_Router/0.8_Account_Register_Router/account_register_router.js';
 
 import {Session_Routes} from '../../0_Router/0.3_Session_Router/session_router.js';
@@ -21,7 +22,6 @@ import URL_History_Recorder_Routes from '../../0_Router/0.3_Session_Router/0.3.1
 
 import {Login_checker_api_Routes} from '../../0_Router/0.9_API/0.9.1_Login_Checker_API/login_checker_api.js';
 import {Google_Map_Api_Routes} from '../../0_Router/0.9_API/0.9.2_Google_Map_API/google_map_api.js';
-
 import Account_Delete_Routes from '../../0_Router/0.11_Account_Delete_Router/0.11_account_delete_router.js';
 import {Account_Update_Routes} from '../../0_Router/0.12_Account_Update_Router/0.12_account_update_router.js';
 
@@ -74,7 +74,7 @@ import { Image_File_Loader_Router } from '../../0_Router/0.10_Tools/0.10.7_Image
         this.Pure_Server.use('/login',Local_Certificater_Routes)
         this.Pure_Server.use('/login/google',Google_certificater_Routes)
 
-
+        this.Pure_Server.use('/check_duplicates', Duplicated_Account_Checker_Routes)
         this.Pure_Server.use('/registration',Account_Register_Routes)
 
         this.Pure_Server.use('/login_check', Login_checker_api_Routes)
