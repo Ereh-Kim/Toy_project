@@ -552,6 +552,10 @@ return <React.Fragment>
                         border: 'black solid 5px'
                         }}
                     
+                    options={{
+                        gestureHandling: 'greedy'
+                    }}
+
                     {...cameraProps}
                         onDragstart={()=>{
                         const New_Default = {}
@@ -561,6 +565,7 @@ return <React.Fragment>
                         const New_Default = {}
                         setCameraProps({defaultZoom:15,defaultCenter:{...New_Default}})    
                     }}
+                    
 
                     >
                 
