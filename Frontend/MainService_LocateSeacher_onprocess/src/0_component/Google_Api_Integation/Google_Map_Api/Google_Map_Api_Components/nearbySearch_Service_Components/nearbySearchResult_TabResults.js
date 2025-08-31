@@ -9,11 +9,14 @@ import Pocket_Icon_Restaurant from '../../../../../1_image_or_icon/Pocket_icon_R
 import Pocket_Icon_Cafe from '../../../../../1_image_or_icon/Pocket_icon_Cafe.png'
 
 import Arrow_Button_UpAhead from '../../../../../1_image_or_icon/Arrow_Button_UpAhead.png'
+import { useSelector } from "react-redux";
 
 
 export const NearbySearch_TabResults = (props) => {
 
     const [OnOff , updateToggle] = useState('off')
+    const Distance_Comparison = useSelector(state => state.Comparison)
+
 
     const LineExtense = () => {
         const LineExtense = document.getElementById('LocationSearch_filter_Container')
@@ -138,6 +141,76 @@ export const NearbySearch_TabResults = (props) => {
                 })}
     }
 
+    const Distance_calculator_Helper = (section, input) =>{
+
+        const phi = (props[`${section}`].position.lat + input.location.latitude) / 2 * Math.PI/180;
+
+        const distance_lat = Math.abs(props[`${section}`].position.lat)-Math.abs(input.location.latitude)
+        const distance_lng = Math.abs(props[`${section}`].position.lng)-Math.abs(input.location.longitude)
+
+        const metersPerDegLat = 111132; 
+        const metersPerDegLon = 111320 * Math.cos(phi); 
+
+        const dy = distance_lat * metersPerDegLat;
+        const dx = distance_lng * metersPerDegLon;
+
+        const result = Math.sqrt(dx*dx+dy*dy)
+        
+        return result
+
+    }
+
+    const Distance_calculator = (input) => {
+
+        console.log(props.target.position, props.client.position)
+
+        let Distance_Comparison;
+
+        if( props.target.position != {lat: 0, lng: 0} &&
+            Number(props.target.position.lat.toFixed(2)) == Number(props.client.position.lat.toFixed(2)) &&
+            Number(props.target.position.lat.toFixed(2)) == Number(props.client.position.lat.toFixed(2))
+        ){
+            Distance_Comparison = 'client'
+        }
+        else{
+            Distance_Comparison = 'target'
+        }
+
+
+        switch(Distance_Comparison){
+
+            case('client'):
+                
+                Distance_Comparison = Distance_calculator_Helper('client', input)
+
+                return <span>
+
+                {Distance_Comparison.toFixed(0)}m
+                
+                
+                 AWAY FROM YOU
+                
+                </span>
+
+            case('target'):
+                
+                Distance_Comparison = {
+                    client : Distance_calculator_Helper('client', input),
+                    target : Distance_calculator_Helper('target', input)
+                }
+
+                return <span>
+
+                {Distance_Comparison.client.toFixed(0)}m AWAY FROM YOU
+                <br></br>
+                {Distance_Comparison.target.toFixed(0)}m AWAY FROM SPOT
+                
+                </span>
+                
+        }
+
+    }
+
     const IsOpen_Inspector = (input, index) => {
         switch(typeof input[index]){
             case('undefined'):
@@ -254,6 +327,8 @@ export const NearbySearch_TabResults = (props) => {
        LineExtense()
     },[])
 
+    console.log(props.places)
+
     return <React.Fragment>
 
     <div
@@ -268,7 +343,18 @@ export const NearbySearch_TabResults = (props) => {
 
     {props.places.map((place, index)=>{
 
-        return <div
+        return <React.Fragment>
+
+        <div
+        style={{
+            position:'relative',
+            top:'10px'
+        }}
+        >        
+        {Distance_calculator(place)}
+        </div>
+
+        <div
 
         key={index}
 
@@ -283,6 +369,7 @@ export const NearbySearch_TabResults = (props) => {
             justifyContent: 'space-between',
             paddingBottom: '2vh'
         }}>
+
             <a 
             href={`/search/location/${place.name}`}
             target="_blank"
@@ -387,6 +474,7 @@ export const NearbySearch_TabResults = (props) => {
             
 
         </div>
+        </React.Fragment>
     })}
 
     </div>

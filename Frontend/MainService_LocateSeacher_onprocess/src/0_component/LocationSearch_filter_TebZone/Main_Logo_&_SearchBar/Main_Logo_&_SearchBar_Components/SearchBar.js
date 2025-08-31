@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { ActionCreater } from "../../../../2_reducer/reducer";
+import { useNavigate } from 'react-router-dom'
 
 import GlassIcon from '../../../../1_image_or_icon/reading_glass_icon.png'
 
@@ -12,6 +13,7 @@ export const SearchBar = () => {
     const SearchBar_Ref = useRef('')
 
     const Url = useSelector(state => state.urlObject)
+    const navigate = useNavigate();
     const dispatch = useDispatch()
 
     return <React.Fragment>
@@ -34,19 +36,20 @@ export const SearchBar = () => {
                             ()=>{
                                 dispatch(ActionCreater('UpdateUrl','keyword',`${SearchBar_Ref.current.value}`))
                             }
-                                
                             }
                             
                     onKeyUp={
                         
-                            ()=>{
+                            (e)=>{
                                 console.log(`/search?${Url.toString()}`)
+
                                 if(window.event.keyCode === 13 && Url.has('FilterTabBar') ===  false){
-                                    document.location.href = `/search?${Url.toString()}&FilterTabBar=opened`
+                                    navigate(`/search?${Url.toString()}&FilterTabBar=opened`)
+                                
                                 }
                                 
                                 if(window.event.keyCode === 13 && Url.has('FilterTabBar') ===  true){
-                                    document.location.href = `/search?${Url.toString()}`
+                                    navigate(`/search?${Url.toString()}`)
                                 }
                     }}>
                 </input>

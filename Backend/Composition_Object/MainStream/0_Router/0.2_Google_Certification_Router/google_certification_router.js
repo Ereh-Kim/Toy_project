@@ -5,8 +5,6 @@ import { Account_Register_Router } from "../0.8_Account_Register_Router/account_
 import { Password_Genarator } from "../0.10_Tools/0.10.1_Password_Genagrator_API/password_genarator_api.js";
 import { File_Reader } from "../0.10_Tools/0.10.2_File_Reader_API/file_reader.js";
 
-import Database_Router_CAM from '../../0_Router/0.6_DataBase_Router_ClinetAccountManager/database_router_CAM.js';
-
 import axios from 'axios'
 import dotenv from 'dotenv'
 

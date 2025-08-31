@@ -579,7 +579,7 @@ return <React.Fragment>
                         onClick={()=>{
                             console.log(MapToggler, 'now state')
                             updateToggle(!MapToggler)
-                        }}
+                    }}
                     
 
                     >
@@ -697,6 +697,8 @@ return <React.Fragment>
                 }}
                 onClick={
                  async ()=>{
+                    dispatch(ActionCreater('UpdateUrl','comparison',`client`))
+
                     let current_address = await Current_Address_Loading()
                     console.log(current_address)
 
@@ -1096,7 +1098,9 @@ return <React.Fragment>
                         ><Spinner/>
                         </div>
 
-                        : <NEARBYSEARCH_RESULT_TABRESULT 
+                        : <NEARBYSEARCH_RESULT_TABRESULT
+                        client={CLIENT_markerProps}
+                        target={markerProps}
                         places={List_Around_spot}
                         timestamp={Opening_Hours}
                         phonestamp={PhoneNumbers}/>
