@@ -46,6 +46,7 @@ const [Opening_Hours, updatePeriod ] = useState({});
 const [PhoneNumbers, updaateNumbers]= useState([]);
 const [StartSpot, updateStart] = useState();
 const [SimilarSpot, updateSimilar] = useState([]);
+const [MapToggler, updateToggle] = useState(false)
 
 const [Info_Window_State, update_Info] = useState({
     clientPosition: true,
@@ -546,14 +547,24 @@ return <React.Fragment>
                      mapId='a6ea1c40e5d4c5a'
                 
                     style={ 
-                        { width:'inherit',
-                        height:'20vh',
-                        margin: '3vh 6vw 0 10vw',
+                        { 
+                        width: MapToggler?'70vw':'inherit',
+                        height: MapToggler?'50vh':'20vh',
+                        margin: MapToggler
+                                ?'1vh 0 0vh 3vw'
+                                :'3vh 6vw 0 10vw',
                         border: 'black solid 5px'
                         }}
                     
                     options={{
-                        gestureHandling: 'greedy'
+                        gestureHandling: 'greedy',
+                        zoomControl: false,
+                        cameraControl: false,
+                        mapTypeControl: false,
+                        scaleControl: false,
+                        streetViewControl: false,
+                        rotateControl: false,
+                        fullscreenControl: true
                     }}
 
                     {...cameraProps}
@@ -565,6 +576,10 @@ return <React.Fragment>
                         const New_Default = {}
                         setCameraProps({defaultZoom:15,defaultCenter:{...New_Default}})    
                     }}
+                        onClick={()=>{
+                            console.log(MapToggler, 'now state')
+                            updateToggle(!MapToggler)
+                        }}
                     
 
                     >
