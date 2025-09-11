@@ -97,7 +97,6 @@ class Usercreation_R_Router extends Pure_Router {
                         Reviewer_Profile_result.picture, 'single', 0, 'read'
                     )
 
-                console.log(Reviewer_Profile_result)
                 element.reviewer_name = Reviewer_Profile_result.name
                 element.reviewer_profile = [PROFILE_IMG_URL + `/0`]
 

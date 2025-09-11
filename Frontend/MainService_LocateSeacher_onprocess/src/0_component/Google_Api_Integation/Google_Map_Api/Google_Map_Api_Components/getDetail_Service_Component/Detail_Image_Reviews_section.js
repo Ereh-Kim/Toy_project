@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
 
@@ -6,10 +6,30 @@ import Arrow from '../../../../../1_image_or_icon/Arrow_Button_UpAhead.png'
 import ThumbUp from '../../../../../1_image_or_icon/thumbs-up-icon.png'
 import Pen from '../../../../../1_image_or_icon/Pen_icon.jpg'
 import EditIcon from '../../../../../1_image_or_icon/edit-list-icon.png'
+import strangerImg from '../../../../../1_image_or_icon/Profile_Stranger_icon.jpg'
+
+import {Buffer} from 'buffer';
 
 import TIMESTAMP from "./Timestamp.js";
 
+import REPLOY_BOX from "../Reusable_Components/replybox.js";
+import Reply_List from "./Reply_List.js";
+
 export const Detail_Image_Reviews_Section = (props) => {
+
+    let imgsrc;
+    
+    if(props.currentUser.status == 'verified'){
+        const rawdata = props.currentUser.userinfo.picture.data
+        const UserImage_Data = Buffer.from(rawdata)
+        const base64Image = UserImage_Data.toString('base64')
+        imgsrc = `data:image/jpg;base64,${base64Image}`;
+    }
+    else{
+        imgsrc = strangerImg
+    }
+
+    const inputRef = useRef();
 
     const [swipeState, setSwipeState] = useState({
         touchStart: 0,
@@ -40,7 +60,7 @@ export const Detail_Image_Reviews_Section = (props) => {
             time: 'time'
         }
     })
-    
+
     const location = useLocation()
     const placecode = location.pathname.slice(17)
 
@@ -48,9 +68,7 @@ export const Detail_Image_Reviews_Section = (props) => {
 
         review_origin_loader(placecode).then(async (res)=>{
             let review_result = res.result
-            console.log(review_result)
             review_result = Object.values(review_result)
-            console.log(review_result)
             setReviews(review_result)
         })
         
@@ -384,9 +402,24 @@ export const Detail_Image_Reviews_Section = (props) => {
 
         let property_keys = reviews_property_keys[origin]
 
+        let reply_origin; 
+
         switch(typeof input){
             case('object'):
                    return input.map((element)=>{
+
+                    switch(origin){
+
+                        case('google'):
+                        const nameNum = element[property_keys.username].split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+                        const timeNum = element[property_keys.time].toString()
+                        reply_origin = -Number(nameNum+timeNum)
+                        break;
+
+                        case('origin'):
+                        reply_origin = element.id
+                        break;
+                    }
 
                     return <React.Fragment>
 
@@ -399,7 +432,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                         border: 'black solid 3.5px',
                         borderRadius: '15px',
                         fontFamily: '큐트신민상',
-                        letterSpacing: '1vw',
+                        letterSpacing: '0.5vw',
                         spaceBetween: '5px',
                         lineHeight: '3.5vh',
                         justifyContent: 'center'
@@ -510,7 +543,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                                     </img>
                                 </span>
                             
-                                <span
+                                {/* <label
                                     style={{
                                         display: 'flex',
                                         flexDirection: 'row',
@@ -521,8 +554,11 @@ export const Detail_Image_Reviews_Section = (props) => {
                                         padding: '0 2vw',
                                         marginLeft: '2vw'
                                     }}>
-                                    <span>
-                                    Reply
+                                    <span
+                                    onClick={()=>{
+                                        }}
+                                    >
+                                        Reply
                                     </span>
                                     
                                     
@@ -534,7 +570,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                                     }}
                                     >
                                     </img>
-                                </span>
+                                </label> */}
                                 
                             </div>
 
@@ -559,17 +595,54 @@ export const Detail_Image_Reviews_Section = (props) => {
                             </div>
                             :''    
                         }
-                        { element !== undefined && element[property_keys.picture_url_array] !== undefined
+                        { element !== '' && element[property_keys.picture_url_array] !== undefined
                             ? <br></br>
                             : ``
                         }
                         
                         <div>{review_text_dispenser(element[property_keys.text])}</div>
                         
+                        <div
+                        style={{
+
+                            width:'195px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            padding: '5px 15px',
+                            borderRadius: '30px',
+                            justifySelf: 'center'
+                        }}
+                        >
+
+                        {props.currentUser.status == 'verified'
+                        ?<REPLOY_BOX
+                        source={origin}
+                        origin={reply_origin}
+                        src={imgsrc}
+                        user={props.currentUser}
+                        ></REPLOY_BOX>
+
+                        :<REPLOY_BOX
+                        src={imgsrc}
+                        user={props.currentUser}
+                        >
+                        </REPLOY_BOX>}
+
+                        </div>
+
                         
 
+                            
+
+                                <Reply_List
+                                source={origin}
+                                origin={reply_origin}
+                                />
+
+
                     </div>
-                    
+                        
+
                     </React.Fragment>})
                 
         }
@@ -692,8 +765,7 @@ export const Detail_Image_Reviews_Section = (props) => {
         </div>
 
         <br></br>
-
-            <div
+                <div
                 style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -704,11 +776,8 @@ export const Detail_Image_Reviews_Section = (props) => {
                 <div
                         style={{
                             display:'grid',
-                            gridTemplateRows: '65vh 65vh',
-                            
                             gridAutoFlow: 'column',
                             columnGap: '5vw',
-                            rowGap: '5vh',
 
                             padding: '5vh 0vw 5vh 5vw'
                         }}

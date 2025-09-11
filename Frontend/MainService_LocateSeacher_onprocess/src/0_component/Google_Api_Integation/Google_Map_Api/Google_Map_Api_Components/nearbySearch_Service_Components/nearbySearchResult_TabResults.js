@@ -56,15 +56,12 @@ export const NearbySearch_TabResults = (props) => {
 
     const Place_Pocket_Icon_Inspector = (input) => {
         if(input.types.includes('cafe')){
-            console.log('cafe')
             return Pocket_Icon_Cafe}
         
             if(input.types.includes('restaurant')){
-            console.log('restaurant')
             return Pocket_Icon_Restaurant}
             
             if(input.types.includes('bar')){
-            console.log('bar')
             return Pocket_Icon_Bar}
     }
 
@@ -162,13 +159,11 @@ export const NearbySearch_TabResults = (props) => {
 
     const Distance_calculator = (input) => {
 
-        console.log(props.target.position, props.client.position)
-
         let Distance_Comparison;
 
         if( props.target.position != {lat: 0, lng: 0} &&
             Number(props.target.position.lat.toFixed(2)) == Number(props.client.position.lat.toFixed(2)) &&
-            Number(props.target.position.lat.toFixed(2)) == Number(props.client.position.lat.toFixed(2))
+            Number(props.target.position.lng.toFixed(2)) == Number(props.client.position.lng.toFixed(2))
         ){
             Distance_Comparison = 'client'
         }
@@ -183,12 +178,47 @@ export const NearbySearch_TabResults = (props) => {
                 
                 Distance_Comparison = Distance_calculator_Helper('client', input)
 
-                return <span>
+                return <span
+                style={{
+                    fontFamily:'큐트신민상',
+                    position: 'relative',
+                    top: '-8px'
+                }}
+                >
 
-                {Distance_Comparison.toFixed(0)}m
+                <span
+                style={{
+                    position: 'relative',
+                    backgroundColor: '#ffcc00',
+                    letterSpacing: '2px',
+                    padding: '4px 4px 4px 8px',
+                    borderRadius: '5px',
+                    fontSize: '20px',
+                    border: "white solid 4px",
+                    zIndex: '1'
+                }}
+                >
+                    {Distance_Comparison.toFixed(0)}m
+                </span>
                 
-                
-                 AWAY FROM YOU
+                <span
+                style={{
+                    position:'relative',
+                    top:'1px',
+                    left: '-3px',
+                    backgroundColor: '#ffcc00',
+                    letterSpacing: '2px',
+                    padding: '9px 2px 6px 4px',
+                    borderTopRightRadius: '5px',
+                    borderEndEndRadius: '5px',
+                    fontSize: '10px',
+                    fontWeight: 'bold',
+                    border: 'white solid 3px',
+                    zIndex: '2'
+                }}
+                >
+                    AWAY FROM YOU
+                </span>
                 
                 </span>
 
@@ -199,12 +229,91 @@ export const NearbySearch_TabResults = (props) => {
                     target : Distance_calculator_Helper('target', input)
                 }
 
-                return <span>
+                return <span
+                    style={{
+                        fontFamily: '큐트신민상',
+                        position: 'relative',
+                        top:'-20px',
+                    }}
+                >
 
-                {Distance_Comparison.client.toFixed(0)}m AWAY FROM YOU
-                <br></br>
-                {Distance_Comparison.target.toFixed(0)}m AWAY FROM SPOT
+                <span
+                style={{
+                    position: 'relative',
+                    backgroundColor: '#ffcc00',
+                    letterSpacing: '2px',
+                    padding: '2px 2px 2px 6px',
+                    borderRadius: '5px',
+                    fontSize: '20px',
+                    border: "white solid 4px",
+                    zIndex: '1'
+                }}
+                >
+                {Distance_Comparison.client.toFixed(0)}m
+                </span>
+
+                <span
+                style={{
+                    position:'relative',
+                    top:'-1px',
+                    left: '-2.5px',
+                    backgroundColor: '#ffcc00',
+                    letterSpacing: '2px',
+                    padding: '5px 2px 3px 4px',
+                    borderTopRightRadius: '5px',
+                    borderEndEndRadius: '5px',
+                    fontSize: '10px',
+                    fontWeight: 'bold',
+                    border: 'white solid 3px',
+                    zIndex: '2'
+                }}
+                >
+                 ( AWAY FROM YOU )
+                </span>
                 
+                <br></br>
+
+                    <span
+                    style={{
+                        position: 'relative',
+                        top: '15px'
+                    }}
+                    >
+                        <span
+                        style={{
+                        position: 'relative',
+                        backgroundColor: '#ffeb3b',
+                        letterSpacing: '2px',
+                        padding: '2px 2px 2px 6px',
+                        borderRadius: '5px',
+                        fontSize: '20px',
+                        border: "white solid 4px",
+                        zIndex: '1'
+                        }}
+                        >
+                            {Distance_Comparison.target.toFixed(0)}m
+                        
+                        </span>
+                        
+                        <span
+                        style={{
+                        position:'relative',
+                        top:'-1px',
+                        left: '-2.5px',
+                        backgroundColor: '#ffeb3b',
+                        letterSpacing: '2px',
+                        padding: '5px 2px 3px 4px',
+                        borderTopRightRadius: '5px',
+                        borderEndEndRadius: '5px',
+                        fontSize: '10px',
+                        fontWeight: 'bold',
+                        border: 'white solid 3px',
+                        zIndex: '2'
+                    }}
+                        >
+                        ( AWAY FROM SPOT )
+                        </span>
+                    </span>
                 </span>
                 
         }
@@ -327,8 +436,6 @@ export const NearbySearch_TabResults = (props) => {
        LineExtense()
     },[])
 
-    console.log(props.places)
-
     return <React.Fragment>
 
     <div
@@ -356,14 +463,14 @@ export const NearbySearch_TabResults = (props) => {
 
         <div
 
-        key={index}
+        key={place.name}
 
         style={{
             width: '45vw',
             height: '35vh',
             border: 'black solid 5px',
             borderRadius: '20px',
-            margin: '2vh 0',
+            margin: '2.5vh 0 10vh 0',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',

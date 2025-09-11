@@ -35,7 +35,49 @@ export const Default_Info = () => {
     const [cameraProps, setCameraProps] = useState(INITIAL_CAMERA);
     const [markerProps, setMarkerProps] = useState(INITIAL_MARKER);
     const [PlaceInfo, updateInfo] = useState({})
+    const [ UserData, updateUserdata ] = useState(
+            {
+                userinfo:{
+                        name:'stranger'
+                },
+                status:'unverified'
+        }
+        );
     
+
+    const login_check = async () => {
+
+        let status = await fetch('/login_check')
+        let status_data = await status.json()
+        
+        switch(status_data.message){
+                
+                case(`undefined_user_accessed`):
+                break;
+
+                case( undefined ):
+                        switch(status_data.status){
+                                
+                                case('verified'):
+                                updateUserdata(status_data)
+                                break;
+
+                                case('unverified'):
+                                updateUserdata(status_data)
+                                break;
+
+                                default:
+                                break;
+                        }
+                break;
+
+                default:
+                break;
+        }
+
+
+    }
+
     const Place_Pocket_Icon_Inspector = (input) => {
         
         switch(typeof input.types){
@@ -118,7 +160,7 @@ export const Default_Info = () => {
     useEffect(()=>{
         if (!Place_Library || !Map_Instance) return;
         var svc = new Place_Library.PlacesService(Map_Instance); 
-        
+        login_check()
         // GetDetail(params.placeid)
 
         svc.getDetails({
@@ -258,6 +300,7 @@ export const Default_Info = () => {
         photos={PlaceInfo.photos} 
         reviews={PlaceInfo.reviews}
         placeid={params.placeid}
+        currentUser={UserData}
         />
 
         <Detail_Video_section/>
