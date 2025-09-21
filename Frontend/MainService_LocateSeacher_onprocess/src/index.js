@@ -19,6 +19,8 @@ import Register_Page_integrator from './0_component/Register_page/Register_page_
 import LOGIN_PAGE_INTEGRATOR from './0_component/Login_page/Login_page_integrator'
 import FOODSCRIPT_LOGIN_PAGE from './0_component/Login_page/foodscript_version_LocalVersion/foodscript_login_page'
 
+import FOODSCIPT_PAGE from './0_component/Foodscript_Api_Integation/Foodscript_map/foodscript_map_integrater.js'
+
 const root = ReactDom.createRoot(document.getElementById('root'))
 
 root.render(
@@ -26,14 +28,25 @@ root.render(
         <Provider store={store}>
         
         <Routers basename='/search'>
+            
             <PERSONALIZED_DATA_PART/>
+            
                 <APIProvider apiKey={`${process.env.REACT_APP_API}`}>
                     <LOCATIONSEARCH_FILTER_PART/>    
                     <GETDETAILS_INTEGRATOR/>
                 </APIProvider>
+            
             <PERSONAILZED_DATA_PAGE_INTEGRATOR/>
+
+            <Routes>
+                <Route
+                    path='/log-visit'
+                    element={<FOODSCIPT_PAGE/>}
+                />
+            </Routes>
+
         </Routers>
-           
+
         <Routers basename='/registration'>
             <Routes>
                 <Route

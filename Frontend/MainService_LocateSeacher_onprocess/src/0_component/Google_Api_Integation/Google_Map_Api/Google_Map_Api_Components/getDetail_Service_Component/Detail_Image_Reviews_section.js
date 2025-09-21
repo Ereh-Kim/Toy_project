@@ -456,7 +456,7 @@ export const Detail_Image_Reviews_Section = (props) => {
 
                                 <div
                                 style={{
-                                    padding: '1vh 2vw'
+                                    padding: '1vh 0 1vh 5vw'
                                 }}>
 
                                     <div
@@ -511,7 +511,7 @@ export const Detail_Image_Reviews_Section = (props) => {
                                 display:'flex',
                                 flexDirection: 'row',
                                 position:'relative',
-                                left:'0.5vw',
+                                left:'5vw',
                                 top:'1vh',
                                 fontSize: '3.5vw',
                                 fontWeight: 'bold'
@@ -581,6 +581,8 @@ export const Detail_Image_Reviews_Section = (props) => {
                             
                             ? <div
                             style={{
+                                width:'70%',
+                                justifySelf: 'center',
                                 display: 'grid',
                                 gridTemplateColumns: '1fr 1fr 1fr',
                                 justifyItems: 'center',

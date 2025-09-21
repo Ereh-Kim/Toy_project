@@ -145,23 +145,10 @@ export const Default_Info = () => {
         }
     }
 
-    const GetDetail = async (input) => {
-        
-        let result = await fetch(`/google_map_api/fetch_getDetail/${input}`,{
-            method: 'GET'
-        })
-
-        const result_data = await result.json()
-        console.log(result_data)
-
-        
-    }
-
     useEffect(()=>{
         if (!Place_Library || !Map_Instance) return;
         var svc = new Place_Library.PlacesService(Map_Instance); 
         login_check()
-        // GetDetail(params.placeid)
 
         svc.getDetails({
             fields: ['name','formatted_address','formatted_phone_number','types'

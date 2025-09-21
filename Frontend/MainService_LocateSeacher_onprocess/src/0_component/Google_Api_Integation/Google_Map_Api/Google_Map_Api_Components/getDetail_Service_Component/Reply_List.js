@@ -47,14 +47,15 @@ export const Reply_List = (props) =>{
         ?''
         :<div
                                 style={{
-                                    width: '85%',
-                                    height: '220px',
+                                    width: '70%',
+                                    height: '250px',
                                     backgroundColor: 'white',
                                     justifyItems:'center',
                                     padding: '10px 15px',
                                     borderRadius: '15px',
                                     overflow: 'scroll',
-                                    border: 'dashed 3px black'
+                                    border: 'dashed 3px black',
+                                    justifySelf: 'center'
                                 }}
                             >
                                 
@@ -81,7 +82,7 @@ export const Reply_List = (props) =>{
                 <div
                 style={{
                     height: 'fit-content',
-                    justifyItems: 'center',
+                    justifyItems: 'start',
                     border: 'black solid 3px',
                     padding: '15px 10px',
                     borderRadius: '10px',
@@ -90,7 +91,7 @@ export const Reply_List = (props) =>{
                     <div
                     style={{
                         display: 'flex',
-                        width:'180px'
+                        width:'fit-content'
                     }}
                     >
                         <img
@@ -130,7 +131,10 @@ export const Reply_List = (props) =>{
                                 <div
                                 style={{
                                     position:'relative',
-                                    right: '10px'
+                                    right: '10px',
+                                    // whiteSpace: 'nowrap',      
+                                    // wordBreak: 'keep-all',     
+                                    // overflowWrap: 'normal'
                                 }}
                                 >
                                 <TIMESTAMP

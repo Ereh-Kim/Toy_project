@@ -15,6 +15,7 @@ import Google_placePhoto_Encoder from "./Google_placePhoto_Encoder";
 import Spinner from "./Reusable_Components/spinner";
 import Google_Map_InfoWindow_CL from "./Google_map_InfoWindow/Google_Map_InfoWindow_CL.js";
 import Google_Map_InfoWindow_TA from "./Google_map_InfoWindow/Google_Map_InfoWindwo_TA.js";
+import { Link } from "react-router-dom";
 
 export const Google_Map = () => {
 
@@ -678,7 +679,31 @@ return <React.Fragment>
 
                 </Map>
 
-                
+                <Link
+                to="/log-visit"
+                >
+
+                <input
+                type="button"
+                value={`\u{1F6AA} Log Visit \u{1F6AA}
+ ( \u{1F30F} Enter Foodscript \u{1F30F} )`}
+                style={{
+                    width: '53.5vw',
+                    marginLeft: '11vw',
+                    marginTop: '1vh',
+                    padding: '1vh 0',
+                    borderRadius: '15px',
+                    fontFamily: '큐트신민상',
+                    letterSpacing: '0.5vw',
+                    fontWeight: 'bold',
+                    border: 'black solid 2px',
+                    backgroundColor: '#f8bb49ff'
+                }}
+                >
+                </input>
+
+                </Link>
+
 
                 <input type="button"
                 value={`${"\u{1F52D}"} Find From My Location ${"\u{1F52D}"}`}
